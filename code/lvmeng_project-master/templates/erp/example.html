@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>example</title>
+<script type="text/javascript" src="/static/example/jquery-1.12.3.js"></script>
+<script type="text/javascript" src="/static/example/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/example/dataTables.fixedColumns.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/static/example/jquery.dataTables.min.css">
+<link type="text/css" rel="stylesheet" href="/static/example/fixedColumns.dataTables.min.css">
+</head>
+<style>
+    th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+    var table = $('#example').DataTable( {
+        scrollY:        "300px",
+        scrollX:        true,
+        scrollCollapse: true,
+        paging:         false,
+        fixedColumns:   {
+            leftColumns: 2
+        }
+    } );
+} );
+
+</script>
+<body style="">
+
+    <table id="example" class="stripe row-border order-column ">
+
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>姓名</th>
+                            <th>日期</th>
+                            {% for date_list in date_lists %}
+                                {% if '周六' in date_list or '周日' in date_list %}
+                                    <th style="color:red;" align="center">{{ date_list }}</th>
+                                {% else %}
+                                    <th align="center">{{ date_list }}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if qr_code %}
+                            {% for agent in qr_agents %}
+                                <tr>
+                                    <td> {{ forloop.counter }}</td>
+                                    <td> {{ agent }}</td>
+                                    <td>{{ agent.code }} </td>
+                                    <td>签到</td>
+                                    {% for che_in in agent.checkIn %}
+                                        <td>{{ che_in|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td> {{ forloop.counter }}</td>
+                                    <td>{{ agent.code }} </td>
+                                    <td>签退</td>
+                                    {% for che_out in agent.checkOut %}
+                                        <td>{{ che_out|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for agent in agents %}
+                                <tr>
+                                    <td> {{ forloop.counter }}</td>
+                                    <td> {{ agent }}</td>
+                                    <td>签到</td>
+                                    {% for che_in in agent.checkIn %}
+                                        <td>{{ che_in|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td> {{ forloop.counter }}</td>
+                                    <td>{{ agent.code }} </td>
+                                    <td>签退</td>
+                                    {% for che_out in agent.checkOut %}
+                                        <td>{{ che_out|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+
+                    </tbody>
+                </table>
+
+
+
+</body>
+</html>

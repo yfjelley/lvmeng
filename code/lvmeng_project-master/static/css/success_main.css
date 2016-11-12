@@ -1,0 +1,370 @@
+/*body {*/
+    /*background: url(../img/bj.png) no-repeat top;;*/
+/*}*/
+
+body, html {
+    font-family: "Microsoft YaHei";
+}
+.site-header {
+    position: relative;
+    top:0;
+    left:0;
+    z-index: 100;
+}
+.site-header, .site-header .navbar {
+    height:80px;
+}
+
+@media (min-width: 768px) {
+    .site-header .navbar {
+        padding:0 10%;
+    }
+}
+
+@media (min-width: 992px) {
+    .site-header .navbar {
+        padding:0 18%;
+    }
+}
+
+.site-header .navbar {
+    padding-top:15px;
+}
+
+.site-header .navbar .navbar-brand {
+    padding-top: 5px;
+}
+
+.nav.navbar-nav li {
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: #666666;
+}
+
+.nav.navbar-nav li .btn-download {
+    margin:10px auto;
+    padding:0;
+    background-color: transparent;
+    border:1px solid #E5E5E5;
+    height:30px;
+    width:100px;
+    border-radius: 5px;
+}
+
+.btn:focus {
+    border-shadow: 0;
+}
+
+.nav.navbar-nav li > a {
+    font-size: 16px;
+    color: #333333;
+}
+
+.nav.navbar-nav li > a:hover {
+    font-size: 16px;
+    color: #E60012;
+}
+
+.nav.navbar-nav li > span {
+    display: block;
+    height:50px;
+    line-height: 16px;
+    padding:17px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.nav.navbar-nav li > span > strong {
+    color: #E60012;
+    font-size: 16px;
+}
+
+
+.wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.vertigo-bg {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+}
+
+.generic-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/static/img/bj.png) no-repeat center center/cover;
+}
+
+.generic-bg2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/static/img/bj-2.png) no-repeat center center/cover;
+}
+
+.container {
+    position: relative;
+    margin-top:5%;
+    padding-top: 50px;
+    text-align: center;
+    /*height: 500px;*/
+}
+
+.title-img {
+
+}
+
+.form-data {
+    margin-top: 40px;
+
+}
+
+.phonenum {
+    width: 261px;
+    border-radius: 5px;
+    height: 41px;
+    padding-left: 16px;
+    border: none;
+}
+
+.btn-phone {
+    margin-left: 20px;
+    width: 151px;
+    height: 41px;
+    background: #E60012;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    color: #FFF;
+}
+
+.grid {
+    margin-top: 80px;
+    width:550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.border-img {
+    height: 80px;
+}
+
+.border-img:hover > img {
+    webkit-filter: opacity(0);
+    filter: opacity(0);
+}
+
+.border-img > img {
+    max-width:80px;
+    max-height:80px;
+}
+
+/*.border-img > img:hover {
+    max-width:80px;
+    max-height:80px;!**!
+    display: block;
+}*/
+
+.ios_cover, .android_cover, .weixin_cover {
+    display: none;
+}
+
+.grid-item > p, .grid-item3 > p {
+    font-size: 18px;
+    color: #fff;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    width: 100%;
+    text-align: center;;
+}
+
+.copy {
+    text-align: center;
+}
+.copy p {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.popover #popover-content {
+    width:270px;
+}
+
+.popover {
+    border:none;
+}
+
+#popover-content .col{
+    float: left;
+    margin: 10px;
+    margin-bottom: 0;
+}
+
+.popover-title {
+    background-color:#FFFFFF;
+    border:none;
+    color: #666666;
+    font-size: 16px;
+}
+
+.popover-content {
+    font-size: 14px;
+    color: #333333;
+    padding:0;
+}
+
+
+/*==============================
+    REGISTER.HTML
+===================================*/
+
+.nav.navbar-nav li .btn-download:hover, .nav.navbar-nav li .btn-download:focus {
+    color: #FFFFFF;
+    background: #e60012;
+}
+
+.panel-register {
+    height: auto;
+    width: 460px;
+    position: absolute;
+    left:50%;
+    top:160px;
+    margin:0 0px 0px -230px;
+    background: #FFFFFF;
+    padding:0 30px;
+    border-radius: 5px;
+}
+
+.btn-group {
+    width:100%;
+}
+
+.btn-group > .btn {
+    width:50%;
+    height:57px;
+    padding:20px 0;
+    font-size:18px;
+    line-height: 18px;
+    border: none;
+    color: #666666;
+}
+
+
+
+.panel-register .form-group, .panel-register .input-group {
+    margin-bottom: 20px;
+}
+
+.panel-register .form-group .form-control, .panel-register .input-group .form-control, .panel-register .alert {
+    height:44px;
+    padding:13px 20px;
+    line-height: 14px;
+    font-size: 16px;
+    color: #999999;
+    border:1px solid #F1F1F1;
+}
+
+.form-control, .panel-register .alert-danger {
+    color: #a94442;
+}
+
+.input-group-addon {
+    background-color: #0092E6;
+    color: #FEFEFE;
+    font-size: 14px;
+    border-radius: 0 5px 5px 0;
+}
+
+.btn-get-code {
+    cursor: pointer;;
+}
+
+.checkbox {
+    text-align: left;
+}
+
+.checkbox > span {
+    color: #0092E6;
+}
+
+.btn-register {
+    width: 100%;
+    height: 44px;
+    background: #E60012;
+    color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-register:hover, .btn-register:focus {
+    color: #FFFFFF;
+    background: #cc141c;
+}
+
+.btn-group .btn-checked {
+    background: #FFFFFF;
+    color: #E60012;
+}
+
+/* ====================================================
+   SUCCESS.HTML
+   ==================================================== */
+
+.success-view {
+    background: #F1F1F1;
+    font-size: 14px;
+    color: #666666;
+}
+
+.success-view .success-tip{
+    margin-top: 10px;
+    text-align: center;
+    color: #333333;
+    font-size: 18px;
+}
+
+.success-view .success-tip:first-child img, .success-view .success-tip:first-child p {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 18px;
+    vertical-align: middle;
+}
+
+.success-tip:first-child p > a {
+    color: #0092E6;
+    cursor: pointer;
+}
+
+.success-view .grid {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.success-view .grid .grid-item {
+    flex:1;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.success-view .grid-item > p, .success-view footer p{
+    color: #666666;
+}

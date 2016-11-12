@@ -1,0 +1,170 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>协同办公</li>
+            <li>内部公告(面向员工)</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>内部公告列表</h4>
+        </div>
+        {% if 'auth.business_announcement_inner' in permissions and not request.user.is_superuser%}
+            <div class="btn-add">
+                <a href="/oa/announcement_add_modify#announcement_employee">新增内部公告</a>
+            </div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            <form action="" method="post" class="form-inline">
+                <span class="date-label">主题：</span>
+                <input id="topic" name="topic" type="text" value="{{ topic|default:'' }}" placeholder="主题">
+                <span class="date-label">日期选择：</span>
+                <input id="data" name="data" type="text" value="{{ data|default:'' }}"  placeholder="添加时间">
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                        <th>序号</th>
+                        <th>主题</th>
+                        <th>是否置顶</th>
+                        <th>置顶开始时间</th>
+                        <th>置顶结束时间</th>
+                        <th>是否发布</th>
+                        <th>发布开始时间</th>
+                        <th>发布结束时间</th>
+                        <th>添加时间</th>
+                        <th>状态</th>
+                        {% if 'auth.business_announcement_inner' in permissions and not request.user.is_superuser%}
+                            <th>操作</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for internal in internals %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a class="announcement_check" href="/erp/check/?id={{ internal.id }}&type=internal#announcement_employee" title="点击查看">{{ internal.topic }}</a></td>
+                            <td>{{ internal.get_on_top_display }}</td>
+                            <td>{{ internal.onTop_start|default:''|date_str }}</td>
+                            <td>{{ internal.onTop_end|default:''|date_str }}</td>
+                            <td>{{ internal.get_publish_display }}</td>
+                            <td>{{ internal.publish_start|default:''|date_str}}</td>
+                            <td>{{ internal.publish_end|default:''|date_str }}</td>
+                            <td>{{ internal.add_time|date_str }}</td>
+                            {% if internal.id in read %}
+
+                                <td style="">已读</td>
+                            {% else %}
+                                <td style="color:#04A1DC;">未读</td>
+                            {% endif %}
+                            {% if 'auth.business_announcement_inner' in permissions and not request.user.is_superuser%}
+                                <td>
+                                    <a class="announcement_modify" href="/oa/announcement_add_modify/?internal_id={{internal.id}}#announcement_employee" title="点击修改公告信息">
+                                             <img src="/static/img/icon-edit.png">
+                                    </a>
+                                    <a href="/oa/announcement_employee/?internal_id={{internal.id}}" onclick="if(confirm('确定删除该公告吗？')==false)return false;">
+                                        <img src="/static/img/icon-delete.png">
+                                    </a>
+                                    <!--<a class="announcement_delete" href="/oa/announcement_employee/?internal_id={{internal.id}}">-->
+                                        <!--<img src="/static/img/icon-delete.png">-->
+                                    <!--</a>-->
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if internals.has_previous %}
+                                <a href="?page={{ internals.previous_page_number }}#announcement_employee">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p internals.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#announcement_employee" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if internals.has_next %}
+                                <a href="?page={{ internals.next_page_number }}#announcement_employee">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{internals.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+        laydate({
+                elem: '#data'
+             });
+
+        $(document).ready(function() {
+                $('#example').DataTable();
+            } );
+
+            $(function(){
+                $("th").attr("title","点击排序");
+            });
+
+            $(function(){
+                $('#example_filter').css('style','display:none');
+                $('#example_info').attr('style','display:none');
+                $('#example_length').attr('style','display:none');
+                $('#example_paginate').attr('style','display:none');
+            });
+</script>
+{% endblock %}

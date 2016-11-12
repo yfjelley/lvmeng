@@ -1,0 +1,27 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="" style="margin-top:100px;">
+        <div class="">
+           <!-- START Language list-->
+            <h4 align="center" style="color:blue;">[系统自动发送邮件有可能在垃圾邮件中，请注意检查]</h4>
+            <h4 align="center" style="color:blue;">{{ message }}</h4>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form align="center" action="/erp/username_change/?user_id={{ user.id }}&type={{ redi_type }}" method="post" role="form" id="pwd_form">
+
+                        <span style="font-size:20px;">修改的手机号：</span><input type="text" name="" readonly value="{{ user.username }}"><br><br>
+                        <span style="font-size:20px;">输入新手机号：</span><input type="text" name="username" id="username"  required><br><br>
+                        <span style="font-size:20px;">设置登录密码：</span><input type="text" name="password" required><br><br>
+                        <span id="notice" style="font-size:20px;color:red;">{{ error }}</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input  type="submit" value="保存" style="background:#18C1EE;height:35px;width:60px;">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

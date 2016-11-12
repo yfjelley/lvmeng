@@ -1,0 +1,38 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">金融头条列表</li>
+            <li>金融头条列表</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>{{message}}</h4>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/erp/headline_add_modify/?headline_id={{headline_id|default:''}}" method="post" role="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

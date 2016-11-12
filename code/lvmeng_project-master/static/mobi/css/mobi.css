@@ -1,0 +1,6 @@
+.product-name{font-size:25px;color:#FFF;text-align:center;padding-bottom:6px;padding-top:18px;}
+.news{font-size:23px;color:#FFF;text-align:center;padding-bottom:12px;padding-top:15px;}
+html {
+    overflow: scroll;
+    touch-action: pan-y;
+}/*网页上下滚动*/

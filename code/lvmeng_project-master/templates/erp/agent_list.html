@@ -1,0 +1,327 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">员工管理</li>
+            <li>查看所有员工</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>员工列表</h4>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+         <div class="content-table">
+            <form action="" method="post" class="form-inline">
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label">员工编号：</label>-->
+                  <!--<div class="col-sm-9">-->
+                     <!--<input type="text" class="form-control"  name="num" value="{{num|default:''}}">-->
+                  <!--</div>-->
+               <!--</div>-->
+                <div class="form-group div-wrap">
+                  <label class="control-label">姓名：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="agent_name" value="{{agent_name|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group div-wrap">
+                  <label class="control-label">电话：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="phoneNum" value="{{phoneNum|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="control-label">身份证号：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control"  name="idNum" value="{{idNum|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+            </form>
+        </div>
+        <div class="row content-table">
+            <div class="col-lg-12 panel-body table-responsive" >
+                <!--============================================for excel==========================================================-->
+                <table class="excel table table-hover" style="display:none">
+                    <thead>
+                        <tr id="" style="height:10px;">
+                            <th>序号</th>
+                            <th>邀请码</th>
+                            <th>姓名</th>
+                            <th>头像</th>
+                            <th>电话</th>
+                            <th>性别</th>
+                            <th>地址</th>
+                            <th>身份证号</th>
+                            <th>职位</th>
+                            <th>部门</th>
+                            <th>拥有客户/位</th>
+                            {% if request.user.is_superuser %}
+                                <th>所属机构</th>
+                            {% endif %}
+                            <th>录入人</th>
+                            <th>注册日期</th>
+                            <th>备注</th>
+                            {% if 'auth.employee_process' in permissions and not request.user.is_superuser%}
+                                <th class="">解除手机绑定</th>
+                                <th class="">修改密码[强制]</th>
+                                <!--{% if 'auth.modify_employee_phonenum' in permissions and not request.user.is_superuser%}-->
+                                    <!--<th class="">修改手机号[账号]</th>-->
+                                <!--{% endif %}-->
+                                <th class="">重发邮件</th>
+                                <th>操作</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for agent in agents %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="/erp/check/?id={{ agent.id }}&type=agent#agent_list" title="点击查看">{{ agent.b_a_num }}</a></td>
+                                <td>{{ agent.name }}</td>
+                                <td>
+                                    {% if agent.sex == '2' %}
+                                            <img style="width:50px;height:50px;" src="{{ agent.avatar|check_picture }}" onerror="this.src='/static/img/default.png'"/>
+                                    {% else %}
+                                            <img style="width:50px;height:50px;" src="{{ agent.avatar|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                                    {% endif %}
+                                </td>
+
+                                <td>{{ agent.phoneNum }}</td>
+
+                                <td>{{ agent.get_sex_display }}</td>
+
+                            <td>{{ agent.address }}</td>
+                            <td class="idcard">{{ agent.idCard_num }}</td>
+                            <td>{{ agent.position|default:'' }}</td>
+                            <td>{{ agent.position.department|default:'' }}</td>
+                            {% if agent.count %}
+                                    <td><a href="/erp/agent_customers/?id={{ agent.id }}#agent_list" title="点击查看该客户经理的客户">{{ agent.count }}</a></td>
+                            {% else %}
+                                <td><a>{{ agent.count }}</a></td>
+                            {% endif %}
+                            {% if request.user.is_superuser %}
+                                <td>{{ agent.business }}</td>
+                            {% endif %}
+                            <td>{{ agent.entry_person }}</td>
+                            <td>{{ agent.register_date|date_str }}</td>
+                            <td>{{ agent.note|truncatechars:20 }}</td>
+                            {% if 'auth.employee_process' in permissions and not request.user.is_superuser%}
+                                {% if agent.device_id %}
+                                    <td><a href="/erp/agent_list/?agent_id={{ agent.id }}#agent_list" onclick="if(confirm('确定解除该员工的手机绑定吗？')==false)return false;">解除[已绑定]</a></td>
+                                {% else %}
+                                    <td>未绑定</td>
+                                {% endif %}
+                                <td class=""><a href="/erp/business_password_change/{{agent.user.id}}/?type=agent_list#agent_list"><img src="/static/img/edit.gif"></a></td>
+
+                                    <td class=""><a href="/erp/business_password_change/{{ agent.user.id }}/?type=agent_list#agent_list" title="点击重新发送邮件">发送</a></td>
+
+                                    <td class="">
+                                         <a href="/erp/agent_process/?agent_id={{agent.id}}#agent_list" title="修改该员工信息">
+                                             <img src="/static/img/icon-edit.png">
+                                         </a>
+                                        <a href="/erp/agent_customer_allot/?agent_id={{ agent.id }}#agent_list" title="删除该员工">
+                                            <img src="/static/img/icon-delete.png">
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--===========================================================================================================-->
+                <table id="example" class="stripe row-border order-column" >
+                    <thead>
+                        <tr id="tr_head" style="height:10px;">
+                            <th>序号</th>
+                            <th>邀请码</th>
+                            <th>姓名</th>
+                            <th>头像</th>
+                            <th>电话</th>
+                            <th>性别</th>
+                            <th>地址</th>
+                            <th>身份证号</th>
+                            <th>职位</th>
+                            <th>部门</th>
+                            <th>拥有客户/位</th>
+                            {% if request.user.is_superuser %}
+                                <th>所属机构</th>
+                            {% endif %}
+                            <th>录入人</th>
+                            <th>注册日期</th>
+                            <th>备注</th>
+                            {% if 'auth.employee_process' in permissions and not request.user.is_superuser%}
+                                <th class="">解除手机绑定</th>
+                                <th class="">修改密码[强制]</th>
+                                <!--{% if 'auth.modify_employee_phonenum' in permissions and not request.user.is_superuser%}-->
+                                    <!--<th class="">修改手机号[账号]</th>-->
+                                <!--{% endif %}-->
+                                <th class="">重发邮件</th>
+                                <th>操作</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for agent in agents %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a class="agent_check" href="/erp/check/?id={{ agent.id }}&type=agent#agent_list" title="点击查看">{{ agent.b_a_num }}</a></td>
+                                <td>{{ agent.name }}</td>
+                                <td>
+                                    {% if agent.sex == '2' %}
+                                            <img style="width:50px;height:50px;" src="{{ agent.avatar|check_picture }}" onerror="this.src='/static/img/default.png'"/>
+                                    {% else %}
+                                            <img style="width:50px;height:50px;" src="{{ agent.avatar|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                                    {% endif %}
+                                </td>
+
+                                <td>{{ agent.phoneNum }}</td>
+
+                                <td>{{ agent.get_sex_display }}</td>
+
+                            <td>{{ agent.address }}</td>
+                            <td class="idcard">{{ agent.idCard_num }}</td>
+                            <td>{{ agent.position|default:'' }}</td>
+                            <td>{{ agent.position.department|default:'' }}</td>
+                            {% if agent.count %}
+                                    <td align="center"><a href="/erp/agent_customers/?id={{ agent.id }}#agent_list" title="点击查看该客户经理的客户">{{ agent.count }}</a></td>
+                            {% else %}
+                                <td align="center"><a>{{ agent.count }}</a></td>
+                            {% endif %}
+                            {% if request.user.is_superuser %}
+                                <td>{{ agent.business }}</td>
+                            {% endif %}
+                            <td>{{ agent.entry_person }}</td>
+                            <td>{{ agent.register_date|date_str }}</td>
+                            <td>{{ agent.note|truncatechars:20 }}</td>
+                            {% if 'auth.employee_process' in permissions and not request.user.is_superuser%}
+                                {% if agent.device_id %}
+                                    <td><a class="device_delete" href="/erp/agent_list/?agent_id={{ agent.id }}#agent_list" onclick="if(confirm('确定解除该员工的手机绑定吗？')==false)return false;">解除[已绑定]</a></td>
+                                    <!--<td><a class="device_delete" href="/erp/agent_list/?agent_id={{ agent.id }}#agent_list" >解除[已绑定]</a></td>-->
+                                {% else %}
+                                    <td>未绑定</td>
+                                {% endif %}
+                                <td class="" ><a class="password_modify" href="/erp/business_password_change/{{agent.user.id}}/?type=agent_list#agent_list"><img src="/static/img/edit.gif"></a></td>
+
+                                    <td class="" ><a class="email_resend" href="/erp/business_password_change/{{ agent.user.id }}/?type=agent_list#agent_list" title="点击重新发送邮件">发送</a></td>
+
+                                    <td class="" >
+                                         <a class="agent_modify" href="/erp/agent_process/?agent_id={{agent.id}}#agent_list" title="修改该员工信息">
+                                             <img src="/static/img/icon-edit.png">
+                                         </a>
+                                        <a class="agent_delete" href="/erp/agent_customer_allot/?agent_id={{ agent.id }}#agent_list" title="删除该员工">
+                                            <img src="/static/img/icon-delete.png">
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if agents.has_previous %}
+                                <a href="?page={{ agents.previous_page_number }}#agent_list">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p agents.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#agent_list" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if agents.has_next %}
+                                <a href="?page={{ agents.next_page_number }}#agent_list">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{agents.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block style %}
+<style>
+
+    th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: auto;
+        height:auto;
+        margin: 0 auto;
+    }
+</style>
+{% endblock %}
+{% block script %}
+<script>
+
+
+    $(document).ready(function() {
+            var table = $('#example').DataTable( {
+                scrollY:        "600px",
+                scrollX:        true,
+                scrollCollapse: true,
+                paging:         false,
+                fixedColumns:   {
+                    leftColumns: 3
+                }
+            } );
+        } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $("td").attr("align","center");
+    });
+
+    $(document).ready(function() {
+            $('#example_filter').css('style','display:none');
+            $('#example_info').attr('style','display:none');
+        } );
+
+</script>
+
+{% endblock %}

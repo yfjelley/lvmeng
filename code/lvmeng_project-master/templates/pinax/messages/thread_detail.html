@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ thread }}<br/>
+{% for message in thread.messages.all %}
+{{ message.sender }}<br/>
+{{ message.sent_at }}<br/>
+{{ message.content }}<br/>
+{% endfor %}
+<form>{{ form }}</form>
+</body>
+</html>

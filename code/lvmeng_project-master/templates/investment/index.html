@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content=" " />
+        <meta name="description" content="  " />
+        <link rel="shortcut icon" href="/static/investment/img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/static/web_customer/customer_new/css/bootstrap.css">
+            <!--上线使用该样式-->
+        <!--<link href="assets/css/min.style.css" rel="stylesheet" type="text/css" />-->
+            <!--调试使用该样式-->
+        <link href="/static/investment/css/style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <nav class="toolsbar">
+            <div id="toolsbar">
+                <div class="tb-left">
+                    <span>欢迎致电</span>
+                    <span>4006-720-315</span>
+                </div>
+
+                <div class="tb-right">
+                    <a class="btn-invest-recruit" href="#">企业免费入驻</a>
+                </div>
+
+                <div class="tb-right">
+                    <a class="my-account" href="#">我的账户</a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="navbar">
+            <div class="contain clearfix">
+                <div class="navbar-logo">
+                    <img src="/static/investment/img/logo.png" />
+                </div>
+                <div class="trj-title">
+                    <span>投融资综合信息</span><br>
+                    <span>服务平台</span>
+                </div>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">找资金</a></li>
+                    <li><a href="#">找项目</a></li>
+                    <li><a href="#">找理财</a></li>
+                    <li><a href="#">找活动</a></li>
+                    <li><a href="#">APP下载</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+            <div class="login-wrap">
+                <div class="login">
+                    <div class="login-header">
+                        登录
+                    </div>
+                    <div class="login-form">
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="手机号码">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="密码">
+                            </div>
+                            <div class="clearfix">
+                                <div class="checkbox-inline">
+                                    <label>
+                                        <input class="remember-me" type="checkbox">自动登录
+                                    </label>
+                                </div>
+                                <div class="login-forget"><a href="#">忘记密码?</a></div>             
+                            <button class="btn btn-login" type="submit">登录</button>
+                            <div class="btn-register"><a href="/">免费注册</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+                           <!-- 轮播 -->
+            <div class="ads-content">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active"> 
+                            <img src="/static/investment/img/carousel-pic1.png" alt="...">
+                            <!--<div class="carousel-caption">
+                                ...
+                            </div>-->
+                        </div>
+                        <div class="item">
+                            <img src="/static/investment/img/carousel-pic1.png" alt="...">
+                            <!--<div class="carousel-caption">
+                                ...
+                            </div>-->
+                        </div>
+                        <div class="item">
+                            <img src="/static/investment/img/carousel-pic1.png" alt="...">
+                            <!--<div class="carousel-caption">
+                                ...
+                            </div>-->
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+         </main>
+
+  <div class="contain clearfix">
+ <div class="find-tab">
+ <div class="input-group">
+    <input type="text" class="form-control input-lg" placeholder="输入你想找的关键词，来试试吧"><span class="input-group-addon btn btn-primary">搜索</span>
+</div>
+
+ <div class="big-tab">
+   <ul id="myTab" class="nav nav-tabs tabbar"> 
+     <li class="find-group active"><a href="#home" data-toggle="tab"> 
+             找资金</a> 
+     </li> 
+     <li class="find-group"><a href="#ios" data-toggle="tab">找项目</a></li> 
+     <li class="find-group"><a href="#jmep" data-toggle="tab"> 
+            找理财</a> 
+     </li> 
+       
+     
+ </ul> 
+
+ <div id="myTabContent" class="tab-content"> 
+     <div class="tab-pane fade in active" id="home"> 
+         <table border="0">
+         	<tr class="tab-1">
+         		<td class="td1">投资方式</td>
+         		<td class="td2">资金主体</td>
+         		<td class="td3"></td>
+         		<td class="td4"></td>
+         		<td class="td5">投资金额</td>
+         		<td class="td6"></td>
+         	</tr>
+         	<tr>
+         		<td class="td1"><a href="">股权投资</a></td>
+         		<td class="td2"><a href="">个人资金</a></td>
+         		<td class="td3"><a href="">VC投资</a></td>
+         		<td class="td4"><a href="">投资公司</a></td>
+         		<td class="td5"><a href="">1万-10万</a></td>
+         		<td class="td6"><a href="">100万-500万</a></td>
+         	</tr>
+
+         	<tr>
+         		<td class="td1"><a href="">债权投资</a></td>
+         		<td class="td2"><a href="">企业资金</a></td>
+         		<td class="td3"><a href="">PE投资</a></td>
+         		<td class="td4"><a href="">商业银行</a></td>
+         		<td class="td5"><a href="">10万-50万</a></td>
+         		<td class="td6"><a href="">500万-1000万</a></td>
+         	</tr>
+         	<tr>
+         		<td class="td1"><a href="">金融投资</a></td>
+         		<td class="td2"><a href="">天使投资</a></td>
+         		<td class="td3"><a href="">小额贷款</a></td>
+         		<td class="td4"><a href="">基金公司</a></td>
+         		<td class="td5"><a href="">50万-100万</a></td>
+         		<td class="td6"><a href="">1000万-5000万</a></td>
+         	</tr>
+         </table>
+         <p class="tab-p"><a href="">不知道怎么找？&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><span class="tab-span"><a href="">填写项目信息，帮您找资金</a></span></p>
+     </div> 
+     <div class="tab-pane fade" id="ios"> 
+          <table border="0">
+         	<tr class="tab-1">
+         		<td class="td1">投资方式</td>
+         		<td class="td2">资金主体</td>
+         		<td class="td3"></td>
+         		<td class="td4"></td>
+         		<td class="td5">投资金额</td>
+         		<td class="td6"></td>
+         	</tr>
+         	<tr>
+         		<td class="td1"><a href="">股权投资</a></td>
+         		<td class="td2"><a href="">个人资金</a></td>
+         		<td class="td3"><a href="">VC投资</a></td>
+         		<td class="td4"><a href="">投资公司</a></td>
+         		<td class="td5"><a href="">1万-10万</a></td>
+         		<td class="td6"><a href="">100万-500万</a></td>
+         	</tr>
+
+         	<tr>
+         		<td class="td1"><a href="">债权投资</a></td>
+         		<td class="td2"><a href="">企业资金</a></td>
+         		<td class="td3"><a href="">PE投资</a></td>
+         		<td class="td4"><a href="">商业银行</a></td>
+         		<td class="td5"><a href="">10万-50万</a></td>
+         		<td class="td6"><a href="">500万-1000万</a></td>
+         	</tr>
+         	<tr>
+         		<td class="td1"><a href="">金融投资</a></td>
+         		<td class="td2"><a href="">天使投资</a></td>
+         		<td class="td3"><a href="">小额贷款</a></td>
+         		<td class="td4"><a href="">基金公司</a></td>
+         		<td class="td5"><a href="">50万-100万</a></td>
+         		<td class="td6"><a href="">1000万-5000万</a></td>
+         	</tr>
+         </table>
+         <p class="tab-p"><a href="">不知道怎么找？&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><span class="tab-span"><a href="">填写项目信息，帮您找资金</a></span></p> 
+     </div> 
+     <div class="tab-pane fade" id="jmep"> 
+         <table border="0">
+         	<tr class="tab-1">
+         		<td class="td1">投资方式</td>
+         		<td class="td2">资金主体</td>
+         		<td class="td3"></td>
+         		<td class="td4"></td>
+         		<td class="td5">投资金额</td>
+         		<td class="td6"></td>
+         	</tr>
+         	<tr>
+         		<td class="td1"><a href="">股权投资</a></td>
+         		<td class="td2"><a href="">个人资金</a></td>
+         		<td class="td3"><a href="">VC投资</a></td>
+         		<td class="td4"><a href="">投资公司</a></td>
+         		<td class="td5"><a href="">1万-10万</a></td>
+         		<td class="td6"><a href="">100万-500万</a></td>
+         	</tr>
+
+         	<tr>
+         		<td class="td1"><a href="">债权投资</a></td>
+         		<td class="td2"><a href="">企业资金</a></td>
+         		<td class="td3"><a href="">PE投资</a></td>
+         		<td class="td4"><a href="">商业银行</a></td>
+         		<td class="td5"><a href="">10万-50万</a></td>
+         		<td class="td6"><a href="">500万-1000万</a></td>
+         	</tr>
+         	<tr>
+         		<td class="td1"><a href="">金融投资</a></td>
+         		<td class="td2"><a href="">天使投资</a></td>
+         		<td class="td3"><a href="">小额贷款</a></td>
+         		<td class="td4"><a href="">基金公司</a></td>
+         		<td class="td5"><a href="">50万-100万</a></td>
+         		<td class="td6"><a href="">1000万-5000万</a></td>
+         	</tr>
+         </table>
+         <p class="tab-p"><a href="">不知道怎么找？&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><span class="tab-span"><a href="">填写项目信息，帮您找资金</a></span></p> 
+     </div> 
+   </div> 
+
+   </div>
+ </div> 
+           <div class="case-succ">
+                 <div class="items">
+                 	<p class=items-time>今日新增项目<span>1</span><span>0</span><span>8</span><span>0</span>个</p>
+                 </div>
+                 <p class="report">融资报告</p>
+                 <!-- 轮播 -->
+                 <div class="case-succ-img">
+    <div id="myCarousel" class="carousel slide"> 
+     <ol class="carousel-indicators"> 
+         <li data-target="#myCarousel" data-slide-to="0" class="active"></li> 
+         <li data-target="#myCarousel" data-slide-to="1"></li> 
+         <li data-target="#myCarousel" data-slide-to="2"></li> 
+     </ol> 
+     <div class="carousel-inner"> 
+         <div class="item active"> 
+             <img src="/static/investment/img/financing-report.png" alt="First slide">
+         </div> 
+         <div class="item"> 
+             <img src="/static/investment/img/financing-report.png" alt="Second slide">
+         </div> 
+         <div class="item"> 
+             <img src="/static/investment/img/financing-report.png" alt="Third slide">
+         </div> 
+     </div> 
+     <a class="carousel-control left" href="#myCarousel" 
+         data-slide="prev">&lsaquo; 
+     </a> 
+     <a class="carousel-control right" href="#myCarousel" 
+         data-slide="next">&rsaquo; 
+     </a> 
+ </div> 
+                 </div>
+                 <p class="case-succ-wen">融资早知道，创业有方向 快来看看吧 投融界每日融资报告</p>
+           </div>
+            </div>
+        
+
+        <div class="content">
+             <p class="Selected-funds-wen"><img src="/static/investment/img/red-arrow.png" alt="">&nbsp;&nbsp;<span>精选资金</span></p>
+             <div class="Selected-funds clearfix">
+             	 <div class="stock fl">
+             	 	 <div>
+             	 	 	<img src="/static/investment/img/stock.png" alt="">
+             	 	 </div>
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">股权投资</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 <div class="information">
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金 </a> </td>
+                                   <td><a href="" class="gray">上海某企业资金500万-8亿元寻优质项目投资</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">投资公司 </a> </td>
+                                   <td><a href="" class="gray">北京某投资公司1000万-2亿元寻加工制造业</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金 </a> </td>
+                                   <td><a href="" class="gray"> 广东某企业资金1000万-5000万元寻医院项目</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金</a>  </td>
+                                   <td><a href="" class="gray">河南某企业资金500万-800万元寻全国优质项</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金</a>  </td>
+                                   <td><a href="" class="gray"> 广东某企业资金2000万-3000万元寻全国TMT</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 	 </div>
+             	 </div>
+             	 <div class="rights fl">
+             	 	  <div>
+             	 	 	<img src="/static/investment/img/rights.png" alt="">
+             	 	 </div>
+             	 	 <p class="clearfix rights-title"><span class="fl fl-color center">股权投资</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 <div class="information">
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金</a>  </td>
+                                   <td><a href="" class="gray">上海某企业资金500万-8亿元寻优质项目投资</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">投资公司 </a> </td>
+                                   <td><a href="" class="gray">北京某投资公司1000万-2亿元寻加工制造业</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金 </a> </td>
+                                   <td> <a href="" class="gray">广东某企业资金1000万-5000万元寻医院项目</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金 </a></td>
+                                   <td><a href="" class="gray">河南某企业资金500万-800万元寻全国优质项</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">企业资金 </a> </td>
+                                   <td> <a href="" class="gray">广东某企业资金2000万-3000万元寻全国TMT</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 </div>
+             </div>	
+             <div class="lease fl">
+             	 	<div class="other-tou">
+             	 		<p>其他投资</p>
+             	 	</div>
+             	 	<div class="other-line">
+             	 	</div>
+             	 	<div class="other-many center">
+             	 		<p><a href="">查看更多</a></p>
+             	 	</div>
+             	 	<div class="other-meng center">
+             	 		<p class="gray"><span class="blue">金融租赁</span> 北京某金融租赁公司500万-5000万元寻本地能</p>
+             	 	</div>
+             </div>		
+        </div>
+        <p class="Selected-funds-wen"><img src="/static/investment/img/red-arrow.png" alt="">&nbsp;&nbsp;<span>优质项目</span></p>
+        <div class="project ">
+              <div class="pro-big clearfix ">
+                   <div class="pro-two fl">
+        	         <div class="pro-meng">
+             	 	 	<img src="/static/investment/img/stock.png" alt="">
+             	 	 	<div class="meng center">北京某酒店项目股权投资</div>
+             	 	 </div> 
+             	 	 <div class="information center">
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">IE互联网</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">北京市</a></td> 
+                                   <td><a href="" class="gray">北京某O2O金融投资教学平台项目</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">上海市</a></td>
+                                   <td><a href="" class="gray">上海某国际移动宣传平台项目股权</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">广东省</a></td>
+                                   <td><a href="" class="gray"> 广东某碰撞预警车联网O2O项目股</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">广东省 </a></td>
+                                   <td ><a href="" class="gray">广东某碰撞预警车联网O2O项目股</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">广东省</a></td>
+                                   <td> <a href="" class="gray">广东某碰撞预警车联网O2O项目股</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 
+             	 </div>	 
+            </div>
+            <div class="pro-two two-1 fl">
+        	         <div class="pro-meng">
+             	 	 	<img src="/static/investment/img/agriculture.png" alt="">
+             	 	 	<div class="meng center">广东某农业目股权融资</div>
+             	 	 </div> 
+             	 	 <div class="information center">
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">农林牧渔</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">重庆市</a></td> 
+                                   <td><a href="" class="gray">重庆衡阳某农业项目融资2000万元</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">江苏省</a></td>
+                                   <td><a href="" class="gray">江苏某茶叶庄园项目股权融资500万...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">云南省</a></td>
+                                   <td><a href="" class="gray"> 云南某垂玲穗状核桃示范园区项目...</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">江苏省 </a></td>
+                                   <td ><a href="" class="gray">江苏某茶叶庄园项目股权融资500万</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">云南省</a></td>
+                                   <td> <a href="" class="gray">云南某垂玲穗状核桃示范园区项目股...</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 
+             	 </div>	 
+            </div>
+            <div class="pro-two two-1 fl">
+        	         <div class="pro-meng">
+             	 	 	<img src="/static/investment/img/villa.png" alt="">
+             	 	 	<div class="meng center">河南某度假别墅项目融资</div>
+             	 	 </div> 
+             	 	 <div class="information center">
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">房地产</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">江西省</a></td> 
+                                   <td><a href="" class="gray">江西某筹建大型养老院项目股权融...</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">贵州省</a></td>
+                                   <td><a href="" class="gray">贵州省上饶某工业园项目股权融资...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">山东省</a></td>
+                                   <td><a href="" class="gray"> 山东某房地产项目融资2000万-1亿...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">山东省</a></td>
+                                   <td><a href="" class="gray"> 山东某房地产项目融资2000万-1亿...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">山东省</a></td>
+                                   <td><a href="" class="gray"> 山东某房地产项目融资2000万-1亿...</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 
+             	 </div>	 
+            </div>
+
+          </div>
+          <div class="pro-big clearfix ">
+                   <div class="pro-two fl">
+        	         <div class="pro-meng">
+             	 	 	<img src="/static/investment/img/build.png" alt="">
+             	 	 	<div class="meng center">广东某电商建材平台股权融资</div>
+             	 	 </div> 
+             	 	 <div class="information center">
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">建筑建材</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">江苏省</a></td> 
+                                   <td><a href="" class="gray">江苏某建材门花行业项目融资500...</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">上海市</a></td>
+                                   <td><a href="" class="gray">上海某投资公司500万-10亿元寻全...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">广东省</a></td>
+                                   <td><a href="" class="gray"> 重庆某建筑防水材料项目股权融资...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">广东省</a></td>
+                                   <td><a href="" class="gray"> 重庆某建筑防水材料项目股权融资...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">广东省</a></td>
+                                   <td><a href="" class="gray"> 重庆某建筑防水材料项目股权融资...</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 
+             	 </div>	 
+            </div>
+            <div class="pro-two two-1 fl">
+        	         <div class="pro-meng">
+             	 	 	<img src="/static/investment/img/seafood.png" alt="">
+             	 	 	<div class="meng center">上海某海鲜餐厅目股权投资</div>
+             	 	 </div> 
+             	 	 <div class="information center">
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">餐饮休闲娱乐</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">江苏省</a></td> 
+                                   <td><a href="" class="gray">江苏某新型餐饮+农业项目股权融资..</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">上海市 </a></td>
+                                   <td><a href="" class="gray">上海某海鲜餐厅项目股权融资300万</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">北京市 </a></td>
+                                   <td><a href="" class="gray"> 北京某素食餐饮项目融资300万元</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">北京市 </a></td>
+                                   <td><a href="" class="gray"> 北京某素食餐饮项目融资300万元</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">北京市 </a></td>
+                                   <td><a href="" class="gray"> 北京某素食餐饮项目融资300万元</a></td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 
+             	 </div>	 
+            </div>
+            <div class="pro-two two-1 fl">
+        	         <div class="pro-meng">
+             	 	 	<img src="/static/investment/img/cybercafe.png" alt="">
+             	 	 	<div class="meng center">江苏某网咖项目股权融资</div>
+             	 	 </div> 
+             	 	 <div class="information center">
+             	 	 <p class="clearfix stock-title"><span class="fl fl-color center">其他行业</span><span class="fr fr-color"><a href="">更多</a></span></p>
+             	 	 	<table class="table" >                         
+                             <tbody>
+                                <tr>
+                                   <td><a href="" class="blue">北京市</a></td> 
+                                   <td><a href="" class="gray">北京某专利保健酒项目股权融资1亿...</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">广东省</a></td>
+                                   <td><a href="" class="gray">广东无明矾紫薯奶酪肉夹心粉生产...</a></td>
+                                </tr>
+                                <tr>
+                                   <td ><a href="" class="blue">上海市</a></td>
+                                   <td><a href="" class="gray"> 上海某中餐智能工业化产业化项目...</a></td>
+                                </tr>
+                                <tr>
+                                   <td><a href="" class="blue">北京市</a></td>
+                                   <td ><a href="" class="gray">北京某素食餐饮项目融资300万元</a>
+                                   </td>
+                                </tr>
+                               <tr>
+                                   <td><a href="" class="blue">北京市</a></td>
+                                   <td ><a href="" class="gray">北京某素食餐饮项目融资300万元</a>
+                                   </td>
+                                </tr>
+                             </tbody>
+                        </table>
+             	 
+             	 </div>	 
+            </div>
+
+          </div>
+       
+
+        </div>
+           <p class="Selected-funds-wen"><img src="/static/investment/img/red-arrow.png" alt="">&nbsp;&nbsp;<span>理财精选</span></p>
+
+          <div class="choose clearfix">
+          	 <div class="choose-big clearfix fl">
+          	 	 <div class="choose-1 fl">
+          	 	 	 <p class="center">债权板块</p>
+          	 	 	 <div class="many">
+          	 	 	     <a href="" class="center">
+          	 	 	     	查看更多>
+          	 	 	     </a>
+          	 	 	 </div>
+          	 	 </div>
+          	 	 <div class="choose-2 fl">
+          	 	 	  <div class="ch-one ">
+          	 	 	  	<p class="wall blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-two">
+          	 	 	  	<p class="wall wall-1 blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-three">
+          	 	 	  	<p class="wall wall-1 blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 </div>
+          	 </div>
+          	 <div class="choose-big choose-big-two clearfix fl">
+          	 	 <div class="choose-1 coin fl">
+          	 	 	 <p class="center">股权板块</p>
+          	 	 	 <div class="many">
+          	 	 	     <a href="" class="center">
+          	 	 	     	查看更多>
+          	 	 	     </a>
+          	 	 	 </div>
+          	 	 </div>
+          	 	 <div class="choose-2 fl">
+          	 	 	  <div class="ch-one ">
+          	 	 	  	<p class="wall blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-two">
+          	 	 	  	<p class="wall wall-1 blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-three">
+          	 	 	  	<p class="wall wall-1 blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 </div>
+          	 </div>
+          </div>
+          <div class="choose clearfix">
+          	 <div class="choose-big clearfix fl">
+          	 	 <div class="choose-1 front fl">
+          	 	 	 <p class="center">债权板块</p>
+          	 	 	 <div class="many">
+          	 	 	     <a href="" class="center">
+          	 	 	     	查看更多>
+          	 	 	     </a>
+          	 	 	 </div>
+          	 	 </div>
+          	 	 <div class="choose-2 fl">
+          	 	 	  <div class="ch-one ">
+          	 	 	  	<p class="wall blue">励琛50号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">500万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-two">
+          	 	 	  	<p class="wall wall-1 blue">长城1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">1000万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-three">
+          	 	 	  	<p class="wall wall-1 blue">中铁定增</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">10%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">100万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 </div>
+          	 </div>
+          	 <div class="choose-big choose-big-two clearfix fl">
+          	 	 <div class="choose-1 else fl">
+          	 	 	 <p class="center">其他板块</p>
+          	 	 	 <div class="many">
+          	 	 	     <a href="" class="center">
+          	 	 	     	查看更多>
+          	 	 	     </a>
+          	 	 	 </div>
+          	 	 </div>
+          	 	 <div class="choose-2 fl">
+          	 	 	  <div class="ch-one ">
+          	 	 	  	<p class="wall blue">金山1号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">12%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">2500万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-two">
+          	 	 	  	<p class="wall wall-1 blue">金山6号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">30%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">400万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 	  <div class="ch-three">
+          	 	 	  	<p class="wall wall-1 blue">律锰80号</p>
+          	 	 	    <div class="row">
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent reed">20%</p>
+          	 	 	  		<p class="center gray yield">预期收益率</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4 ">
+          	 	 	  		<p class="center percent">6个月</p>
+          	 	 	  		<p class="center gray yield">项目期限</p>
+          	 	 	  	</div>
+          	 	 	  	<div class="col-md-4">
+          	 	 	  		<p class="center percent">5000万</p>
+          	 	 	  		<p class="center gray yield">总金额</p>
+          	 	 	  	</div>
+          	 	 	    </div>	
+          	 	 	  </div>
+          	 	 </div>
+          	 </div>
+          </div>
+
+
+        <div class="link">
+            <div class="contain">
+                <div class="link-title">友情链接</div>
+                <div class="link-info">
+                    <a href="#">牛基队专题 </a>
+                    <a href="#">金价查询 </a>
+                    <a href="#">私募基金 </a>
+                    <a href="#">韬客外汇论坛</a>
+                    <a href="#">小算盘财富 </a>
+                    <a href="#">东方财富网 </a>
+                    <a href="#">汇金网 </a>
+                    <a href="#">慧聪企业管理 </a>
+                    <a href="#">第一金融网 </a>
+                    <a href="#">股城财经 </a>
+                    <a href="#">前瞻财经 </a>
+                    <a href="#">国鑫黄金 </a>
+                    <a href="#">中投顾问 </a>
+                    <a href="#">小额贷款 </a>
+                    <a href="#">金海贷 </a>
+                    <a href="#">第一纸白银 </a>
+                    <a href="#">投资理财导航 </a>
+                    <a href="#">贷款网站 </a>
+                    <a href="#">金羊网理财 </a>
+                    <a href="#">叩富网模拟炒股 </a>
+                    <a href="#">理想股票论坛 </a>
+                    <a href="#">招商引资 </a>
+                    <a href="#">爱股股票网 </a>
+                    <a href="#">中国期货信息网 </a>
+                    <a href="#">创业板  </a>
+                    <a href="#">投资创业 </a>
+                    <a href="#">投资移民 </a>
+                </div>
+            </div>
+        </div>
+         </div>
+
+        <footer class="footer-bar">
+            <div class="contain">
+                <div class="help-group">
+                    <h2>关于牛基队</h2>
+                    <p><a href="#">牛基队介绍</a></p>
+                    <p><a href="#">牛基队介绍</a></p>
+                    <p><a href="#">牛基队介绍</a></p>
+                    <p><a href="#">牛基队介绍</a></p>
+                </div>
+                <div class="help-group">
+                    <h2>平台保障</h2>
+                    <p><a href="#">牛基队介绍</a></p>
+                    <p><a href="#">牛基队介绍</a></p>
+                </div>
+                <div class="help-group">
+                    <h2>新手指导 </h2>
+                    <p><a href="#">免费注册生成名片</a></p>
+                    <p><a href="#">免费发布牛基队信息</a></p>
+                    <p><a href="#">常见问题解答</a></p>
+                </div>
+                <div class="help-group">
+                    <h2>客服服务热线</h2>
+                    <p><a class="service-call" href="#">4006-720-315</a></p>
+                    <p><a href="#">周一到周五 9:00-20:00</a></p>
+                </div>
+                <div class="help-group">
+                    <h2>微信公众号</h2>
+                    <img src="/static/investment/img/qrcode.png" alt="">
+                </div>
+            </div>
+            <div class="copyright">
+                <p>©2016上海律锰信息技术有限公司 版权 沪ICP备16013923</p>
+            </div>
+        </footer>
+         <script> 
+     $(function () { 
+         $('#myTab li:eq(1) a').tab('show'); 
+     }); 
+ </script> 
+    </body>
+</html>
+
+<script type="text/javascript" src="/static/web_customer/customer_new/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/static/web_customer/customer_new/js/bootstrap.js"></script>
+<script type="text/javascript" src="/static/investment/js/base.js"></script>

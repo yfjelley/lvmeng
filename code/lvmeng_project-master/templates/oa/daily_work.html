@@ -1,0 +1,161 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>协同办公</li>
+            <li>工作汇报</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>工作汇报</h4>
+        </div>
+        {% if not request.user.business and not request.user.is_superuser%}
+            <div class="btn-add">
+                <a href="/oa/daily_work_add_modify#daily_work">新增工作汇报</a>
+            </div>
+            <div class="export">
+        {% else %}
+            <div class="export-extra">
+        {% endif %}
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            <form action="" method="post" class="form-inline">
+                <span class="date-label">姓名：</span>
+                <input id="name" name="name" type="text" value="{{ name|default:'' }}" placeholder="姓名">
+                <span class="date-label">日期选择：</span>
+                <input id="data" name="data" type="text" value="{{ data|default:'' }}"  placeholder="填报时间">
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive" >
+                <table id="example" class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                        <th>序号</th>
+                        <th>填报人</th>
+                        <th>当天总结</th>
+                        <th>明日计划</th>
+                        <th>填报时间</th>
+                        <th>汇报类型</th>
+                        <th>审核结果</th>
+                        {% if not request.user.business and not request.user.is_superuser%}
+                            <th>操作</th>
+                        {% endif %}
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for daily_work in daily_works %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td title="点击查看" style="cursor:pointer"><a class="daily_check" href="/erp/check/?type=daily_work&id={{ daily_work.id }}#daily_work">{{ daily_work.user }}</a></td>
+                            <td>{{ daily_work.topic|truncatechars:20 }}</td>
+                            <td>{{ daily_work.content|truncatechars:20 }}</td>
+                            <td>{{ daily_work.time|date_str }}</td>
+                            <td>{{ daily_work.get_work_type_display }}</td>
+                            <td title="点击查看审核" style="cursor:pointer;"><a class="daily_examine" href="/oa/daily_work_examine/?daily_id={{ daily_work.id }}#daily_work">查看</a></td>
+                            <!--<th style="cursor:pointer" title="点击修改"><a href="/oa/daily_work_add_modify/?daily_id={{ daily_work.id }}"><img src="/static/img/edit.gif"></a></th>-->
+                            {% if not request.user.business and not request.user.is_superuser%}
+                                <td>
+                                    <a href="/oa/daily_work/?daily_id={{daily_work.id}}" onclick="if(confirm('确定删除该工作汇报吗？')==false)return false;" title="点击删除"><img src="/static/img/icon-delete.png"></a>
+                                    <!--<a class="daily_delete" href="/oa/daily_work/?daily_id={{daily_work.id}}"><img src="/static/img/icon-delete.png"></a>-->
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if daily_works.has_previous %}
+                                <a href="?page={{ daily_works.previous_page_number }}#daily_work">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p daily_works.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#daily_work" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if daily_works.has_next %}
+                                <a href="?page={{ daily_works.next_page_number }}#daily_work">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{daily_works.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+        laydate({
+                elem: '#data'
+             });
+
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+
+        $(function(){
+            $("th").attr("title","点击排序");
+        });
+
+        $(function(){
+            $('#example_filter').css('style','display:none');
+            $('#example_info').attr('style','display:none');
+            $('#example_length').attr('style','display:none');
+            $('#example_paginate').attr('style','display:none');
+        });
+
+</script>
+{% endblock %}

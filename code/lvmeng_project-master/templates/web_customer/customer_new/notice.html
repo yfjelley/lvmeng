@@ -1,0 +1,160 @@
+{% extends "web_customer/customer_new/base.html" %}
+
+{% block head %}
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+{#    <link rel="icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />#}
+{#    <link rel="shortcut icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />#}
+{#    <title>牛基队</title>#}
+
+    <link href="/static/web_customer/customer_new/css/bootstrap.css" type="text/css" rel="stylesheet">
+
+    <link href="/static/web_customer/customer_new/css/muban.css" rel="stylesheet" type="text/css">
+    <link href="/static/web_customer/customer_new/css/notice.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="/static/web_customer/customer_new/js/html5shiv.js"></script>
+    <script type="text/javascript" src="/static/web_customer/customer_new/js/respond.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <div class="container">
+        <div class="pull-left">
+            <!--<img src="/static/web_customer/customer_new/images/another/niu.png">-->
+            <div class="image_logo">
+            <img src="/media/{{ business.logo }}" onerror="this.src='/static/img/default_blue.png'">
+            {% comment %}<img src="/static/web_customer/customer_new/images/another/niheta.png">{% endcomment %}
+            <span style="font-size:26px;line-height: 80px;color: #333333;"> {{ business }}</span>
+            </div>
+        </div>
+        <div class="pull-right">
+            <p>财富热线：{{ business.business_phone }}</p>
+            <form class="bs-docs-example form-inline pull-right"  method="get" action="/web_customer/customer_business_search/"/>
+                <select name="bus_id" style="width: 180px;font-size: 14px;">
+                        <option value="{{ business.id }}">{{ business }}</option>
+                    {% for agent in agents %}
+                        {% if business != agent.business %}
+                            <option value="{{ agent.business.id }}">{{ agent.business }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            <button class="btn " type="submit">确定</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="menu">
+    <div class="container">
+        <nav class="navbar ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-menu">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/web_customer/redi_to_index/?business_id={{ business.id }}">首页</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#product">产品中心</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#topline">金融头条</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#topline">企业公告</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#footer">联系我们</a></li>
+                    <li><a href="/web_customer/personal_info/?bus_id={{ business.id }}">我的账户</a></li>
+                    <li style="float: right;"><a href="/logout/" >退出登录</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div>
+    <img src="/static/web_customer/customer_new/images/banner/bj.png">
+</div>
+
+
+<div id="notice" style="background: #F1F1F1;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" id="notice_top" style="background: white;">
+                <div class="notice_nav">
+                    <p>首页>>企业公告>>详情</p>
+                </div>
+
+                <div id="notice_title">
+                    <p>{{ announcement.title }}</p>
+                </div>
+                <div id="notice_date">
+                    <p>{{ announcement.date }}</p>
+                </div>
+                <hr/>
+                <div class="notice_contect">
+                    {{ announcement.text|safe }}
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer id="footer">
+    <div class="contact">
+        <img src="/static/web_customer/customer_new/images/another/line_left.png">
+        <span>联系我们</span>
+        <img src="/static/web_customer/customer_new/images/another/line_right.png">
+        <p> Contact us</p>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <p class="footer_word">COOPERATIVE PARTNER  合作伙伴</p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/360.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/baidu.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/gongshang.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/guotai.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/texun.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/xinlang.png"></div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4" >
+                <p class="footer_word">CONTACT US  联系我们</p>
+                <div class="foot_info">
+                    <p>客服热线：{{ business.business_phone }}</p>
+                    <p>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ business.business_email }}</p>
+                    <br/>
+                    <p>地址：{{ business.work_address }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4" id="ewm">
+                <div class="col-md-4 col-sm-4">
+                    <!--<img src="/static/web_customer/customer_new/images/ewm/gongzhonghao.png">-->
+                    <img src="/media/{{ business.business_qrcode }}" onerror="this.src='/static/img/default_blue.png'" style="width:90px;height:90px;">
+                    <p class="ewm_word">企业公众号</p>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <img src="/static/web_customer/customer_new/images/ewm/guanwang.png">
+                    <p class="ewm_word">下载APP</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+{% endblock %}

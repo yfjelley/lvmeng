@@ -1,0 +1,221 @@
+{% extends "mobi/base.html" %}
+
+{% block veiw %}
+{#<div view-title="{{product_detail.abbreviation}}" name="product-detail-view" class="product-detail-view" ng-cloak>#}
+<div class="product-detail-view">
+{#    <ion-nav-title>#}
+{#        {{product_detail.abbreviation}}#}
+{#    </ion-nav-title>#}
+
+{#    <ion-nav-buttons side="left">#}
+{#      <a class="button button-icon button-clear ion-ios-arrow-left" ng-click="goBack()">&nbsp;&nbsp;&nbsp;</a>#}
+{#    </ion-nav-buttons>#}
+{#    <ion-nav-buttons side="right" >#}
+{#        <span>#}
+{#            <button class="button button-icon button-clear" ng-class="collectionLen?'ion-android-favorite':'ion-android-favorite-outline'"#}
+{#                    ng-click="collectionLen?removeFromProductCollections():addToProductCollections()"></button>#}
+{#        </span>#}
+{##}
+{#        <span>#}
+{#            <button class="button button-icon button-clear" ng-class="attentionLen?'ion-ios-star':'ion-ios-star-outline'"#}
+{#                     ng-click="attentionLen?removeFromProductAttentions():addToProductAttentions()"></button>#}
+{#        </span>#}
+{#   </ion-nav-buttons>#}
+
+
+{#    <div has-bouncing="false" class="has-phone-suspend">#}
+    <div class="has-phone-suspend">
+        <div class="income-wrap">
+{#            <div class="row income-header">#}
+{#                <div class="col1">#}
+{#                    <img src="/static/mobi/img/product-line.png" alt="">#}
+{#                </div>#}
+{#                <div class="col2">预期收益</div>#}
+{#                <div class="col3">#}
+{#                    <img class="flipy" src="/static/mobi/img/product-line.png" alt="">#}
+{#                </div>#}
+{#            </div>#}
+            <div class="income-content">
+{#                找不到该产品!#}
+            </div>
+        </div>
+
+        <div class="invest-wrap">
+            <div class="row row-label">
+{#                <div class="col">起投额度(万)</div>#}
+{#                <div class="col">投资期限(月)</div>#}
+{#                <div class="col">追加额度(万)</div>#}
+            </div>
+            <div class="row row-content">
+{#                <div class="col">{{ product_detail.mini_sub | parseNumber }}</div>#}
+                <div class="col">{{product_detail.period}}</div>
+{#                <div class="col">{{ product_detail.addition | parseNumber}}</div>#}
+            </div>
+        </div>
+
+        <div class="row total-amount">
+            <div class="col amount-label"><h3>该产品不存在!</h3></div>
+{#            <div class="line"></div>#}
+{#            <div class="col">{{ product_detail.product_sum | parseNumber}}</div>#}
+        </div>
+
+{#        <div class="list product-bill">#}
+{#            <div class="bill1">#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">产品名称</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.name }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="line"></div>#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">产品管理人</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.manager }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="bill2">#}
+{#                <div class="row raise-period">#}
+{#                    <span>募集期限</span>#}
+{#                </div>#}
+{#                <div class="line"></div>#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">募集开始日期</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.begin_date }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!--<div class="line"></div>-->#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">募集结束日期<span class="suggest">(可提前结束)</span></span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.end_date }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="bill2">#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">风险类型</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.risk_preference }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="line"></div>#}
+{##}
+{##}
+{#               <!-- <div class="">#}
+{#                    <div class="row">#}
+{#                        <span class="category-title">实施策略</span>#}
+{#                    </div>#}
+{#                    <kittencup-collapse content="{{product_detail.strategy}}"></kittencup-collapse>#}
+{#                </div>-->#}
+{#                <div class="">#}
+{#                    <div class="row">#}
+{#                        <span class="category-title">实施策略</span>#}
+{#                    </div>#}
+{#                    <!--<kittencup-collapse content="{{product_detail.strategy}}"></kittencup-collapse>-->#}
+{#                    <div class="row">#}
+{#                        <span class="category-content" ng-bind-html=" product_detail.strategy|to_trusted"></span>#}
+{#                    </div>#}
+{#<!--#}
+{#                    <span class="category-content" ng-class="{collapse:!isCollapsed}" ng-bind-html=" product_detail.strategy|to_trusted"></span>#}
+{#                        <span class="category-content collapse" ng-show="!isCollapsed" ng-bind-html=" product_detail.strategy|to_trusted"></span>#}
+{#                        <span class="category-content" ng-show="isCollapsed" ng-bind-html=" product_detail.strategy|to_trusted"></span>#}
+{#                    </div>#}
+{#-->#}
+{#                   <!-- <span class="category-footer" ng-click="toggoleAccodion();">#}
+{#                        <i ng-class="isCollapsed?'ion-ios-arrow-up':'ion-ios-arrow-down'"></i>#}
+{#                        {{label}}#}
+{#                    </span>-->#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#            <div class="bill2">#}
+{#                <div class="line"></div>#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">托管机构</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.custodian }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="line"></div>#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">产品类型</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.product_type.typeName }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="line"></div>#}
+{#                <div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title">产品简介</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content">#}
+{#                        {{ product_detail.term_footnote }}#}
+{#                    </span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="line"></div>#}
+{#                <!--<div class="row">#}
+{#                    <div class="col">#}
+{#                        <span class="bill-title" >投资范围</span>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                    <span class="bill-content" ng-bind-html=" product_detail.invest_scope|to_trusted"></span>#}
+{#                    </div>#}
+{#                </div>-->#}
+{#                <div class="">#}
+{#                    <div class="row">#}
+{#                        <span class="category-title">投资范围</span>#}
+{#                    </div>#}
+{#                    <div class="row">#}
+{#                        <span class="category-content" ng-bind-html=" product_detail.invest_scope|to_trusted"></span>#}
+{#                    </div>#}
+{#                    <!--<kittencup-collapse content="{{product_detail.invest_scope}}"></kittencup-collapse>-->#}
+{#                </div>#}
+{#            </div>#}
+
+{#        </div>#}
+
+    </div>
+
+{#    <div class="phone-call-wrap-suspend"  ng-click="action_sheet_show()">#}
+{#        <button class="button button-blue">#}
+{#            <i class="ion-ios-telephone"></i>#}
+{#        </button>#}
+{#    </div>#}
+</div>
+
+
+{% endblock %}

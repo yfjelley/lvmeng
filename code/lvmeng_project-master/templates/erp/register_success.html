@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>牛基队注册成功</title>
+    <link rel="stylesheet" href="/static/new_vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/success_main.css">
+    <link href="/static/web_customer/homePage/lvmeng/images/favicon.png" rel="shortcut icon" />
+</head>
+<body class="success-view">
+    <header class="site-header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://niujidui.com">
+                    <img src="/static/new_img/logo.png" />
+                </a>
+            </div>
+            <div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right hide">
+                        <li><span>我已注册,现在就&nbsp;</span></li>
+                        <li><button class="btn-download">下载登录</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="wrapper" >
+        <div class="container">
+            <!--<div class="header success-tip">
+                <div>
+                    <img src="img/success.png" />
+                    <p>恭喜您，已注册成功！</p>
+                </div>
+                <p>账号密码已发送至注册邮箱，请<a>点击查看</a></p>
+
+            </div>-->
+
+            <div class="header success-tip">
+                <div>
+                    <img src="/static/img/success.png" />
+                    <p>提交成功！</p>
+                </div>
+                <!--<p>审核成功后，账号密码会发送至注册邮箱</p>-->
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if forloop.last %}
+                            <p>{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+
+            <div class="popover-content hide" style="background: transparent">
+                <a href="/login" class="btn" style="padding:10px;color: #333; font-size:16px;">企业登录</a><br><br>
+                <a href="/customer_login" class="btn" style="padding:10px;color: #333; font-size:16px;">个人登录</a></div>
+
+            <div class="grid">
+                <div class="grid-item col-sm-4" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="扫描二维码下载试用">
+                    <div class="border-img">
+                        <img src="/static/new_img/IOS.png" class="ios">
+                    </div>
+                    <p>ios</p>
+                </div>
+                <div class="grid-item col-sm-4" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="扫描二维码下载试用">
+                    <div class="border-img">
+                        <img src="/static/new_img/android.png" class="android">
+                    </div>
+
+                    <p>android</p>
+                </div>
+                <div class="grid-item grid-item3 col-sm-4" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="扫描二维码关注公众号">
+                    <div class="border-img">
+                        <img src="/static/new_img/weixin.png" class="weixin">
+                        <!--<img src="img/weixi_c.png" class="weixin_cover">-->
+                    </div>
+
+                    <p>公众号</p>
+                </div>
+            </div>
+
+            <!--<div id="popover-head" class="hide">
+                扫描二维码下载试用
+            </div>-->
+            <div id="popover-content" class="hide" style="width:270px;">
+                <div class="col" style="float: left; margin:0 10px;">
+                    <img src="/static/new_img/qr_customer.png" alt="">
+                    <p>用户版</p>
+                </div>
+                <div class="col" style="float: left; margin:0 10px;">
+                    <img src="/static/new_img/qr_business.png" alt="">
+                    <p>企业版</p>
+                </div>
+            </div>
+            <div id="popover-content3" class="hide" style="float: left; margin:0;">
+                <img src="/static/new_img/qr_general.png" alt="">
+                <p>公众号</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="copy">
+            <p>©2016上海律锰信息技术有限公司 版权 沪ICP备16013923号-1</p>
+        </div>
+    </footer>
+</body>
+</html>
+<script src="/static/new_vendors/jquery/dist/jquery.min.js"></script>
+<script src="/static/new_vendors/bootstrap/js/bootstrap.js"></script>
+<script src="/static/new_vendors/greensock/EasePack.min.js"></script>
+<script src="/static/new_vendors/greensock/TweenMax.min.js"></script>
+<script src="/static/new_js/index.js"></script>

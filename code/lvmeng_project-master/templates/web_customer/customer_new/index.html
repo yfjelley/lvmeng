@@ -1,0 +1,392 @@
+{% extends "web_customer/customer_new/base.html" %}
+
+
+{% block head %}
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+{#    <link rel="icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />#}
+{#    <link rel="shortcut icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />#}
+{#    <title>牛基队</title>#}
+
+    <link href="/static/web_customer/customer_new/css/bootstrap.css" type="text/css" rel="stylesheet">
+
+    <link href="/static/web_customer/customer_new/css/lvmeng.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="/static/web_customer/customer_new/js/html5shiv.js"></script>
+    <script type="text/javascript" src="/static/web_customer/customer_new/js/respond.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
+<div id="divall">
+    <div class="div_modal">
+        <div class="content">
+            <div style="padding: 0 30px;">
+                <div style="float: right;width: 372px;">
+                    <div class="login_in">
+                        <p class="on" onclick="denglu()" id="on">登录</p>
+                    </div>
+                    <div id="error" style="margin-top:20px;color:red;font-size:15px;">
+                        {{ error }}
+                    </div>
+                    <input id="loginMark" style="display:none;" value="{{ success|default:'' }}">
+                    <div class="content_one" id="content_one">
+                        <form action="" method="post" id="cus_form">
+                            <input type="text" placeholder="用户名/手机号" name="username">
+                            <input type="password" placeholder="密码" name="password">
+                            <div class="content_two">
+                                <input type="checkbox" checked="checked"><span>记住我</span>
+                            </div>
+                            <a onclick="login()">立即登录</a>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="content_ad_a">尊敬的用户：</p>
+                    <p class="content_ad_b">
+                        恪守《私募投资基金监督管理暂行办法》规定，即日起注册用户才能登录网站查看，特此公告！
+                    </p>
+                    <p  class="content_ad_c">2016年4月7日<br/><br/></p>
+                </div>
+            </div>
+            <div class="content_word">
+                <div style="background: #CCCCCC;">
+                    <h2>合格投资者认定</h2>
+                    <div class="content_word_a">
+                        <p class="content_word_b">
+                            根据《私募投资基金监督管理暂行办法》第四章第十四条规定：“私募基金管理人、私募基金销售机构不得向合格投资者之外的单位和个人募集资金，不得通过报刊、电台、电视、互联网等
+                            公众传播媒体或者讲座、报告会、分析会的布告、传单、手机短信、微信、博客和电子邮件等方式，向不特定对象宣传推介。”
+                        </p>
+                        <p class="content_word_c">谨遵《私募投资基金监督管理暂行办法》之规定，只向特定的合格投资者宣传推介相关私募投资基金产品。</p>
+
+                        <p class="content_word_d">
+                            阁下如有意进行私募投资基金投资且满足《私募投资基金监督管理暂行办法》关于合规投资者标准之规定，即具备相应风险识别能力和
+                            风险承担能力，投资于单只私募基金的金额不低于100万元，且个人金融类资产不低于300万元或者最近三年个人年均收入不低于50万元人民币。请阁下详细阅读本提示，并注册成为特定的
+                            合规投资者，方可获得私募投资基金产品宣传推介服务。</p>
+                        <p class="content_word_e">
+                            <span style="color: #000000;">
+                                <label><input type="checkbox" checked="checked" >我已阅读并接受此认定证书</label>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div_modal_back"></div>
+</div>
+
+<div id="header">
+    <div class="container">
+        <div class="pull-left">
+            <!--<img src="/static/web_customer/customer_new/images/another/niu.png">-->
+            <div class="image_logo">
+            <img src="/media/{{ business.logo }}" onerror="this.src='/static/img/default_blue.png'">
+            {% comment %}<img src="/static/web_customer/customer_new/images/another/niheta.png">{% endcomment %}
+            <span style="font-size:26px;line-height: 80px;color: #333333;"> {{ business }}</span>
+            </div>
+        </div>
+        <div class="pull-right">
+            <p>财富热线：{{ business.business_phone }}</p>
+
+            <form class="bs-docs-example form-inline pull-right"  method="get" action="/web_customer/customer_business_search/"/>
+                <select name="bus_id" style="width: 180px;font-size: 14px;">
+                        <option value="{{ business.id }}">{{ business }}</option>
+                    {% for agent in agents %}
+                        {% if business != agent.business %}
+                            <option value="{{ agent.business.id }}">{{ agent.business }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            <button class="btn " type="submit">确定</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="menu">
+    <div class="container">
+        <nav class="navbar ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-menu">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/web_customer/redi_to_index/">首页</a></li>
+                    <li><a href="#product">产品中心</a></li>
+                    <li><a href="#topline">金融头条</a></li>
+                    <li><a href="#topline">企业公告</a></li>
+                    <li><a href="#footer">联系我们</a></li>
+                    <li><a href="/web_customer/personal_info/?bus_id={{ business.id }}">我的账户</a></li>
+                    <li style="float: right;"><a href="/logout/" >退出登录</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="/static/web_customer/customer_new/images/banner/banner2.png" alt="...">
+        </div>
+        <div class="item">
+            <img src="/static/web_customer/customer_new/images/banner/banner.png" alt="...">
+        </div>
+        <div class="item">
+            <img src="/static/web_customer/customer_new/images/banner/banner4.png" alt="...">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="ad_img">
+    <img src="/static/web_customer/customer_new/images/banner/guanli.png">
+</div>
+
+<div id="product">
+    <div class="product">
+        <img src="/static/web_customer/customer_new/images/another/line_left.png">
+        <span>产品中心</span>
+        <img src="/static/web_customer/customer_new/images/another/line_right.png">
+        <p>Production center</p>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-2" id="hot">
+                <p>热销产品</p>
+                <img src="/static/web_customer/customer_new/images/another/picter.png">
+            </div>
+            <div class="col-md-10 col-sm-10" id="gategory">
+                <ul class="gategory_name">
+                    {% if active == 1 %}
+                        <li><a id="gategory1" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=1#product" style="color:red;">股权基金</a></li>
+                    {% else %}
+                        <li><a id="gategory1" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=1#product">股权基金</a></li>
+                    {% endif %}
+                    {% if active == 2 %}
+                        <li><a id="gategory2" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=2#product" style="color:red;">创新基金</a></li>
+                    {% else %}
+                        <li><a id="gategory2" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=2#product">创新基金</a></li>
+                    {% endif %}
+                    {% if active == 3 %}
+                        <li><a id="gategory3" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=3#product" style="color:red;">债权基金</a></li>
+                    {% else %}
+                        <li><a id="gategory3" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=3#product" >债权基金</a></li>
+                    {% endif %}
+                    {% if active == 4 %}
+                        <li><a id="gategory4" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=4#product" style="color:red;">证券基金</a></li>
+                    {% else %}
+                    <li><a id="gategory4" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=4#product">证券基金</a></li>
+                    {% endif %}
+                    {% if active == 5 %}
+                        <li><a id="gategory5" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=5#product" style="color:red;">集合信托</a></li>
+                    {% else %}
+                        <li><a id="gategory5" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=5#product">集合信托</a></li>
+                    {% endif %}
+                    {% if active == 6 %}
+                        <li><a id="gategory6" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=6#product" style="color:red;">集合资管</a></li>
+                    {% else %}
+                        <li><a id="gategory6" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=6#product">集合资管</a></li>
+                    {% endif %}
+                    {% if active == 7 %}
+                        <li><a id="gategory7" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=7#product" style="color:red;">集合保险</a></li>
+                    {% else %}
+                        <li><a id="gategory7" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=7#product">集合保险</a></li>
+                    {% endif %}
+                    {% if active == 100 %}
+                        <li><a id="gategory8" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=100#product" style="color:red;">所有产品</a></li>
+                    {% else %}
+                        <li><a id="gategory8" href="/web_customer/show_product_by_type/?bus_id={{ business.id }}&product_type=100#product">所有产品</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-10 col-sm-10" id="gategory_info">
+                <ul class="gategory_title">
+                    <li>产品名称</li>
+                    <li>预期收益</li>
+                    <li>产品期限（月）</li>
+                    <li>认购起点（万）</li>
+                    <li>总金额（万）</li>
+                    <li>托管机构</li>
+                </ul>
+                {% for product in products %}
+                <ul class="gategory_info_1">
+                    <li><a href="/web_customer/product/?bus_id={{ business.id }}&product_id={{ product.id }}">{{ product.name|default:''|truncatechars:8 }}</a></li>
+                    <li class="gategory_info_red">{{ product.return_expected|default:'' }}%</li>
+                    <li>{{ product.period|default:'' }}</li>
+                    <li>{{ product.mini_sub|default:'' }}</li>
+                    <li>{{ product.product_sum|default:'' }}</li>
+                    <li>{{ product.custodian|default:''|truncatechars:8 }}</li>
+                </ul>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="topline">
+    <div class="news">
+        <img src="/static/web_customer/customer_new/images/another/line_left.png">
+        <span>新闻资讯</span>
+        <img src="/static/web_customer/customer_new/images/another/line_right.png">
+        <p> News information</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-8">
+                <p>
+                    <span class="span1">金融头条</span>
+                    <span class="span2">headline</span>
+                    <span class="span3"><a href="/web_customer/web_customer_headline_list/?bus_id={{ business.id }}">MORE</a></span>
+                </p>
+
+                <div class="row" id="news">
+                    {% for headline in headlines %}
+                        <div class="col-md-6 col-sm-6">
+                            <div class="media">
+
+                                <a class="pull-left" href="/web_customer/web_customer_headline_detail/?line_id={{ headline.id }}">
+                                    <img class="media-object" src="/media/{{ headline.picture }}" onerror="this.src='/static/img/default_blue.png'" style="width:100px;height:60px;">
+
+                                </a>
+                                <div class="media-body" style="max-height: 60px;padding-top: 10px;">
+                                    <a href="/web_customer/web_customer_headline_detail/?line_id={{ headline.id }}&bus_id={{ business.id }}">{{ headline.title|truncatechars:25 }}</a>
+                                    <div class="media-bottom">{{ headline.register_date|date:'Y-m-d' }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+                <p>
+                    <span class="span1">企业公告</span>
+                    <span class="span2">notice</span>
+                    <span class="span3"><a href="/web_customer/noticelist/?business_id={{ business.id }}">MORE</a></span>
+                </p>
+                <div class="notice">
+                    <ul>
+                        {% for announcement in announcements %}
+                            <span>{{ announcement.date|date:'Y-m-d' }}</span>
+                            <li><a href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announcement.id }}">{{ announcement.title|truncatechars:15 }}</a></li>
+                        {% endfor  %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="contact">
+        <img src="/static/web_customer/customer_new/images/another/line_left.png">
+        <span>联系我们</span>
+        <img src="/static/web_customer/customer_new/images/another/line_right.png">
+        <p> Contact us</p>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <p class="footer_word">COOPERATIVE PARTNER  合作伙伴</p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/360.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/baidu.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/gongshang.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/guotai.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/texun.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/xinlang.png"></div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4" >
+                <p class="footer_word">CONTACT US  联系我们</p>
+                <div class="foot_info">
+                    <p>客服热线：{{ business.business_phone }}</p>
+                    <p>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ business.business_email }}</p>
+                    <br/>
+                    <p>地址：{{ business.work_address }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4" id="ewm">
+                <div class="col-md-4 col-sm-4">
+                    <!--<img src="/static/web_customer/customer_new/images/ewm/gongzhonghao.png">-->
+                    <img src="/media/{{ business.business_qrcode }}" onerror="this.src='/static/img/default_blue.png'" style="width:90px;height:90px;">
+                    <p class="ewm_word">企业公众号</p>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <img src="/static/web_customer/customer_new/images/ewm/guanwang.png">
+                    <p class="ewm_word">下载APP</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<div class="right_ewm">
+    <img src="/static/web_customer/customer_new/images/ewm/ewm_download.jpg" style="width:100px;height:100px">
+    <p>扫描下载用户APP</p>
+</div>
+
+
+<script type="text/javascript" src="/static/web_customer/customer_new/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/static/web_customer/customer_new/js/bootstrap.js"></script>
+
+<script>
+    <!--function login(){-->
+        <!--document.getElementById("divall").style.display = "none";-->
+    <!--}-->
+    function login(){
+        $("#cus_form").submit();
+    }
+
+    $(function(){
+        var mark = $("#loginMark").val();
+        if(mark){
+            document.getElementById("divall").style.display = "none";
+        }
+    });
+
+    $(function(){
+        $('.right_ewm').animate({right:'0',opacity:'1'},1000)
+
+    })
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,130 @@
+
+body,html{font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;}
+video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
+video::-webkit-media-controls-play-button {}
+video::-webkit-media-controls-timeline {}
+video::-webkit-media-controls-current-time-display{}
+video::-webkit-media-controls-time-remaining-display {}
+video::-webkit-media-controls-mute-button {}
+video::-webkit-media-controls-toggle-closed-captions-button {}
+video::-webkit-media-controls-volume-slider {}
+
+
+.intro { background-image: url("../images/banner/banner1.jpg");
+
+        background-attachment: fixed;
+        /*-webkit-background-size: 100% 700px;
+        background-size: 100% 700px;*/
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+}
+.intro_embed {
+    width: 299px;
+    height: 610px;
+    background-image: url("../images/banner/iphone6.png");
+    position: absolute;
+    right: 13%;
+    top:4.5%;
+}
+
+.intro_embed embed {
+    width:257px;
+    height:458px;
+    margin-left:20px;
+    margin-top: 75px;
+}
+.modal{ margin-top: 100px;  }
+
+.modal-body p { color: black;
+                font-size: 16px;
+}
+.modal_licaishi {float: right;
+                margin-top: -43px;
+                margin-right: 100px;
+}
+.modal-sm {width: 450px;}
+.modal-title {color: #2795E2;
+                text-align: center;
+}
+.announce_title span {float: right;margin-top: 2px;}
+.announce_title p {width: 250px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+}
+.announce_title a:hover {color: #2795E2;
+                        cursor: pointer;
+}
+
+#container{ height:250px;  }
+
+.copy {text-align: center;
+    margin-top: 10px;
+    background-color:#333333;
+}
+
+.media-body {color: white;}
+
+.footer_word_tel p {font-size: 16px;}
+
+.right_code{
+    position:fixed;
+    top:30%;
+    right:0px;
+    opacity:1;
+
+}
+
+.right_code p {
+    color: white;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    margin-right: 3px;
+}
+
+.right_code img {
+    width:100px;
+    height:100px
+}
+.popover {
+    max-width: 120px;
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+}
+
+.popover-content button { padding: 10px;}
+
+.list-inline a:hover {background-color: #2795E2; }
+
+.nav_img2 {margin-top: 20px;}
+
+.nav_img3 { margin-left: 115px;
+            margin-top: -40px;
+}
+.mav_img4 { margin-left: 130px;
+            margin-top: -40px;
+}
+.navbar-default .navbar-nav>li>a {
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+}
+.video {
+     background-image: url(../images/banner/banner2.png);
+     background-attachment: scroll;
+     -webkit-background-size: 100% 100%;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+ }
+.img_logo {
+     background-image: url('/static/web_customer/homePage/lvmeng/images/banner/banner3.png');
+     background-attachment: scroll;
+     -webkit-background-size: 100% 100%;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+}

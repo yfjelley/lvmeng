@@ -1,0 +1,168 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">员工管理</li>
+            <li>查看所有员工</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>员工列表</h4>
+        </div>
+        <div class="content-table">
+            <form action="" method="post" class="form-inline">
+                <div class="form-group">
+                    <label class="control-label">员工编号：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control"  name="num" value="{{num|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group div-wrap">
+                  <label class="control-label">姓名：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="agent_name" value="{{agent_name|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group div-wrap">
+                  <label class="control-label">电话：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="phoneNum" value="{{phoneNum|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="control-label">身份证号：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control"  name="idNum" value="{{idNum|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                  </div>
+                    <div class="col-sm-9">
+                    <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+               </div>
+               </div>
+
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>邀请码</th>
+                            <th>姓名</th>
+                            <th>头像</th>
+                            <th>电话</th>
+                            <th>性别</th>
+                            <th>地址</th>
+                            <th>身份证号</th>
+
+                            <th>拥有客户/位</th>
+                            <!--<th>录入人</th>-->
+                            <th>注册日期</th>
+                            <!--<th>备注</th>-->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for agent in agents %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="/erp/check/?id={{ agent.id }}&type=lvmeng_agent#admin_agent_list" title="点击查看">{{ agent.b_a_num }}</a></td>
+                                <td>{{ agent.name }}</td>
+                                <td><img style="width:50px;height:50px;" src="/media/{{ agent.avatar }}" onerror="this.src='/static/img/default_blue.png'"/></td>
+                                <td>{{ agent.phoneNum }}</td>
+                                <td>{{ agent.get_sex_display }}</td>
+                                <td>{{ agent.address }}</td>
+                                <td>{{ agent.idCard_num }}</td>
+
+                                {% if agent.count %}
+                                    <td><a href="/erp/agent_customers/?id={{ agent.id }}#admin_agent_list" title="点击查看该客户经理的客户">{{ agent.count }}</a></td>
+                                {% else %}
+                                    <td><a>{{ agent.count }}</a></td>
+                                {% endif %}
+                                <!--<th>{{ agent.entry_person }}</th>-->
+                                <td>{{ agent.register_date|date_str }}</td>
+                                <!--<th>{{ agent.note }}</th>-->
+                                <!--<th><a style="color:red" href="javascript:;" onclick="if(confirm('确定删除该机构吗？')==false)return false;">删除</a></th>-->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if agents.has_previous %}
+                                <a href="?page={{ agents.previous_page_number }}#admin_agent_list">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p agents.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#admin_agent_list" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if agents.has_next %}
+                                <a href="?page={{ agents.next_page_number }}#admin_agent_list">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+
+                        {% else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{agents.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}
+

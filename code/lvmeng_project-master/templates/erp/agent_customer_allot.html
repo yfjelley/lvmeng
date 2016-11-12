@@ -1,0 +1,128 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title></title>-->
+<!--</head>-->
+<!--<script src="/static/agle/vendor/jquery/dist/jquery.js"></script>-->
+<!--<script src="/static/js/jquery-webox.js"></script>-->
+<!--<link type="text/css" rel="stylesheet" href="/static/css/image/jquery-webox.css">-->
+<!--<style>-->
+    <!--th{width:100px;}-->
+    <!--#agent_cus{margin-top:20px;background:#D2C9BA;}-->
+    <!--.mvBox{height:15px; background:#F5FAFD url(/static/img/test2.jpg) no-repeat left center; width:471px; position:relative; padding:0 30px; margin:0 auto;}-->
+    <!--.mvBtn{position:absolute; left:50px; top:0;}-->
+    <!--.mvTxt{height:50px; line-height:50px; width:531px; text-align:center; font-size:30px; color:#29B6FF; font-family:Arial; margin:0 auto;}-->
+    <!--.div_mv,.mvBox{display:none;}-->
+<!--</style>-->
+<!--<body>-->
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+            <h4 style="color:red;">客户分配</h4>
+        </div>
+    <div style="background:#F5FAFD; padding:50px;" class="div_mv">
+        <div class="mvTxt">正在进行客户分配,请稍等<span class="mvSq">.</span><span class="mvSq">.</span><span class="mvSq">.</span></div></div>
+    <div class="mvBox">
+        <img class="mvBtn" src="/static/img/test1.jpg" />
+    </div>
+    <form method="get" action="/erp/agent_list/#agent_list" id="agentForm">
+        {% csrf_token %}
+        <table border frame=below align="center" id="agent_cus">
+            <tr style="background:#FDFDFD">
+                <th>客户</th>
+                <th>购买金额</th>
+                <th>请选择客户经理</th>
+            </tr>
+            {% for customer in customers %}
+                <tr>
+                    <th style="display:none;">{{ customer.id }}</th>
+                    <th>{{ customer.name }}</th>
+                    <th>{{ customer.sum }}</th>
+                    <th>
+                        <select name="agent">
+                            {% for agent in agent_list %}
+                                <option value="{{ agent.id }}" style="width:500px;">{{ agent.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </th>
+                </tr>
+            {% endfor %}
+        </table>
+        <div style="margin-left:90%;margin-top:15px;">
+            <input type="button" id="submit" value="确定" >
+        </div>
+
+    </form>
+  </div>
+{% endblock %}
+{% block style %}
+<style>
+    th{width:800px;}
+    #agent_cus{margin-top:20px;background:#D2C9BA;}
+    .mvBox{height:15px; background:#F5FAFD url(/static/img/test2.jpg) no-repeat left center; width:471px; position:relative; padding:0 30px; margin:0 auto;}
+    .mvBtn{position:absolute; left:50px; top:0;}
+    .mvTxt{height:50px; line-height:50px; width:531px; text-align:center; font-size:30px; color:#29B6FF; font-family:Arial; margin:0 auto;}
+    .div_mv,.mvBox{display:none;}
+</style>
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+         $("#submit").click(function(){
+            $(".div_mv").css("display","block");
+            $(".mvBox").css("display","block");
+            $("#agentForm").css("display","none");
+            var arrayObj = new Array();
+            $("#agent_cus tr").each(function(index){
+                    if(index!=0){
+                        $(this).children().each(function(index){
+                            if(index==0){
+                                var key = $(this).text();
+                                arrayObj.push(key);
+                            }
+                            if(index==3){
+                                var value = $(this).find("option:selected").val();
+                                arrayObj.push(value);
+                            }
+                        });
+                    }
+                });
+                arrayObj.push({{ agent_id }});
+                <!--alert(arrayObj);-->
+                $.ajax({
+                    type:"post",
+                    url:"/erp/agent_customer_allot/",
+                    data:"array="+arrayObj,
+                    dataType:"json",
+                    success:function(data){
+                            if(data.da){
+                                <!--window.location.reload();-->
+                                window.location = "/erp/agent_list/?location=location#agent_list";
+                            }
+                        }
+                });
+         });
+    });
+
+var delVal=50;
+function autoMove(){
+	 delVal++;
+	 if(delVal>400){
+		delVal=50;
+	 }
+	 $(".mvBtn").css("left",delVal);
+ }
+ setInterval(autoMove,8);
+ var deNum=0;
+ function autoTsq(){
+	$(".mvSq").css("color","#F5FAFD");
+	setTimeout(function(){$(".mvSq").eq(0).css("color","#29B6FF")},0);
+	setTimeout(function(){$(".mvSq").eq(1).css("color","#29B6FF")},500);
+	setTimeout(function(){$(".mvSq").eq(2).css("color","#29B6FF")},1000);
+ }
+ setInterval(autoTsq,1500);
+
+</script>
+{% endblock %}

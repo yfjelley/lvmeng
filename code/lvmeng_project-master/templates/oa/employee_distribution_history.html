@@ -1,0 +1,191 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>考勤管理</li>
+            <li>{{message}}</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>{{message}}</h4>
+        </div>
+        <div>
+            <form action="/oa/employee_history_position/#employee_history_position" method="post">
+                姓名：<select name="option" id="option" onchange="alink_name();" required>
+                        {% if agent %}
+                            <option value="{{ agent.id }}" id="display_name" >{{ agent }}</option>
+                        {% else %}
+                            <option value="" >请选择</option>
+                        {% endif %}
+
+                        {% for check in agents %}
+                                {% if agent != check %}
+                                    <option value="{{ check.id }}">{{ check }}</option>
+                                {% endif %}
+                        {% endfor %}
+                          </select>
+
+                &nbsp;&nbsp;&nbsp;
+                日期选择：<input id="dataTime" name="dataTime" type="text" value="{{ dataTime|default:'' }}" required>-
+                <input id="dataEnd" name="dataEnd" type="text" value="{{ dataEnd|default:'' }}" required>
+                <input type="submit" value="确定">&nbsp;&nbsp;<input type="button" value="数据导出到Excel表格" style="color:red" onclick="download();" title="点击导出数据" class="btn-export">
+                <a id="day3" href="" style="display:none"><input type="button" value="三天内"></a>
+                <a id="day7" href="" style="display:none"><input type="button" value="一周内"></a>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 panel-body" id="container" style="height:800px;">
+
+            </div>
+        </div>
+
+        <table class="excel"  style="display:none">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>姓名</th>
+                            <th>签到时间</th>
+                            <th>签到位置</th>
+                            <th>所属机构</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for check in checks %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ agent.name }}</td>
+                                <td>{{ check.check_time }}</td>
+                                <td id="address{{ forloop.counter }}"></td>
+                                <td>{{ agent.business }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    laydate({
+                elem: '#dataTime'
+             });
+     laydate({
+        elem: '#dataEnd'
+     });
+
+    function alink_name(){
+        var name = $('#option option:selected').val();
+        if(name==""){
+            document.getElementById("day3").href = "/oa/employee_history_position_days/?days=-2&name={{ name }}#employee_history_position";
+            document.getElementById("day7").href = "/oa/employee_history_position_days/?days=-6&name={{ name }}#employee_history_position";
+        }
+        else{
+            document.getElementById("day3").href = "/oa/employee_history_position_days/?days=-2&name="+name+"#employee_history_position";
+            document.getElementById("day7").href = "/oa/employee_history_position_days/?days=-6&name="+name+"#employee_history_position";
+            }
+    }
+    alink_name();
+
+    var map = new BMap.Map("container");                        // 创建Map实例
+    map.centerAndZoom(new BMap.Point('121.54537', '31.230601'), 7);//该坐标表示上海浦东新区
+
+    setMapEvent();
+    addMapControl();
+        //地图事件设置函数：
+        function setMapEvent(){
+            map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+            map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+            map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+            map.enableKeyboard();//启用键盘上下左右键移动地图
+        }
+        //地图控件添加函数：
+        function addMapControl(){
+            //向地图中添加缩放控件
+        var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+        map.addControl(ctrl_nav);
+         //向地图中添加缩略图控件
+        var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+        map.addControl(ctrl_ove);
+         //向地图中添加比例尺控件
+        var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+        map.addControl(ctrl_sca);
+        map.addControl(new BMap.MapTypeControl());//添加不同类型的地图模式(三维不可用)
+        }
+
+     //添加标注点并设置点击窗口
+      var num = 1
+      $.each({{json_data|safe}},function(index,value){
+        var marker1 = new BMap.Marker(new BMap.Point(value.fields.abscissa, value.fields.ordinate));  // 创建标注
+
+        $.ajax({
+        type:"get",
+        url:"/oa/ajax_name/",
+        dataType:"json",
+        data:{"id":value.pk,"type":"history"},
+        success:function(json){
+                var mygeo = new BMap.Geocoder();
+                mygeo.getLocation(new BMap.Point(value.fields.abscissa,value.fields.ordinate),function(result){
+
+                    if(result){
+                            address = result.address
+                            $("#address"+num).html(address);
+
+                            <!--alert("#address"+num);-->
+                            <!--alert($("#address"+num).html());-->
+                            num = num + 1
+                            map.addOverlay(marker1);// 将标注添加到地图中
+                            var infoWindow = new BMap.InfoWindow("签到时间：<span id='show_time'>"+value.fields.check_time+"</span><br/>所属机构："+json.business, {
+                              width : 300,     // 信息窗口宽度
+                              height: 100,     // 信息窗口高度
+                              title : "姓名："+json.name+"<br/>"+"位置："+address,  // 信息窗口标题
+                              enableMessage : false
+                             });  // 创建信息窗口对象
+                            <!--marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow);});//点击后打开信息窗口-->
+                            marker1.addEventListener("click", function(){
+                                this.openInfoWindow(infoWindow);
+                                var date_time = $("#show_time").html();
+                                $("#show_time").html(date_time.replace("T"," "));
+                                });
+                        }
+                     });
+                    }
+                 });
+
+                <!--map.addOverlay(marker1);// 将标注添加到地图中-->
+                <!--var infoWindow = new BMap.InfoWindow("签到时间:"+value.fields.check_time, {-->
+                  <!--width : 200,     // 信息窗口宽度-->
+                  <!--height: 80,     // 信息窗口高度-->
+                  <!--title : json.name+"的位置["+address+"]",  // 信息窗口标题-->
+                  <!--enableMessage : false-->
+                 <!--});  // 创建信息窗口对象-->
+                <!--marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow);});//点击后打开信息窗口-->
+            <!--}-->
+
+        <!--});-->
+
+        <!--map.addOverlay(marker1);// 将标注添加到地图中-->
+        <!--&lt;!&ndash;alert(first_name)&ndash;&gt;-->
+        <!--var infoWindow = new BMap.InfoWindow("签到时间:"+value.fields.check_time, {-->
+          <!--width : 250,     // 信息窗口宽度-->
+          <!--height: 80,     // 信息窗口高度-->
+          <!--title : $("#check_name").val(),  // 信息窗口标题-->
+          <!--enableMessage : false-->
+         <!--});  // 创建信息窗口对象-->
+       <!--marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow);});//点击后打开信息窗口-->
+
+    });
+
+     <!--var marker1 = new BMap.Marker(new BMap.Point('114.21892734521', '29.575429778924'));  // 创建标注-->
+     <!--map.addOverlay(marker1);// 将标注添加到地图中-->
+     <!--var infoWindow = new BMap.InfoWindow("some message", {-->
+      <!--width : 200,     // 信息窗口宽度-->
+      <!--height: 80,     // 信息窗口高度-->
+      <!--title : "某某某的位置",  // 信息窗口标题-->
+      <!--enableMessage : false-->
+     <!--});  // 创建信息窗口对象-->
+     <!--marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow);});//点击后打开信息窗口-->
+
+</script>
+{% endblock %}

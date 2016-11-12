@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+    {% if business %}
+        <link rel="icon" href="/media/{{ business.logo }}" type="image" />
+        <link rel="shortcut icon" href=src="/media/{{ business.logo }}" type="image" />
+        <title>{{ business.name }}</title>
+    {% else %}
+        <!--<link rel="icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />-->
+        <link rel="shortcut icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />
+        <title>牛基队</title>
+    {% endif %}
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      <!--_paq.push(['deleteCustomDimension', 1]);-->
+      <!--_paq.push(['deleteCustomDimension', 2]);-->
+      _paq.push(['setCustomDimension', 1, '{{ user.username }}']);
+      _paq.push(['setCustomDimension', 3, '{{ user.first_name }}']);
+      _paq.push(['setCustomDimension', 4, '{{ user.last_name }}']);
+      <!--_paq.push(['setCustomDimension', 5, '{{ user.business.name }}']);-->
+      <!--_paq.push(['setCustomDimension', 2, '{{ user.username }}');-->
+      _paq.push(['setCustomVariable',
+        // Index, the number from 1 to 5 where this custom variable name is stored for the current page view
+        1,
+        // Name, the name of the variable, for example: Category, Sub-category, UserType
+        "User",
+        // Value, for example: "Sports", "News", "World", "Business", etc.
+          "{{ user.first_name }}",
+        // Scope of the custom variable, "page" means the custom variable applies to the current page view
+        "page"
+      ]);
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analysis.niujidui.com:49997/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+
+    <noscript><p><img src="//analysis.niujidui.com:49997/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</body>
+</html>

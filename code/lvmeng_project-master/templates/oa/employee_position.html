@@ -1,0 +1,97 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+            <ol class="breadcrumb">
+                <span>当前位置：</span>
+                <li class="active">办公自动化</li>
+                <li>考勤管理</li>
+                <li>{{message}}</li>
+            </ol>
+            <div class="header-line">
+               <!-- START Language list-->
+                <h4>{{message}}</h4>
+            </div>
+            {% load detail_deal %}
+            <form method="post" action="">
+                员工姓名：<select name="emp_name" required>
+                            {% if ck_user %}
+                                <option value="{{ ck_user.id }}" >{{ ck_user }}</option>
+                            {% else %}
+                                <option value="" >请选择</option>
+                            {% endif %}
+                            {% for check in checks %}
+                                {% if ck_user != check %}
+                                    <option value="{{ check.id }}">{{ check }}</option>
+                                {% endif %}
+                            {% endfor %}
+                          </select>
+                          <input type="submit" value="查找" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          签到地址:<input type="text" id="address" style="color:blue;width:250px;" placeholder="签到地址"/>
+                          签到时间:<input type="text" id="time" style="color:blue;width:150px;" value="{{check_time|date_str}}" placeholder="签到时间"/>
+                          所属机构:<input type="text" id="business" style="color:blue;width:100px;" value="{{business}}" placeholder="所属机构"/>
+                        <input type="text" id="check_time" style="display:none;" value="{{check_time|date_str}}"/>
+                        <input type="text" id="belong_business" style="display:none;" value="{{business}}"/>
+                        <input type="text" id="user" style="display:none;" value="{{user}}"/>
+        </form>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-lg-12 panel-body" id="container" style="height:800px;">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var address
+    var map = new BMap.Map("container"); //创建地图
+    map.centerAndZoom(new BMap.Point(121.54537, 31.230601), 6); //初始化地图
+    map.enableScrollWheelZoom();  // 开启鼠标滚轮缩放
+    map.enableKeyboard();         // 开启键盘控制
+    map.enableContinuousZoom();   // 开启连续缩放效果
+    map.enableInertialDragging(); // 开启惯性拖拽效果
+
+    map.addControl(new BMap.NavigationControl()); //添加标准地图控件(左上角的放大缩小左右拖拽控件)
+    map.addControl(new BMap.ScaleControl());      //添加比例尺控件(左下角显示的比例尺控件)
+    map.addControl(new BMap.OverviewMapControl()); // 缩略图控件
+    map.addControl(new BMap.MapTypeControl());
+
+    if({{abscissa}}){
+        var mygeo = new BMap.Geocoder();
+            mygeo.getLocation(new BMap.Point({{abscissa}},{{ordinate}}),function(result){
+                if(result){
+                    address = result.address
+                    <!--search();-->
+                    $("#address").val(address);
+                    var business = $("#belong_business").val();
+                    var check_time = $("#check_time").val();
+
+                    var user = $("#user").val();
+                    <!--check_time = 0-->
+                    var marker1 = new BMap.Marker(new BMap.Point({{abscissa}},{{ordinate}}));
+                    map.addOverlay(marker1);
+                    var infoWindow = new BMap.InfoWindow("姓名："+user+"<br/>"+"最新签到时间："+check_time+"<br/>"+"所属机构："+business, {
+                        width : 260,
+                        height: 100,
+                        title : "位置:"+address,
+                        enableMessage : false
+                    });
+                    marker1.openInfoWindow(infoWindow);
+                    marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow);});
+                }
+             });
+
+     }
+
+    <!--var city = new BMap.LocalSearch(map, { pageCapacity: 1, renderOptions: { map: map, autoViewport: true} }); //地图显示到查询结果处-->
+
+    <!--function search() {-->
+        <!--var s = $("#txtSearch").val();-->
+        <!--city.search(s); //查找城市-->
+        <!--city.search(address); //查找城市-->
+        <!--city.search("上海"); //查找城市-->
+        <!--$("#address").val(address);-->
+    <!--}-->
+
+</script>
+{% endblock %}

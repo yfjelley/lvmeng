@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   <title>律锰信息技术</title>
+   <!-- =============== VENDOR STYLES ===============-->
+    {% load staticfiles %}
+   <link type="text/css" rel="stylesheet" href="{% static "agle/vendor/fontawesome/css/font-awesome.min.css" %}" >
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="{% static "agle/vendor/simple-line-icons/css/simple-line-icons.css" %}">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/bootstrap.css" %}" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/app_complete.css" %}" id="maincss">
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/luzheng.css" %}" id="maincss">
+</head>
+
+<body>
+   <div class="wrapper">
+      <div class="block-center mt-xl wd-xl">
+         <!-- START panel-->
+         <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center">
+{#               <a href="#">#}
+{#                  <img src="img/logo.png" alt="Image" class="block-center img-rounded">#}
+{#               </a>#}
+            </div>
+            <div class="panel-body">
+               <h3 class="text-center pv">律锰信息技术 机构入口</h3>
+               <form role="form" data-parsley-validate="" novalidate="" class="mb-lg" action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+                  <div class="form-group has-feedback">
+                     <input id="id_username" maxlength="254" name="username" type="text" type="username" placeholder="用户名" autocomplete="off" required class="form-control">
+                     <span class="fa fa-user form-control-feedback text-muted"></span>
+                  </div>
+                  <div class="form-group has-feedback">
+                     <input id="exampleInputPassword1" type="password" placeholder="密码" required class="form-control" name="password" value="{{ next }}" >
+                     <span class="fa fa-lock form-control-feedback text-muted"></span>
+                  </div>
+{#                  <div class="clearfix">#}
+{#                     <div class="checkbox c-checkbox pull-left mt0">#}
+{#                        <label>#}
+{#                           <input type="checkbox" value="" name="remember">#}
+{#                           <span class="fa fa-check"></span>记住密码</label>#}
+{#                     </div>#}
+{#                     <div class="pull-right"><a href="/password/reset" class="text-muted">忘记密码？</a>#}
+{#                     </div>#}
+{#                  </div>#}
+                  <button type="submit" class="btn btn-block btn-primary mt-lg">登陆</button>
+               </form>
+
+{#               <p class="pt-lg text-center">Need to Signup?</p><a href="register.html" class="btn btn-block btn-default">Register Now</a>#}
+            </div>
+         </div>
+         <!-- END panel-->
+         <div class="p-lg text-center">
+            <span>&copy;</span>
+            <span>2016</span>
+            <span>-</span>
+            <span>Lvmeng Information Technology</span>
+            <br>
+            <span>Corporation Management System</span>
+         </div>
+      </div>
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <!-- PARSLEY-->
+   <script src="{% static "agle/vendor/modernizr/modernizr.js" %}"></script>
+   <!-- JQUERY-->
+   <script src="{% static "agle/vendor/jquery/dist/jquery.js" %}"></script>
+   <!-- BOOTSTRAP-->
+   <script src="{% static "agle/vendor/bootstrap/dist/js/bootstrap.js" %}"></script>
+   <!-- STORAGE API-->
+   <script src="{% static "agle/vendor/jQuery-Storage-API/jquery.storageapi.js" %}"></script>
+   <!-- JQUERY EASING-->
+   <script src="{% static "agle/vendor/jquery.easing/js/jquery.easing.js" %}"></script>
+   <!-- ANIMO-->
+   <script src="{% static "agle/vendor/parsleyjs/dist/parsley.min.js" %}"></script>
+   <!-- CLASSY LOADER-->
+   <script src="{% static "agle/vendor/jquery-classyloader/js/jquery.classyloader.min.js" %}"></script>
+
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="{% static "agle/app/js/app.js" %}"></script>
+</body>
+
+</html>

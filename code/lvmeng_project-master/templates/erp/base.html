@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta name="renderer" content="webkit">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Luzheng Futures Asset Management">
+   <link href="/static/web_customer/homePage/lvmeng/images/favicon.png" rel="shortcut icon" />
+   <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3&ak=o5kn9m88vZiSOKPypvsXmBcaf4pPZnT9"></script>
+    <!--<link href="/static/agle/app/img/small_logo.png" rel="shortcut icon" />-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/css/ui.core.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/css/ui.datepicker.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/css/ui.theme.css">-->
+
+   <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3&ak=x2EmyMUddHoHp8QbkhK1GSKi"></script>-->
+
+    {% load staticfiles %}
+
+
+    <title>牛基队</title>
+   <!-- =============== VENDOR STYLES ===============-->
+   <!-- FONT AWESOME-->
+
+   <link type="text/css" rel="stylesheet" href="{% static "agle/vendor/fontawesome/css/font-awesome.min.css" %}" >
+
+    <link type="text/css" rel="stylesheet" href="/static/css/image/jquery-webox.css">
+    <!-- SIMPLE LINE ICONS-->
+    <link rel="stylesheet" href="{% static "agle/vendor/simple-line-icons/css/simple-line-icons.css" %}">
+    <!-- ANIMATE.CSS-->
+    <link type="text/css" rel="stylesheet" href="{% static "agle/vendor/animate.css/animate.min.css" %}">
+    <!-- WHIRL (spinners)-->
+    <link type="text/css" rel="stylesheet" href="{% static "agle/vendor/whirl/dist/whirl.css" %}">
+    <!-- =============== PAGE VENDOR STYLES ===============-->
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+
+    <link type="text/css" rel="stylesheet" href="/static/agle/vendor/bootstrap/dist/css/bootstrap.css" id="bscss">
+
+    <!-- =============== METISMENU STYLES ===============-->
+   <link rel="stylesheet" href="{% static "agle/vendor/metisMenu/dist/metisMenu.css" %}">
+
+    <!-- =============== APP STYLES ===============-->
+    <link type="text/css" rel="stylesheet" href="/static/agle/app/css/app_complete.css" id="maincss">
+    <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/luzheng.css" %}" id="maincss">
+    <link rel="stylesheet" type="text/css" href="{% static "erp/css/employee.css" %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static "erp/css/lvmeng.css" %}" type="text/css">
+
+    <script src="{% static "agle/app/js/PCASClass.js" %}" charset="gb2312"></script>
+
+    <script src="{% static "agle/vendor/jquery/dist/jquery.js" %}"></script>
+    <script src="{% static "erp/js/address.js" %}"></script>
+    <script src="{% static "erp/js/datetool/laydate.dev.js" %}"></script>
+    <script src="{% static "js/jquery.table2excel.js" %}"></script>
+    <script src="/static/js/jquery.table2excel.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+    <script type="text/javascript" src="/static/custom-input-file/js/custominputfile.js"></script>
+    <script type="text/javascript" src="/static/custom-input-file/js/jquery.Jcrop.min.js"></script>
+    <script type="text/javascript" src="/static/custom-input-file/js/custominputfile.min-es.js"></script>
+    <!--<script type="text/javascript" src="/static/datatables/jquery.dataTables.min.js"></script>-->
+    <link type="text/css" rel="stylesheet" href="/static/custom-input-file/css/custominputfile.css">
+    <link type="text/css" rel="stylesheet" href="/static/custom-input-file/css/jquery.Jcrop.min.css">
+    <!--<link type="text/css" rel="stylesheet" href="/static/datatables/dataTables.bootstrap.min.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="/static/datatables/jquery.dataTables.min.css">-->
+
+    <script type="text/javascript" src="/static/example/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/example/dataTables.fixedColumns.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/static/example/jquery.dataTables.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/example/fixedColumns.dataTables.min.css">
+
+    <script src="{% static "agle/bower_components/js-cookie/src/js.cookie.js" %}"></script>
+    <script src="{% static "erp/js/lvmeng.js" %}"></script>
+    <script src="{% static "erp/js/product.js" %}"></script>
+
+
+    {% block head %}{% endblock %}
+
+</head>
+
+
+<body onload="setup();">
+<div class="wrapper">
+
+    <header class="topnavbar-wrapper">
+        <!-- START Top Navbar-->
+
+        <nav role="navigation" class="navbar topnavbar">
+            <div class="brand-logo">
+                <img style="cursor:pointer;" src="{% static "img/logo.png" %} " alt="牛基队" title="点击返回首页" onclick="return_logo()">
+            </div>
+
+            <div class="info clearfix">
+                <ul class="nav-list">
+                    <li class="item1" onclick="return_logo()"><a href="#">进入主页</a></li>
+                    <li class="item2">联系我们：4006-720-315</li>
+
+
+                    <!--{% if not request.user.business %}-->
+                        <!--<li class="item2 dropdown dropdown-list" id="chat_count">-->
+                             <!--<a href="#" data-toggle="dropdown">-->
+                                <!--<em><img style="" src="/static/img/chat.png"/></em>-->
+                                <!--<div id="unread_message" style="top: -8px;" class="label label-danger">{% if total_unread %}{{ total_unread }}{% endif %}</div>-->
+                             <!--</a>-->
+
+                            <!--<ul class="dropdown-menu animated flipInX">-->
+                                <!--<li>-->
+                                    <!--<div class="list-group">-->
+                                        <!--&lt;!&ndash; list item&ndash;&gt;-->
+                                        <!--{% for users in user_agents %}-->
+                                            <!--<a class="list-group-item" onclick="online_chat({{ users.id }});" style="cursor:pointer;">-->
+                                                <!--<div class="media-box">-->
+                                                    <!--<div class="media-box-body clearfix">-->
+                                                        <!--<div class="m0" style="float:left">{{ users }}</div>-->
+                                                        <!--<div class="label label-danger pull-right" style="float:left;" >{% if users.unread %}{{ users.unread }}{% endif %}</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</a>-->
+                                        <!--{% endfor %}-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+
+                         <!--</li>-->
+                    <!--{% endif %}-->
+
+
+                    <li class="item3 dropdown dropdown-list">
+
+                        <a href="#" data-toggle="dropdown">
+                            <img src="{% static "img/icon-user.png" %}" alt="">
+                        </a>
+
+                        <!-- START Dropdown menu-->
+                        <ul class="dropdown-menu animated flipInX">
+                            <li>
+                                <!-- START list group-->
+                                <div class="list-group">
+                                    <!-- list item-->
+                                    <a class="list-group-item">
+                                        <div class="media-box">
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">当前用户: {{ request.user.first_name }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <div class="media-box">
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">角色:
+                                                    {% if request.user.business %}
+                                                        机构管理员
+                                                    {% else %}
+                                                        {{ request.user.last_name }}
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="list-group-item">
+                                        <div class="media-box">
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">所属机构:
+                                                    {{ request.user.business.name }}{{ request.user.agent.business.name }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- list item-->
+                                    <a href="/password_change" class="list-group-item">
+                                        <div class="media-box">
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">修改密码</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item4"><a  onclick="if(confirm('确定退出登录吗？')==false)return false;" class="logout" href="/logout/">退出</a></li>
+
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <aside class="aside">
+        <div class="aside-inner">
+            <nav data-sidebar-anyclick-close="" class="sidebar">
+                <!-- START sidebar nav-->
+                <ul class="nav metismenu" id="menu">
+                    <li>
+                        {% if not request.user.business.name and not request.user.agent.business.name %}
+                        {% else %}
+                            <a class="no-image">
+                                <img src="{% static "img/nav-base/agent.png" %}">
+                                {{ request.user.business.name }}{{ request.user.agent.business.name }}
+                            </a>
+                        {% endif %}
+                    </li>
+
+                    {% ifequal True request.user.is_superuser %}
+
+                        <li>
+                        <a href="#lvmeng" class="collapsed li-item" id="lvmeng_click" title="Extras"  aria-expanded="false">
+                            <div id="lv_unread" class="icon-img"></div>
+                            律锰管理
+                        </a>
+                        {% if request.path == "/erp/business_list/" or request.path == "/erp/headline_add_modify/" or request.GET.type == "lv" or request.GET.type == "admin_product" or request.GET.type == "headline" or request.GET.type == "business" or request.path == "/erp/financial_headlines/" or request.path == "/web_customer/lv_announcement_process/" or request.path == "/web_customer/lv_announcement_list/" or request.path == "/erp/business_process/" or request.path == "/erp/admin_agent_list/" or request.path == "/erp/admin_customers/" %}
+                            <ul id="lvmeng" class="nav sidebar-subnav collapse in" aria-expanded="false">
+                        {% else %}
+                            <ul id="lvmeng" class="nav sidebar-subnav collapse" aria-expanded="false">
+                        {% endif %}
+                        <li class="sidebar-subnav-header">律锰管理</li>
+
+                        <li class="business_list" >
+                            <a href="/erp/business_list/#business_list" title="Blog" onclick="toggleClass();">
+                                客户机构列表
+                            </a>
+                        </li>
+
+                        <li  class="lv_announcement_list">
+                            <a href="/web_customer/lv_announcement_list/#lv_announcement_list" title="Blog">
+                                律锰公告列表
+                            </a>
+                        </li>
+                        <li  class="financial_headlines">
+                            <a href="/erp/financial_headlines/#financial_headlines" title="Blog">
+                               金融头条
+                            </a>
+                        </li>
+
+                        <li  class="business_process">
+                            <a href="/erp/business_process/#business_process" title="Blog">
+                                添加客户机构
+                            </a>
+                        </li>
+
+
+
+
+                        <li  class="redister_business">
+                            <a href="/erp/business_redister_list/#redister_business">
+                                {% if lv_unread  %}
+                                    <div id="redister_business" class="pull-right label label-danger"
+                                         title="{{ lv_unread }}条未读申请">{{ lv_unread }}</div>
+                                {% endif %}
+                                机构注册审批
+                            </a>
+                        </li>
+
+
+
+
+                        <li >
+                            <a href="#role" id="role_click" title="Blog"  aria-expanded="false">
+                                <span class="fa arrow"></span>
+                                按角色查看
+                            </a>
+                            {% if request.path == "/erp/admin_agent_list/" or request.path == "/erp/admin_customers/" %}
+                                <ul id="role" class="nav sidebar-subnav collapse in menu3" aria-expanded="false">
+                            {% else %}
+                                <ul id="role" class="nav sidebar-subnav collapse menu3" aria-expanded="false"
+                                    style="height: 0px;">
+                            {% endif %}
+                            <li class="sidebar-subnav-header">按角色查看</li>
+
+                            <li  class="admin_agent_list">
+                                <a href="/erp/admin_agent_list/#admin_agent_list">
+                                    员工
+                                </a>
+                            </li>
+
+                            <li  class="admin_customers">
+                                <a href="/erp/admin_customers/#admin_customers">
+                                    客户
+                                </a>
+                            </li>
+
+                            <li  class="redister_customers">
+                                <a href="/erp/redister_customers/#redister_customers">
+                                    未分配注册客户
+                                </a>
+                            </li>
+                            </ul>
+
+                            </li>
+                            <!--</li>-->
+                            </ul>
+                        </li>
+                    {% endifequal %}
+
+                 {% if 'auth.business_info_modify' in permissions %}
+                  <li >
+                       <a href="#business_info" id="business_click" title="Extras"  aria-expanded="false" class="collapsed">
+                           <div class="icon-img"></div>
+                           机构信息
+                       </a>
+                       {% if request.path == "/erp/show_business_base_info/" or request.path == "/erp/modify_business_base_info/" or request.path == "/erp/business_carousel_list_delete/" or request.path == "/erp/business_carousel_add/" %}
+                           <ul id="business_info" class="nav sidebar-subnav collapse in" aria-expanded="false">
+                       {% else %}
+                           <ul id="business_info" class="nav sidebar-subnav collapse" aria-expanded="false" style="height: 0px;">
+                       {% endif %}
+                           <li class="sidebar-subnav-header">机构信息</li>
+                           {% if not request.user.is_superuser %}
+                               <li  class="show_business_base_info">
+                                   <a href="/erp/show_business_base_info/#show_business_base_info" title="Blog">
+                                       机构基本信息
+                                   </a>
+                               </li>
+                           {% endif %}
+                               <li  class="business_carousel_list_delete">
+                                   <a href="/erp/business_carousel_list_delete/#business_carousel_list_delete" >
+                                       机构轮播图
+                                   </a>
+                               </li>
+                       </ul>
+                   </li>
+                   {% endif %}
+
+                  <li >
+                       <a id="employee_click" href="#employee" title="Extras"  aria-expanded="false" class="collapsed">
+                           <div class="icon-img"></div>
+                           员工管理
+                       </a>
+                       {% if request.path == "/erp/agent_list/" or request.path == "/erp/position_list/" or request.path == "/erp/mail_list/" or request.path == "/erp/agent_customer_allot/" or request.path == "/erp/position_add_modify/" or request.path == "/erp/agent_process/" or request.GET.type == "agent" or request.GET.type == "position" or request.GET.type == "agent_list" %}
+                            <ul id="employee" class="nav sidebar-subnav collapse in" aria-expanded="false">
+                       {% else %}
+                            <ul id="employee" class="nav sidebar-subnav collapse" aria-expanded="false" style="height: 0px;">
+                       {% endif %}
+                           <li class="sidebar-subnav-header">查看所有员工</li>
+                           {% if 'auth.employee_show' in permissions %}
+                               <li  class="agent_list">
+                                   <a href="/erp/agent_list/#agent_list" title="Blog">
+                                       查看所有员工
+                                   </a>
+                               </li>
+                            {% endif %}
+                           {% if 'auth.employee_process' in permissions and not request.user.is_superuser%}
+                               <li  class="agent_process">
+                                   <a href="/erp/agent_process/#agent_process" >
+                                       新增员工
+                                   </a>
+                               </li>
+                               <li  class="position_list">
+                                   <a href="/erp/position_list/#position_list" >
+                                       职位列表
+                                   </a>
+                               </li>
+                           {% endif %}
+
+                           <li  class="mail_list">
+                                   <a href="/erp/mail_list/#mail_list" >
+                                       员工通讯录
+                                   </a>
+                           </li>
+
+                       </ul>
+                   </li>
+
+                   <li >
+                       <a href="#notice" id="notice_click" title="Extras"  aria-expanded="false" class="collapsed">
+                           <div class="icon-img"></div>
+                           机构公告<span class="sub-title">(面向客户)</span>
+                       </a>
+                       {% if request.path == "/erp/picture_logos/" or request.path == "/erp/business_announcement_list/" or request.GET.type == "announcement" %}
+                           <ul id="notice" class="nav sidebar-subnav collapse in" aria-expanded="false">
+                       {% else %}
+                           <ul id="notice" class="nav sidebar-subnav collapse" aria-expanded="false" style="height: 0px;">
+                       {% endif %}
+                            {% if 'auth.business_announcement_out' in permissions and not request.user.is_superuser %}
+                               <li  class="picture_logos">
+                                   <a href="/erp/picture_logos/#picture_logos" title="Blog">
+                                       添加机构公告信息
+                                   </a>
+                               </li>
+                           {% endif %}
+                           <li  class="business_announcement_list">
+                               <a href="/erp/business_announcement_list/#business_announcement_list" title="Blog">
+                                   查看机构公告信息
+                               </a>
+                           </li>
+
+                            </ul>
+                            </li>
+
+                  <li >
+                       <a href="#agent" id="agent_click" title="Extras"  aria-expanded="false" class="collapsed">
+                           <div class="icon-img"></div>
+                           员工对客户管理
+                       </a>
+                       {% if request.path == "/erp/customer_list/" or request.path == "/erp/customer_add/" or request.path == "/erp/agent_add_product/" or request.path == "/erp/agent_product_list/" or request.GET.type == "customer" or request.GET.type == "real_purchase" or request.GET.type == "customer_purchase"%}
+                           <ul id="agent" class="nav sidebar-subnav collapse in" aria-expanded="false">
+                       {% else %}
+                           <ul id="agent" class="nav sidebar-subnav collapse" aria-expanded="false" style="height: 0px;">
+                       {% endif %}
+                           <li class="sidebar-subnav-header">员工对客户管理</li>
+                           <li  class="customer_list">
+                               <a href="/erp/customer_list/#customer_list" title="Blog">
+                                   查看客户列表
+                               </a>
+                           </li>
+
+                                {% if request.user.agent %}
+                                    <li  class="customer_add">
+                                        <a href="/erp/customer_add/#customer_add">
+                                            新增意向客户
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                    <li  class="agent_product_list">
+                                        <a href="/erp/agent_product_list/?type=customer_purchase#agent_product_list">
+                                            客户购买列表
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                                </li>
+                                <li>
+                                    <a href="#product" class="collapsed li-item" id="product_click" title="Extras"
+                                       aria-expanded="false">
+                                        <div class="icon-img"></div>
+                                        产品管理
+                                    </a>
+                                    {% if request.path == "/erp/product_list/" or request.path == "/erp/product_process/" or request.GET.type == "product" %}
+                                        <ul id="product" class="nav sidebar-subnav collapse in" aria-expanded="false">
+                                    {% else %}
+                                        <ul id="product" class="nav sidebar-subnav collapse" aria-expanded="false"
+                                            style="height: 0px;">
+                                    {% endif %}
+                                    <li class="sidebar-subnav-header">产品管理</li>
+                                    <li  class="product_list">
+                                        <a href="/erp/product_list/#product_list" title="Blog">
+                                            查看产品列表
+                                        </a>
+                                    </li>
+                                    {% if 'auth.product_process' in permissions and not request.user.is_superuser %}
+                                        <li  class="product_process">
+                                            <a href="/erp/product_process/#product_process">
+                                                新增产品
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#check_work" class="collapsed li-item" id="check_work_click" title="Extras"
+                                            aria-expanded="false">
+                                            <div class="icon-img"></div>
+                                            办公自动化
+                                        </a>
+                                        {% if request.path == "/oa/daily_todo_list/" or request.path == "/oa/daily_work_add_modify/" or request.path == "/erp/income_inquiry/" or request.path == "/oa/check_table/" or request.path == "/oa/daily_work_examine/" or request.path == "/oa/cost_examine/" or request.path == "/oa/travel_add_modify/" or request.path == "/oa/edit_examine/" or request.path == "/oa/travel_apply/" or request.path == "/oa/leave_examine/" or request.path == "/oa/travel_examine_list/" or request.path == "/oa/travel_examine/" or request.path == "/oa/leave_examine_list/" or request.path == "/oa/leave_add_modify/" or request.path == "/oa/leave_management/" or request.path == "/oa/cost_add_modify/" or request.path == "/oa/daily_todo_add_modify/" or request.path == "/oa/cost_examine_list/" or request.path == "/oa/cost_application/" or request.path == "/oa/daily_work/"  or request.path == "/oa/examine_list/" or request.path == "/oa/announcement_add_modify/" or request.path == "/oa/announcement_employee/" or request.GET.type == "check_leave" or request.GET.type == "check_travel" or request.path == "/oa/employee_distribution/" or request.path == "/oa/employee_position/" or request.GET.type == "check_cost" or request.path == "/oa/employee_history_position_days/" or request.path == "/oa/employee_history_position/" or request.GET.type == "daily" or request.GET.type == "internal" or request.GET.type == "daily_work" or request.GET.type == "income_real_purchase" %}
+                                            <ul id="check_work" class="nav sidebar-subnav collapse in"
+                                                aria-expanded="false">
+                                        {% else %}
+                                            <ul id="check_work" class="nav sidebar-subnav collapse"
+                                                aria-expanded="false" style="height: 0px;">
+                                        {% endif %}
+                                        <li class="sidebar-subnav-header">自动化办公</li>
+                                        <li  class="daily_todo_list">
+                                            <a href="/oa/daily_todo_list/#daily_todo_list" id="to_do">
+                                                每日待办
+                                            </a>
+                                        </li>
+										{% if 'auth.check_work' in permissions %}
+                                        <li >
+                                            <a href="#checkWork" id="checkWork_click" title="Blog"  aria-expanded="false" class="collapsed">
+                                                <span class="fa arrow"></span>
+                                                考勤管理
+                                            </a>
+                                            {% if request.path == "/oa/employee_distribution/" or request.path == "/oa/check_table/" or request.path == "/oa/employee_position/" or request.path == "/oa/employee_history_position/" or request.path == "/oa/employee_history_position_days/" %}
+                                                <ul id="checkWork" class="nav sidebar-subnav collapse in menu3"
+                                                    aria-expanded="false">
+                                            {% else %}
+                                                <ul id="checkWork" class="nav sidebar-subnav collapse menu3"
+                                                    aria-expanded="false" style="height: 0px;">
+                                            {% endif %}
+
+                                            <li class="sidebar-subnav-header">考勤管理</li>
+
+                                            <li  class="check_table">
+                                                <a href="/oa/check_table/#check_table">
+                                                    考勤表
+                                                </a>
+                                            </li>
+                                            {% if 'auth.check_time_setting' in permissions and not request.user.is_superuser %}
+                                                <li  class="check_time_setting">
+                                                    <a href="/oa/check_time_setting/#check_time_setting">
+                                                        考勤时间设定
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+
+                                            <li  class="employee_distribution">
+                                                <a href="/oa/employee_distribution/#employee_distribution">
+                                                    员工分布图
+                                                </a>
+                                            </li>
+                                            <li  class="employee_position">
+                                                <a href="/oa/employee_position/#employee_position">
+                                                    员工位置查询
+                                                </a>
+                                            </li>
+                                            <li  class="employee_history_position">
+                                                <a href="/oa/employee_history_position/#employee_history_position">
+                                                    行动轨迹回放
+                                                </a>
+                                            </li>
+
+                               </ul>
+                           </li>
+                           {% endif %}
+
+                                            <li >
+                                                <a href="#Cooperative_Office" id="Cooperative_Office_click" title="Blog"
+                                                    aria-expanded="false" class="collapsed">
+                                                    {% if total_count > 0 %}
+                                                        <div class="pull-right label label-danger"
+                                                             title="{{ total_count }}条未读审批申请">{{ total_count }}</div>{% endif %}
+                                                    <span class="fa arrow"></span>
+                                                    协同办公
+                                                </a>
+                                                {% if request.path == "/oa/announcement_employee/" or request.path == "/oa/daily_work_add_modify/" or request.path == "/oa/cost_examine/" or request.path == "/oa/daily_work_examine/" or request.path == "/oa/examine_list/" or request.path == "/oa/travel_add_modify/" or request.path == "/oa/edit_examine/" or request.path == "/oa/travel_apply/" or request.path == "/oa/leave_examine_list/" or request.path == "/oa/travel_examine_list/" or request.path == "/oa/travel_examine/" or request.path == "/oa/leave_examine/" or request.path == "/oa/leave_add_modify/" or request.path == "/oa/leave_management/" or request.path == "/oa/cost_add_modify/" or request.path == "/oa/announcement_add_modify/" or request.path == "/oa/cost_examine_list/" or request.path == "/oa/cost_application/" or request.path == "/oa/daily_work/" or request.GET.type == "internal" or request.GET.type == "check_cost" or request.GET.type == "check_leave" or request.GET.type == "check_travel" or request.GET.type == "daily_work" %}
+                                                    <ul id="Cooperative_Office" class="nav sidebar-subnav collapse in menu3"
+                                                        aria-expanded="false">
+                                                {% else %}
+                                                    <ul id="Cooperative_Office" class="nav sidebar-subnav collapse menu3"
+                                                        aria-expanded="false" style="height: 0px;">
+                                                {% endif %}
+                                                <li class="sidebar-subnav-header">协同办公</li>
+
+                                                <li  class="announcement_employee">
+                                                    <a href="/oa/announcement_employee/#announcement_employee" title="Blog">
+                                                        内部公告<span class="sub-title">(面向员工)</span>
+                                                    </a>
+                                                </li>
+
+                                   <li  class="daily_work">
+                                       <a href="/oa/daily_work/#daily_work" >
+                                           工作汇报
+                                       </a>
+                                   </li>
+
+                                                <li  class="cost_application">
+                                                    <a href="/oa/cost_application/#cost_application">
+                                                        费用申请
+                                                    </a>
+                                                </li>
+
+                                                <li  class="leave_management">
+                                                    <a href="/oa/leave_management/#leave_management" >
+                                                        请假申请
+                                                    </a>
+                                                </li>
+
+                                                <li  class="travel_apply">
+                                                    <a href="/oa/travel_apply/#travel_apply">
+                                                        出差申请
+                                                    </a>
+                                                </li>
+                                                {% if not request.user.business and not request.user.is_superuser %}
+                                                    <li  class="examine_list">
+                                                        <a href="/oa/examine_list/#examine_list">
+                                                            {% if count > 0 %}
+                                                                <div class="pull-right label label-danger"
+                                                                     title="{{ count }}条未读申请">{{ count }}</div>{% endif %}
+                                                            审批列表
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                </ul>
+                                                </li>
+
+                            {% if 'auth.financial_management' in permissions %}
+                               <li >
+                                   <a href="#financial_management" id="financial_management_click" title="Blog"  class="collapsed" aria-expanded="false">
+                                        <span class="fa arrow"></span>
+                                       财务管理
+                                   </a>
+                                   {% if request.path == "/erp/income_inquiry/" or request.GET.type == "income_real_purchase"%}
+                                        <ul id="financial_management" class="nav sidebar-subnav collapse in menu3" aria-expanded="false">
+                                   {% else %}
+                                        <ul id="financial_management" class="nav sidebar-subnav collapse menu3" aria-expanded="false" style="height: 0px;">
+                                   {% endif %}
+
+                                           <li  class="income_inquiry income_real_purchase">
+                                               <a href="/erp/income_inquiry/#income_inquiry" title="Blog">
+                                                   收款查询
+                                               </a>
+                                           </li>
+
+                                       </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                     </ul>
+                   </li>
+
+                </ul>
+
+                <!-- END sidebar nav-->
+            </nav>
+        </div>
+        <!-- END Sidebar (left)-->
+    </aside>
+    <!-- offsidebar-->
+    <!-- Main section-->
+    <section>
+        <!-- Page content-->
+
+        <div class="content-wrapper">
+            {% block content %}{% endblock %}
+
+        </div>
+    </section>
+    <!-- Page footer-->
+    <footer>
+        <span>&copy; 2016 - Lvmeng Information Technology</span>
+    </footer>
+</div>
+
+<!-- =============== VENDOR SCRIPTS ===============-->
+<!-- MODERNIZR-->
+<script src="{% static "agle/vendor/modernizr/modernizr.js" %}"></script>
+<!-- JQUERY-->
+
+<!-- BOOTSTRAP-->
+<script src="{% static "agle/vendor/bootstrap/dist/js/bootstrap.js" %}"></script>
+
+<!-- METISMENU-->
+<script src="/static/agle/vendor/metisMenu/dist/metisMenu.js"></script>
+
+<!-- STORAGE API-->
+<script src="{% static "agle/vendor/jQuery-Storage-API/jquery.storageapi.js" %}"></script>
+<!-- JQUERY EASING-->
+<script src="{% static "agle/vendor/jquery.easing/js/jquery.easing.js" %}"></script>
+<!-- ANIMO-->
+<script src="{% static "agle/vendor/animo.js/animo.js" %}"></script>
+<!-- CLASSY LOADER-->
+{#   <script src="{% static "agle/vendor/jquery-classyloader/js/jquery.classyloader.min.js" %}"></script>#}
+<!-- =============== PAGE VENDOR SCRIPTS ===============-->
+<!-- =============== APP SCRIPTS ===============-->
+<script src="{% static "agle/app/js/app_complete.js" %}"></script>
+<script src="/static/js/jquery-webox.js"></script>
+
+<script src="{% static "erp/js/employee.js" %}"></script>
+
+<!-- Piwik -->
+<script type="text/javascript">
+    $(function() {
+          $('#menu').metisMenu();
+    });
+    var _paq = _paq || [];
+    <!--_paq.push(['deleteCustomDimension', 1]);-->
+    <!--_paq.push(['deleteCustomDimension', 2]);-->
+    _paq.push(['setCustomDimension', 1, '{{ user.username }}']);
+    _paq.push(['setCustomDimension', 3, '{{ user.first_name }}']);
+    _paq.push(['setCustomDimension', 4, '{{ user.last_name }}']);
+    _paq.push(['setCustomDimension', 5, '{{ request.user.business.name }}{{ request.user.agent.business.name }}']);
+    <!--_paq.push(['setCustomDimension', 2, '{{ user.username }}');-->
+    _paq.push(['setCustomVariable',
+        // Index, the number from 1 to 5 where this custom variable name is stored for the current page view
+        1,
+        // Name, the name of the variable, for example: Category, Sub-category, UserType
+        "User",
+        // Value, for example: "Sports", "News", "World", "Business", etc.
+        "{{ user.first_name }}",
+        // Scope of the custom variable, "page" means the custom variable applies to the current page view
+        "page"
+    ]);
+
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+        var u = "//analysis.niujidui.com:49997/";
+        _paq.push(['setTrackerUrl', u + 'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
+    })();
+</script>
+<noscript><p><img src="//analysis.niujidui.com:49997/piwik.php?idsite=1" style="border:0;" alt=""/></p></noscript>
+<!-- End Piwik Code -->
+
+{% block custom_js %}{% endblock %}
+<script>
+
+</script>
+<style>
+    #div_id_text {
+        clear: both
+    }
+
+    #div_id_show_text {
+        margin-left: 0;
+        margin-top: 30px;
+    }
+</style>
+{% block style %}{% endblock %}
+{% block script %}{% endblock %}
+</body>
+</html>

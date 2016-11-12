@@ -1,0 +1,306 @@
+{% extends "erp/base2.html" %}
+{% block content %}
+    <header class="site-header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://niujidui.com">
+                    <img src="/static/new_img/logo.png" />
+                </a>
+            </div>
+            <div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right">
+                        <!--<li><span>我已注册,现在就&nbsp;</span></li>-->
+                        <!--<li><button class="btn-download">下载登录</button></li>-->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="wrapper">
+        <div class="vertigo-bg js-vertigo">
+            <div class="generic-bg2"></div>
+        </div>
+
+        <div class="panel-register">
+            <div class="btn-group">
+                <div class="btn btn-toggole btn-checked" id="red_business">企业注册</div>
+                <div class="btn btn-toggole" id="red_person">个人注册</div>
+            </div>
+            <div class="alert alert-danger" role="alert" style="text-align:center;color:#FFFFFF"></div>
+            <div class="business">
+                <form id="register-form" onsubmit="return check_password();" action="" method="post" role="form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                         <select class="form-control">
+                          <option>融资机构</option>
+                          <option>金融企业</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" required type="text" name="name" value="{{ name|default:'' }}" placeholder="企业简称">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" id="email" name="email" value="{{ email|default:'' }}" required type="text" placeholder="企业邮箱(注册用户名)">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="phoneNum" id="phoneNum" value="{{ phoneNum|default:'' }}" readonly>
+                        <button id="get_code" class="input-group-addon btn-get-code" onclick="get_verification_code({{phoneNum}});">获取验证码</button>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" name="verification_code" value="{{ verification_code|default:'' }}" required  placeholder="验证码">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="password" required id="password" name="password1" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="password" required id="password1" name="password2" placeholder="请再次输入密码">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" checked> 我已阅读并同意
+                        </label>
+                        <span class="niujidui-protocol" data-toggle="modal" data-target="#myModal">《服务协议》</span>
+                    </div>
+                    <!--<div>-->
+                        <!--尊敬的用户:<br>&nbsp;&nbsp;&nbsp;&nbsp;牛基队恪守&lt;私募投资基金监督管理暂行办法&gt;规定,即日起注册用户才能登陆网站查看,特此公告!-->
+                    <!--</div>-->
+
+                    <button id="register" type="submit" class="btn btn-register">免费注册</button>
+                </form>
+            </div>
+            <div class="profile" style="display: none;">
+                <form action="/erp/person_redister/" method="post" role="form" id="person_form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control input-lg" required type="text" name="person_name" value="{{ person_name|default:'' }}" placeholder="真实姓名">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" required type="text" name="person_email" id="person_email" value="{{ person_email|default:'' }}" placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" readonly name="phoneNum2" id="phoneNum2" value="{{ phoneNum|default:'' }}">
+                        <button id="get_code1" class="input-group-addon" onclick="get_verification_code({{phoneNum}});">获取验证码</button>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" required type="text" name="verification_code2" id="verification_code2" value="{{ verification_code2|default:'' }}" placeholder="验证码">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control input-lg" required type="password" id="password3" name="password3" value="{{ password3|default:'' }}" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" required type="password" id="password4" name="password4" value="{{ password4|default:'' }}"  placeholder="请再次输入密码">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" checked> 我已阅读并同意
+                        </label>
+                        <span class="niujidui-protocol" data-toggle="modal" data-target="#myModal">《服务协议》</span>
+                    </div>
+                    <!--<div>-->
+                        <!--尊敬的用户:<br>&nbsp;&nbsp;&nbsp;&nbsp;牛基队恪守&lt;私募投资基金监督管理暂行办法&gt;规定,即日起注册用户才能登陆网站查看,特此公告!-->
+                    <!--</div>-->
+
+                    <button type="button" id="register_person" onclick="check_password2();"  class="btn btn-register">免费注册</button>
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="copy">
+            <p>©2016上海律锰信息技术有限公司 版权 沪ICP备16013923号-1</p>
+        </div>
+    </footer>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    var api_host = window.location.host
+
+    var InterValObj; //timer变量，控制时间
+    var count = 120; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    /**
+	 * 获取验证码
+	 */
+	function get_verification_code(phoneNum){
+        //向后台发送处理数据
+		var url = 'http://' + api_host + '/api/verification/?purpose=register&phone_number=' + phoneNum;
+        $.ajax({
+            url: url,
+            success: function(data) {
+                var status = data["status"];
+                var message = data["message"];
+                if (status) {
+                    curCount = count;
+　　                //设置button效果，开始计时
+                    $("#get_code").attr("disabled", "true");
+                    $("#get_code").css("background-color","#78c1eb");
+                    $("#get_code1").attr("disabled", "true");
+                    $("#get_code1").css("background-color","#78c1eb");
+                    $("#get_code").html("重新获取" + curCount);
+                    $("#get_code1").html("重新获取" + curCount);
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                } else {
+                    $('#error').html("*" + message);
+                }
+            },
+            error: function(){
+                $('#error').html("*网络错误，请重试！");
+            }
+        });
+	}
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {18701789653
+            window.clearInterval(InterValObj);//停止计时器
+            $("#get_code").removeAttr("disabled");//启用按钮
+            $("#get_code1").removeAttr("disabled");//启用按钮
+            $("#get_code").html("重新发送");
+            $("#get_code1").html("重新发送");
+        }
+        else {
+            curCount--;
+            $("#get_code").html("重新获取" + curCount);
+            $("#get_code1").html("重新获取" + curCount);
+        }
+    }
+
+    //点击验证码图片进行刷新
+    $(function() {
+        $('img.captcha').after(
+                $('<a href="#void" class="captcha-refresh">Refresh</a>')
+                );
+
+        // Click-handler for the refresh-link
+        $('img.captcha').click(function(){
+            var $form = $(this).parents('form');
+            var url = location.protocol + "//" + window.location.hostname + ":"
+                      + location.port + "/captcha/refresh/";
+
+            // Make the AJAX-call
+            $.getJSON(url, {}, function(json) {
+                $form.find('input[name="captcha_0"]').val(json.key);
+                $form.find('img.captcha').attr('src', json.image_url);
+            });
+
+            return false;
+        });
+    });
+
+    function check_password(){
+        if ($("#password").val() != $("#password1").val()){
+            $(".alert-danger").html("密码输入有误,请重新输入");
+            $(".alert-danger").css("display","block");
+            return false;
+        }else{
+                $(".alert-danger").css("display","none");
+                $(".alert-danger").html("");
+            }
+    }
+
+    function check_password2(){
+        if ($("#password3").val() != $("#password4").val()){
+            $(".alert-danger").html("密码输入有误,请重新输入");
+            $(".alert-danger").css("display","block");
+            return false;
+        }
+
+        var email =$("#person_email").val();
+        var bo=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(email);
+    　　if(bo==false){
+             $(".alert-danger").html("请输入正确的邮箱");
+             $(".alert-danger").css("display","block");
+              return false;
+    　　}
+
+        var phoneNum =$("#phoneNum2").val();
+        var verification_code =$("#verification_code2").val();
+        $.ajax({
+                type:"get",
+                url:"/erp/valid_phone/",
+                data:{
+                    str:phoneNum,
+                },
+                dataType:"json",
+                success:function(data){
+                    if(data.result=="false"){
+                        $(".alert-danger").html("该号码已存在");
+                        $(".alert-danger").css("display","block");
+                    }else{
+                        $.ajax({
+                                type:"post",
+                                url:"/erp/valid_code/",
+                                data:{
+                                    phoneNum:phoneNum,
+                                    verification_code:verification_code
+                                },
+                                dataType:"json",
+                                success:function(data){
+                                    if(data.result=="false"){
+                                        $(".alert-danger").html("验证码有误!");
+                                        $(".alert-danger").css("display","block");
+                                    }else{
+                                        $("#person_form").submit();
+                                    }
+                                }
+                            });
+                    }
+                }
+            });
+    }
+
+    $("#email").blur(function(){
+             var email =$("#email").val();
+                var bo=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(email);
+            　　if(bo==false){
+                      $(".alert-danger").html("请输入正确的邮箱!");
+                      $(".alert-danger").css("display","block");
+                      return false;
+            　　}else{
+                    $(".alert-danger").html("");
+                    $(".alert-danger").css("display","none");
+                }
+
+            $.ajax({
+                type:"get",
+                url:"/erp/valid_email/",
+                data:{
+                    str:email,
+                },
+                dataType:"json",
+                success:function(data){
+                    if(data.result=="false"){
+                        $(".alert-danger").html("该邮箱已存在!");
+                        $(".alert-danger").css("display","block");
+                        $("#register").attr("disabled","disabled");
+                        return false;
+                    }else{
+                        $(".alert-danger").html("");
+                        $(".alert-danger").css("display","none");
+                        $("#register").removeAttr("disabled");
+                    }
+                }
+            });
+        });
+
+        $(function(){
+            $("#red_business").click(function(){
+                $(".profile").css("display","none")
+                $(".business").css("display","")
+            });
+            $("#red_person").click(function(){
+                $(".profile").css("display","")
+                $(".business").css("display","none")
+            });
+        })
+
+</script>
+{% endblock %}

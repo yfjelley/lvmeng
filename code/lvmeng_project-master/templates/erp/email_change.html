@@ -1,0 +1,57 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">律锰管理</li>
+            <li>{{ message }}</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4 align="center">{{ message }}</h4>
+        </div>
+
+        <div>
+             <div class="tips">
+               <!-- START Language list-->
+                <p align="center">[系统自动发送邮件有可能在垃圾邮件中，请注意检查]</p>
+            </div>
+            <div class="panel-body">
+                <form align="center" action="/erp/username_change/?user_id={{ user.id }}&type={{ redi_type }}" method="post" role="form" id="pwd_form">
+
+                    <div class="error">
+                        <h5 id="notice" style="color:red;">{{ error }}</h5>
+                    </div>
+
+                    <div class="form-sheet">
+                        <input type="text" name="" readonly value="{{ user.username }}" placeholder="修改的邮箱" class="form-control">
+                        <input type="text" name="username" id="username" placeholder="输入新邮箱" class="form-control" required onchange="check_email(this.value);">
+                        <input type="text" placeholder="新登录密码" class="form-control"  type="text" name="password" required>
+                        <input type="submit" value="保存" class="form-control btn-change-pwd">
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+function check_email(strEmail)
+      {
+            if(strEmail)
+          {
+            if(strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)!= -1){
+              $("#notice").css("display","none");
+              }
+           else{
+              $("#notice").html("邮箱格式不对!");
+              $("#notice").css("display","");
+              }
+          }
+      }
+
+</script>
+
+{% endblock %}

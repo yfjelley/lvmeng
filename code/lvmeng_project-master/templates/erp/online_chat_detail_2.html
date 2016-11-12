@@ -1,0 +1,10 @@
+<div class="chat01_title">
+    <ul class="talkTo">
+      <li style="text-align:center">
+        <a href="javascript:;" id="get_user_name">{{ talk_user }}</a></li>
+        <!--{{ talk_user }}</li>-->
+    </ul>
+    <input style="display:none;" value="{{ talk_user.id }}" id="talk_user"/>
+    <!--<a class="close_btn" href="javascript:;"></a>-->
+</div>
+        {% include "erp/online_chat_detail.html" %}

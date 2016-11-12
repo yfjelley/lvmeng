@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   {% block meta %}{% endblock %}
+   <title>牛基队用户注册</title>
+   <!-- =============== VENDOR STYLES ===============-->
+    {% load staticfiles %}
+   <link type="text/css" rel="stylesheet" href="{% static "agle/vendor/fontawesome/css/font-awesome.min.css" %}" >
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="{% static "agle/vendor/simple-line-icons/css/simple-line-icons.css" %}">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/bootstrap.css" %}" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/app_complete.css" %}" id="maincss">
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/luzheng.css" %}" id="maincss">
+</head>
+
+<body>
+   <div class="wrapper">
+      {% block content %}{% endblock %}
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <!-- PARSLEY-->
+   <script src="{% static "agle/vendor/modernizr/modernizr.js" %}"></script>
+   <!-- JQUERY-->
+   <script src="{% static "agle/vendor/jquery/dist/jquery.js" %}"></script>
+   <!-- BOOTSTRAP-->
+   <script src="{% static "agle/vendor/bootstrap/dist/js/bootstrap.js" %}"></script>
+   <!-- STORAGE API-->
+   <script src="{% static "agle/vendor/jQuery-Storage-API/jquery.storageapi.js" %}"></script>
+   <!-- JQUERY EASING-->
+   <script src="{% static "agle/vendor/jquery.easing/js/jquery.easing.js" %}"></script>
+   <!-- ANIMO-->
+   <script src="{% static "agle/vendor/parsleyjs/dist/parsley.min.js" %}"></script>
+   <!-- CLASSY LOADER-->
+   <script src="{% static "agle/vendor/jquery-classyloader/js/jquery.classyloader.min.js" %}"></script>
+
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="{% static "agle/app/js/app.js" %}"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      <!--_paq.push(['deleteCustomDimension', 1]);-->
+      <!--_paq.push(['deleteCustomDimension', 2]);-->
+    {#  _paq.push(['setCustomDimension', 1, '{{ user.first_name }}']);#}
+      <!--_paq.push(['setCustomDimension', 2, '{{ user.username }}');-->
+      _paq.push(['setCustomVariable',
+        // Index, the number from 1 to 5 where this custom variable name is stored for the current page view
+        1,
+        // Name, the name of the variable, for example: Category, Sub-category, UserType
+        "User",
+        // Value, for example: "Sports", "News", "World", "Business", etc.
+          "{{ user.first_name }}",
+        // Scope of the custom variable, "page" means the custom variable applies to the current page view
+        "page"
+      ]);
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analysis.niujidui.com:49997/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//analysis.niujidui.com:49997/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</body>
+{% block script %}{% endblock %}
+</html>

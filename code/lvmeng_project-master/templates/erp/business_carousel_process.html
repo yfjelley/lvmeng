@@ -1,0 +1,59 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">机构信息</li>
+            <li>机构轮播图</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>添加机构轮播图</h4>
+        </div>
+        {% comment %}<div class="">
+            <h4  style="color:blue;">添加机构轮播图</h4>
+        </div>{% endcomment %}
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/erp/business_carousel_add/?carousel_id={{ carousel_id }}" method="post" role="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+
+    $(function(){
+        $("#id_carousel").after("<input type='text' style='display:none;' name='base_1' id='base_1'/>");
+    });
+
+    $(document).ready(function(e){
+      $('#id_carousel').customFile({
+            type : 'image',
+            image : {
+                crop	: true,
+                cropSize: [185,53],
+                preview : {
+                    display: true,
+                    maxWidth: 5000,
+                    maxHeight: 5000,
+                }
+            },
+            filePicker : '<h5>点击上传图片</h5>',
+      });
+    });
+
+     $(function(){
+        $("#submit-id-save").click(function(){
+            set_base_input();
+        });
+     });
+
+</script>
+{% endblock %}

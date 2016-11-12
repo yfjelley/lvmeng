@@ -1,0 +1,120 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">律锰管理</li>
+            <li>添加客户机构</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>{{message}}</h4>
+        </div>
+        {% if modify_mark %}
+            <div class="">
+                <a href="/erp/modify_business_base_info"><input type="button" value="点击修改"></a>
+            </div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <input style="display:none;" name="check_remark" id="remark" value="{{ remark }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/erp/business_process/?bus_id={{ bus_id }}" method="post" role="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+
+    $(function(){
+        $("#id_address").before("<form name='shareip' action='' method='' id='city_form'><select class='select form-control' name='province' id='s1' style='width:180px;display: inline-block;'><option></option></select>&nbsp;&nbsp;&nbsp;<select class='select form-control' name='city' id='s2' style='width:180px;display: inline-block;'><option></option></select>&nbsp;&nbsp;&nbsp;<select class='select form-control' name='town' id='s3' style='width:180px;display: inline-block;'><option></option></select></form>");
+        $("#id_address").css("margin-top","10px");
+        $("#id_address").css("margin-bottom","10px");
+    });
+
+    $(function(){
+        var mark = $("#check_remark").val();
+        if(mark){
+            $("#city_form").css("display","none");
+        }
+        $("#s3").change(function(){
+            var province = $("#s1").find("option:selected").val();
+            var city = $("#s2").find("option:selected").val();
+            var town = $("#s3").find("option:selected").val();
+            if(province == city){
+                $("#id_address").val(province+town)
+            }else{
+                $("#id_address").val(province+city+town)
+            }
+
+        });
+    });
+
+    $(function(){
+        var mark = $("#id_phoneNum").val();
+        var remark = $("#remark").val();
+        if(mark==""){
+            $("#div_id_phoneNum").after("<div class='form-group'><label class='control-label'>初始密码<span style='color:red;'>*</span></label><div class='controls'><input name='password' id='init_password' placeholder='输入初始密码' class='form-control' style='width:180px;'/></div></div>");
+        }
+        <!--$("#id_phoneNum").after("<span id='span_phoneNum' style='font-size:18px;color:red;display:none;'>该号码已存在,请重新输入</span>");-->
+        $("#id_email").after("<span id='span_email' style='font-size:18px;color:red;display:none;'>该邮箱已存在,请重新输入</span>");
+
+        if(remark=="true"){
+            $("#id_email").attr({"readonly":true});
+        }
+    });
+
+    <!--$(function(){-->
+        <!--$("#id_phoneNum").change(function(){-->
+            <!--var str = $("#id_phoneNum").val()-->
+            <!--$.ajax({-->
+            <!--type:"get",-->
+            <!--url:"/erp/valid_phone/",-->
+            <!--data:{'str':str},-->
+            <!--success:function(data){-->
+                    <!--if(data.result == "false"){-->
+                        <!--$("#span_phoneNum").css("display","");-->
+                    <!--}else{-->
+                        <!--$("#span_phoneNum").css("display","none");-->
+                    <!--}-->
+                <!--}-->
+        <!--});-->
+        <!--});-->
+    <!--});-->
+
+    $(function(){
+        $("#id_email").change(function(){
+            var str = $("#id_email").val()
+            $.ajax({
+            type:"get",
+            url:"/erp/valid_phone/",
+            data:{'str':str},
+            success:function(data){
+                    if(data.result == "false"){
+                        $("#span_email").css("display","");
+                    }else{
+                        $("#span_email").css("display","none");
+                    }
+                }
+        });
+        });
+    });
+
+
+</script>
+{% endblock %}

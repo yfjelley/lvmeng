@@ -1,0 +1,185 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+            <ol class="breadcrumb">
+                <span>当前位置：</span>
+                <li class="active">员工对客户管理</li>
+                <li>客户购买列表</li>
+            </ol>
+            <div class="header-line">
+               <!-- START Language list-->
+                <h4>客户购买列表</h4>
+            </div>
+        </div>
+        {% if request.user.agent %}
+            <div class="btn-add">
+                <a href="/erp/agent_add_product/#agent_product_list">新增客户购买</a>
+            </div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+         <div class="content-table">
+            <form action="" method="post" class="form-inline">
+                <div class="form-group">
+                  <label class="control-label">客户名：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control"  name="customer_num" value="{{customer_num|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="control-label">产品名：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control"  name="product_name" value="{{product_name|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                    <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+                {% comment %}客户名：<input type="text" name="customer_num" value="{{customer_num|default:''}}">&nbsp;&nbsp;&nbsp;&nbsp;
+                产品名：<input type="text" name="product_name" value="{{product_name|default:''}}">&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="搜索">{% endcomment %}
+            </form>
+        </div>
+        <div class="row content-table">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="excel table table-hover" style="overflow-x:scroll;white-space:nowrap;">
+                <thead>
+                    <tr id="tr_head">
+                        <th>购买客户姓名</th>
+                        <th>产品名</th>
+                        <th>实收金额</th>
+                        <th>收款日期</th>
+                        <th>付款方式</th>
+                        <th>产品结束日期</th>
+                        <th>添加时间</th>
+                        <th>录入人</th>
+                        <!--<th>注册日期</th>-->
+                        <!--<th>备注</th>-->
+
+                        <!--<th>修改密码[强制]</th>-->
+                        <!--<th style="color:#04A1DC;">修改</th>-->
+                        <!--<th  style="color:red;">删除</th>-->
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% load detail_deal %}
+                    {% for real_purchase in real_purchases %}
+                        <tr>
+                            <td><a href="/erp/check/?id={{ real_purchase.id }}&type=real_purchase#agent_product_list" title="点击查看">{{ real_purchase.customer }}</a></td>
+                            <td>{{ real_purchase.product }}</td>
+                            <td style="color:green;">{{ real_purchase.amount }}</td>
+                            <td>{{ real_purchase.income_date|date_str }}</td>
+                            <td>{{ real_purchase.get_pay_type_display }}</td>
+                            <td>{{ real_purchase.end_date|date_str }}</td>
+                            <td>{{ real_purchase.register_time|date_str }}</td>
+                            <td>{{ real_purchase.real_agent }}</td>
+                            <!--<th>{{ agent.register_date }}</th>-->
+                            <!--<th>{{ agent.note }}</th>-->
+
+                            <!--<th><a href="/erp/business_password_change/{{agent.phoneNum}}/?type=agent_list"><img src="/static/img/edit.gif/"></a></th>-->
+                            <!--<th><a href="/erp/agent_process/?agent_id={{agent.id}}"><img src="/static/img/edit.gif/"></a></th>-->
+                            <!--<th style="color:red;cursor:pointer;" onclick="deleteAgent({{ agent.id }});">删除</th>-->
+
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+                </table>
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if real_purchases.has_previous %}
+                                <a href="?page={{ real_purchases.previous_page_number }}#agent_product_list">&lt; 上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p real_purchases.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#agent_product_list" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if headlines.has_next %}
+                                <a href="?page={{ real_purchases.next_page_number }}#agent_product_list">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+
+                        {% else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{real_purchases.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    <!--function deleteAgent(id){-->
+        <!--$.ajax({-->
+        <!--type:"get",-->
+        <!--url:"/erp/agent_customer_allot/",-->
+        <!--data:{"agent_id":id},-->
+        <!--success:function(html){-->
+               <!--$.webox({-->
+                   <!--height:700,-->
+                   <!--width:600,-->
+                   <!--bgvisibel:true,-->
+                   <!--title:'客户经理客户分配',-->
+                   <!--html:html,-->
+                <!--});-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}

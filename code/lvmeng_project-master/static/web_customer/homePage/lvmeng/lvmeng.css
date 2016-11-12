@@ -1,0 +1,48 @@
+
+.intro-section h2 {text-align: center;
+                    line-height: 60px;
+}
+.right_code{position:fixed;
+        top:30%;
+        right:0px;
+        opacity:1;
+}
+
+.modal{margin-top: 80px;}
+.modal-sm {width: 250px;}
+.list-inline h4{color: #0099FF;}
+.list-inline button {margin-top: 30px;
+                    border: solid 2px ;
+                    font-size: 24px;
+}
+
+.table1{width:100%;
+        border-collapse:collapse;
+}
+.table1 td {width:30%;
+            padding:5px 5px 3px ;
+            vertical-align: top;
+
+
+}
+
+.popover {max-width: 120px;
+          background-color: transparent;
+          border: transparent;
+          box-shadow: none;
+}
+
+.popover-content button { padding: 10px;}
+
+
+.carousel-control.right {background-image: none;}
+.carousel-control.left {background-image: none;margin-left:-60px;}
+
+#video{height: 600px;}
+
+.video {
+    background-image: url(../lvmeng/images/1111.jpg);
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+}

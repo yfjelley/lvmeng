@@ -1,0 +1,123 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+           <!-- START Language list-->
+            <h4 style="color:red;">客户列表</h4>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table  id="example" class="excel table table-hover" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>客户姓名</th>
+                            <th>电话</th>
+                            <th>性别</th>
+                            <th>地址</th>
+                            <th>身份证号</th>
+                            <th>注册日期</th>
+                            <th>购买产品数量</th>
+                            <th>购买总金额/元</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% load detail_deal %}
+                    {% for customer in customers %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            {% if request.user.is_superuser %}
+                                <td><a  class="customer_check" href="/erp/check/?id={{ customer.id }}&type=lvmeng_customer#admin_agent_list" title="点击查看">{{ customer.name }}</a></td>
+                            {% else %}
+                                <td><a class="customer_check" href="/erp/check/?id={{ customer.id }}&type=agent_customer#agent_list" title="点击查看">{{ customer.name }}</a></td>
+                            {% endif %}
+                            <td>{{ customer.phoneNum }}</td>
+                            <td>{{ customer.get_sex_display }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>{{ customer.idCard_num }}</td>
+                            <td>{{ customer.register_date|date_str }}</td>
+                            {% if customer.purchase %}
+                                {% if request.user.is_superuser %}
+                                    <td><a class="product_count" href="/erp/admin_product_list/?id={{ customer.id }}#{{ position_mark }}" title="点击查看该客户所购买产品">{{ customer.purchase }}</a></td>
+                                {% else %}
+                                    <td><a class="product_count" href="/erp/purchases_list/?id={{ customer.id }}#{{ position_mark }}" title="点击查看该客户所购买产品">{{ customer.purchase }}</a></td>
+                                {% endif %}
+                            {% else %}
+                                <td><a>{{ customer.purchase }}</a></td>
+                            {% endif %}
+                            <td style="color:#299A00;">{{ customer.sum }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if customers.has_previous %}
+                                <a href="?page={{ customers.previous_page_number }}&id={{ id }}#{{ position_mark }}">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p customers.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}&id={{ id }}#{{ position_mark }}" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if agents.has_next %}
+                                <a href="?page={{ customers.next_page_number }}&id={{ id }}#{{ position_mark }}">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+
+                        {% else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{customers.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}

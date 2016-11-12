@@ -1,0 +1,32 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+            <h4  style="color:blue;">{{message}}</h4>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/oa/announcement_add_modify/?internal_id={{ internal_id }}#announcement_employee" method="post" role="form">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

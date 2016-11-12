@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #444 url("/static/img/carbon_fibre_big.png")
+}
+
+.loginBox {
+    width: 420px;
+    height: 230px;
+    padding: 0 20px;
+    border: 1px solid #fff;
+    color: #000;
+    margin-top: 40px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 0 15px #222;
+    background: -moz-linear-gradient(top, #fff, #efefef 8%);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#f6f6f6), to(#f4f4f4));
+    font: 11px/1.5em 'Microsoft YaHei';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -210px;
+    margin-top: -115px;
+}
+
+.LoginTitle {
+    /* Gecko browsers */
+    -moz-border-radius: 5px 0 5px 0;
+    /* Webkit browsers */
+    -webkit-border-radius: 5px 0 5px 0;
+    /* W3C syntax - likely to be standard so use for future proofing */
+    border-radius: 10px 10px 0 0;
+    border: none;
+    height: 45px;
+    line-height: 39px;
+    background-repeat: no-repeat;
+    background-position: -385px -160px
+}
+
+.loginCent {
+    position: absolute;
+    height: 90%;
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 50px;
+    margin-left: 5%;
+    background-repeat: no-repeat;
+    background-image: url("/static/img/login.jpg");
+    min-height: 410px;
+    min-width: 860px;
+}
+
+.Cent {
+    height: 310px;
+    width: 580px;
+    margin-left: 385px;
+    margin-top: 65px;
+    border: none;
+    background-image: url("/static/img/login.jpg");
+    background-repeat: no-repeat;
+    background-position: -385px -160px;
+}
+
+#LoginSubmit {
+    margin-right: -12px;
+    float: right;
+    width: 248px;
+    height: 50px;
+    margin-top: 12px;
+    background-image: url("/static/img/login.jpg");
+    background-repeat: no-repeat;
+    background-position: -731px -399px;
+}
+
+#LoginSubmit:hover {
+    cursor:pointer;
+}
+
+.TitleTxt {
+    margin-left: 45px;
+    line-height: 95px;
+    font: '新宋体';
+    font-size: 48px;
+    color: #FFFFFF;
+}
+
+.username, .password{
+    width:200px;
+    height:33px;
+     border-radius: 4px;
+}

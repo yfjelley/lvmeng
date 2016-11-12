@@ -1,0 +1,209 @@
+body,html{font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;}
+
+/*.media-heading {margin-top: 20px;
+
+                margin-left: 7px;
+}*/
+/*.container {background-image: url('/static/agle/app/img/BJ.png');
+            height: 600px;
+            width: 100%;
+            max-width: none !important;
+            background-attachment: scroll;
+            margin-top: 15px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+}*/
+.wrap {
+    min-width: 810px;
+    height: 100%;
+    min-height: 600px;
+}
+
+.header {
+    height: 90px;
+}
+
+.header .wrap {
+    position: relative;
+    width: 1210px;
+    margin: 0 auto;
+}
+
+.header .logo {
+    float: left;
+    width: 318px;
+    margin: 20px 0 10px 24px;
+    height: 60px;
+}
+
+
+.contain {
+    position: relative;
+    z-index: 0;
+    /*overflow: hidden;*/
+}
+.banner {
+    background: url('/static/img/login_bg.png') no-repeat top left;
+    height: 500px;
+    width: 100%;
+    min-width:1250px;
+    position: relative;
+    overflow: hidden;
+    /*margin-top: 15px;*/
+}
+
+.login-wrap {
+    position: relative;
+    top: 0;
+    z-index: 2;
+    width: 1210px;
+    height: 0;
+    margin: auto;
+}
+/*
+.login-panel {
+    position: absolute;
+    background:rgba(255, 255, 255, 0.4) none repeat scroll 0 0 !important;!*实现FF背景透明，文字不透明*!
+    filter:Alpha(opacity=40);
+    background:#fff;!*实现IE背景透明*!
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125);
+    width: 520px;
+    height: 521px;
+    top: -481px;
+    right: 365px;
+    padding: 0 70px;
+}
+*/
+
+.login-panel {
+    position: absolute;
+    background:rgba(255, 255, 255, 0.4) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+    filter:Alpha(opacity=40);
+    background:#fff;/*实现IE背景透明*/
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125);
+    width: 440px;
+    height: 480px;
+    top: -481px;
+    right: 0px;
+    padding: 0 30px;
+}
+
+.login-panel > h1 {
+    color: #333333;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 36px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.input-group {
+    margin-bottom:20px;
+}
+
+.input-group > .input-group-addon, .input-group > .form-control {
+    border:none;
+}
+
+.input-group > .form-control {
+    height: 51px;
+    padding: 15px 20px;
+    line-height:21px;
+    color: #666666;
+    border: 1px solid #E5E5E5;
+}
+
+.input-check {
+    margin-bottom: 50px;
+    color: #666666;
+}
+
+.btn-sub {
+    width: 100%;
+    height:51px;
+    background: #E60012;
+    font-size:18px;
+    padding:16px auto;
+    line-height:19px;
+    color: #FFFFFF;
+}
+
+.login_btn > .btn.focus, .login_btn > .btn:focus, .login_btn > .btn:hover {
+    color: #FFFFFF;
+    background: #cc141c;
+    text-decoration: none;
+}
+
+.foot-bar {
+    margin-top:33px;
+    height:110px;
+    width:100%;
+    /*margin-bottom: 70px;*/
+}
+
+.foot-bar .foot-wrap {
+    position: relative;
+    width: 1210px;
+    margin: 0 auto;
+}
+
+.foot-bar .foot-wrap .com-info{
+    /*padding-left:365px;*/
+    float: left;
+    font-size:18px;
+    font-family: AdobeHeitiStd-Regular;
+    margin-left:24px;
+}
+.foot-bar .attention-to-me{
+    float: right;
+}
+
+.u-qr-code {
+    background: url("/static/img/attention2me.png") no-repeat top left;
+}
+
+.u-g-appwx {
+    background: url("/static/img/app_barcode.png") no-repeat top left;
+    margin-right:30px;
+    /*margin-left:40px;*/
+}
+
+.u-qr-code, .u-g-appwx {
+    width: 190px;
+    height: 100px;
+    padding-left: 110px;
+    float: left;
+}
+/*
+.input-check input {
+    margin-right: 10px;
+}
+
+.input-check > input, .input-check > label {
+    vertical-align: middle;
+}
+*/
+/*
+.pull-right{width: 25%;
+            height: 500px;
+            background-color: white;
+            position: relative;
+            margin-right: 10%;
+            margin-top: 2%;
+}
+h1 {text-align: center;margin-top: 15%;}
+.input-group { width: 90%;
+               margin-left: 5%;
+               padding-top: 30px;
+}
+
+.input-group-addon {background: #0092E6;}
+.login_btn button {background: #E60012;
+                    border: none;
+                    width:90%;
+                    margin-left: 5%;
+                    margin-top: 30px;
+}*/

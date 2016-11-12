@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://analysis.niujidui.com:49997">
+
+        {% load staticfiles %}
+        <title>牛基队</title>
+
+        <!--<link href="lib/ion-md-input/css/ion-md-input.min.css" rel="stylesheet">-->
+        <!--<link href="lib/ionic-material/dist/ionic.material.css" rel="stylesheet">-->
+
+
+        <!-- compiled css output -->
+        <link href="/static/mobi/css/ionic.app.css" rel="stylesheet">
+        <link href="/static/mobi/css/mobi.css" rel="stylesheet">
+
+
+{#        <script src="/static/mobi/lib/ionic/js/ionic.bundle.js"></script>#}
+        <!--<script src="lib/ion-md-input/js/ion-md-input.min.js"></script>-->
+        <!--<script src="lib/ionic-material/dist/ionic.material.min.js"></script>-->
+
+        <!-- ngCordova to control native plugin-->
+{#        <script src="/static/mobi/lib/ngCordova/dist/ng-cordova.js"></script>#}
+        <!-- cordova script (this will be a 404 during development) -->
+{#        <script src="cordova.js"></script>#}
+
+
+        <!-- your app's js -->
+{#        <script src="js/app.js"></script>#}
+{#        <script src="js/controllers.js"></script>#}
+{#        <script src="js/services.js"></script>#}
+{#        <script src="js/constants.js"></script>#}
+{#        <script src="js/filters.js"></script>#}
+
+        <!-- ionic datepicker-->
+{#        <script src="/static/mobi/lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>#}
+{#        <script src="/static/mobi/lib/angulartics/dist/angulartics.min.js"></script>#}
+{#        <script src="/static/mobi/lib/angulartics-piwik/dist/angulartics-piwik.min.js"></script>#}
+{#        <script src="/static/mobi/lib/piwik/piwik.js"></script>#}
+        <!-- todo: need to be removed in production, just for backend mock up-->
+        <!--<script src="lib/angular-mocks/angular-mocks.js"></script>-->
+        <!--<script src="js/data.js"></script>-->
+        <!--<script src="js/ngMockE2E.js"></script>-->
+
+{#        <script src="/static/mobi/lib/jquery/dist/jquery.slim.min.js"></script>#}
+        <!--<script src="lib/classy-loader/jquery.classyloader.lvmeng.js"></script>-->
+    </head>
+{#        <body ng-app="starter" ng-controller="AppCtrl">#}
+        <body>
+            <!--<ion-nav-bar animation="nav-title-slide-ios7"-->
+                         <!--class="bar-assertive"-->
+                         <!--back-button-type="button-icon"-->
+                         <!--back-button-icon="ion-arrow-left-c"></ion-nav-bar>-->
+
+            <!--<ion-nav-view animation="slide-left-right"></ion-nav-view>-->
+{#            <ion-nav-bar class="bar-assertive" ng-class="{'front-color':('main.front'|includedByState),'profile-color':('main.user'|includedByState), 'product-color':('main.product'|includedByState), 'product-detail-color':('product_detail'|includedByState), 'news-color':('main.news'|includedByState), 'settings-color':('settings.list'|includedByState)}">#}
+{#            </ion-nav-bar>#}
+
+{#            <ion-nav-view></ion-nav-view>#}
+            {% block veiw %}{% endblock %}
+            <!-- Piwik -->
+            <noscript><p><img src="http://analysis.niujidui.com:49997/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+            <!-- End Piwik Code -->
+        </body>
+</html>
+
+{#<script>#}
+{#  //parsing the URL, saving any params to sessionStorage and redirecting the app to the correct page inside your app.#}
+{#  //url : for instance (niujidui://#/main/product)#}
+{#  //file:///private/var/mobile/Containers/Bundle/Application/E5DD3801-DA55-466D-86A6-EF1D34021AAF/%E7%89%9B%E5%9F%BA%E9%98%9F.app/www/index.html#/main/front#}
+{##}
+{#  function handleOpenURL(url) {#}
+{#    setTimeout(function() {#}
+{#      window.location.href = window.location.href.substr(0, window.location.href.lastIndexOf('#')) + url.replace('niujidui://', '');#}
+{#    }, 0);#}
+{#  }#}
+{#</script>#}

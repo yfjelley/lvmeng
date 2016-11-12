@@ -1,0 +1,31 @@
+{% extends "mobi/base.html" %}
+
+{% block veiw %}
+{% load product_deal %}
+{% load detail_deal %}
+<div class="product-detail-view">
+    <div class="income-wrap">
+        <div class="news">
+            新闻详情
+        </div>
+    </div>
+{#    <ion-nav-buttons side="left">#}
+{#        <a class="button button-icon button-clear ion-ios-arrow-left" ng-click="goBack()">&nbsp;&nbsp;&nbsp;</a>#}
+{#    </ion-nav-buttons>#}
+
+  <div>
+    <div STYLE="padding: 10px 10px; text-align: left;">
+      <h3 style="text-align: center;">该新闻不存在!</h3><br>
+{#      <div >#}
+{#        <img src="{{news.picture}}" alt="{{news.title}}" style="max-width: 100%;width: 412px; left: 0px;">#}
+{#      </div>#}
+      <!--<pre style="text-align: left;">{{news.context}}</pre>-->
+{#       <div ng-bind-html="news.context|to_trusted"></div>#}
+       <div></div>
+      <br/>
+      <br/>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

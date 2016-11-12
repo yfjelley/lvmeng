@@ -1,0 +1,96 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>协同办公</li>
+            <li>请假申请</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>请假申请列表</h4>
+        </div>
+        {% if not request.user.business and not request.user.is_superuser%}
+            <div class="btn-add">
+                <a href="/oa/leave_add_modify">新增请假申请</a>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <table class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>申请人</th>
+                            <th>请假类型</th>
+                            <th>请假原因</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>申请时间</th>
+                            <th>审核状态</th>
+                            <th>审核</th>
+                            {% if not request.user.business and not request.user.is_superuser%}
+                                <th>操作</th>
+                            {% endif %}
+                        </tr>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                        {% for obj in objs %}
+                            <tr>
+                                <th title="点击查看" style="cursor:pointer"><a href="/erp/check/?type=check_leave&id={{ obj.id }}">{{ obj.user }}</a></th>
+                                <th>{{ obj.topic }}</th>
+                                <th>{{ obj.content }}</th>
+                                <th>{{ obj.start }}</th>
+                                <th>{{ obj.end }}</th>
+                                <th>{{ obj.time }}</th>
+                                {% if obj.status == '1' %}
+                                    <th>未读</th>
+                                {% else %}
+                                    <th style="color:blue;">已读</th>
+                                {% endif %}
+                                {% if obj.examine_status == '3' %}
+                                    <th title="点击审核" style="cursor:pointer;color:blue;" onclick="leave_examine({{obj.id}});">待审核</th>
+                                {% endif %}
+                                {% if obj.examine_status == '2' %}
+                                    <th title="点击修改" style="cursor:pointer;color:red;" onclick="leave_examine({{obj.id}});"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">驳回</th>
+                                {% endif %}
+                                {% if obj.examine_status == '1' %}
+                                    <th title="点击修改" style="cursor:pointer;color:blue;" onclick="leave_examine({{obj.id}});"><img style="width:20px;height:20px;" src="/static/img/yes.gif">通过</th>
+                                {% endif %}
+                                {% if not request.user.business and not request.user.is_superuser %}
+                                    <th><a href="/oa/cost_application/?cost_id={{cost.id}}" onclick="if(confirm('确定删除该费用申请吗？')==false)return false;" title="点击删除"><img src="/static/img/icon-delete.png"></a></th>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    function leave_examine(id){
+        $.ajax({
+        type:"get",
+        url:"/oa/edit_leave_examine/",
+        data:{"id":id},
+        success:function(html){
+               $.webox({
+                   height:550,
+                   width:500,
+                   bgvisibel:true,
+                   title:'审核费用',
+                   html:html,
+                });
+            }
+        });
+    }
+
+</script>
+
+{% endblock %}

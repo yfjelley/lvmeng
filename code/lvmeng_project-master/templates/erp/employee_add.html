@@ -1,0 +1,37 @@
+{% extends "erp/base.html" %}
+
+{% block content %}
+    <div class="">
+        <div class="">
+            <h4  style="color:blue;">{{message}}</h4>
+        </div>
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <input style="display:none;" name="check_remark" id="remark" value="{{ remark }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/erp/employee_add/?emp_id={{ emp_id }}" method="post" role="form">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+
+
+    $(function(){
+        var mark = $("#id_phoneNum").val();
+        var remark = $("#remark").val();
+        if(mark==""){
+            $("#div_id_phoneNum").after("<div><label>初始密码<span >*</span></label><div><input name='password' placeholder='输入初始密码' type='text'/></div></div>");
+        }
+        if(remark=="true"){
+            $("#id_phoneNum").attr({"readonly":true});
+        }
+    });
+</script>
+{% endblock %}

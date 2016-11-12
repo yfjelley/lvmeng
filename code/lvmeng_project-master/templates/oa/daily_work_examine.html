@@ -1,0 +1,85 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>协同办公</li>
+            <li>工作汇报</li>
+            <li>工作汇报审批结果</li>
+        </ol>
+        {% load detail_deal %}
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <div class="">
+                    <h4 style="color:red;">工作汇报申请内容</h4>
+                </div>
+                <table class="table table-hover excel">
+                    <thead>
+                        <tr id="tr_head1">
+                            <th>申请人</th>
+                            <th>当天总结</th>
+                            <th>明日计划</th>
+                            <th>填报时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ daily_work.user }}</td>
+                            <td>{{ daily_work.topic|truncatechars:20 }}</td>
+                            <td>{{ daily_work.content|truncatechars:20 }}</td>
+                            <td>{{ daily_work.time|date_str }}</td>
+                        </tr>
+                    </tbody>
+
+                </table><br>
+                <div class="">
+                    <h4 style="color:red;">工作汇报审批列表</h4>
+                </div>
+                <table class="table table-hover excel">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>审批人</th>
+                            <th>审核状态</th>
+                            <th>审核结果</th>
+                            <th>审批备注</th>
+                            <th>审批时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for daily_examine in daily_examines %}
+                        <tr>
+                            <th>{{ daily_examine.examine_user }}</th>
+                            {% if  daily_examine.read_status == '1'%}
+                                <th>{{ daily_examine.get_read_status_display }}</th>
+                            {% else %}
+                                <th style="color:blue;">{{ daily_examine.get_read_status_display }}</th>
+                            {% endif %}
+
+                            {% if daily_examine.examine_status == '3' %}
+                                <th>{{ daily_examine.get_examine_status_display }}</th>
+                            {% endif %}
+                            {% if daily_examine.examine_status == '2' %}
+                                <th style="color:red;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ daily_examine.get_examine_status_display }}</th>
+                            {% endif %}
+                            {% if daily_examine.examine_status == '1' %}
+                                <th style="color:blue;"><img style="width:20px;height:20px;" src="/static/img/yes.gif">{{ daily_examine.get_examine_status_display }}</th>
+                            {% endif %}
+
+                            <th>{{ daily_examine.examine_message|default:'' }}</th>
+                            <th>{{ daily_examine.examine_time|default:''|date_str }}</th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+</script>
+
+{% endblock %}

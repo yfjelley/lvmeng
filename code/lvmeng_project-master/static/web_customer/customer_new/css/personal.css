@@ -1,0 +1,103 @@
+body,html{font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;}
+#person {background: #F1F1F1;}
+#person_local {background: #F1F1F1;
+                margin-left: -15px;
+                margin-right: -15px;
+                margin-top: -80px;
+}
+#person_local p{font-size: 18px;
+                color: #E60012;
+                line-height: 80px;
+                padding-left: 100px;
+}
+.person_info{background: #666666;
+            height: auto;
+            margin-left: -30px;
+            margin-right: -30px;
+            margin-top: -10px;
+}
+.media-object {margin: 10px 10px 10px ;
+                width: 100px;
+                height: 100px;
+}
+.media-object img {width: 100px;
+                    height: 100px;
+}
+.media-body p {margin-top: 20px;
+                font-size: 20px;
+                color: #FFFFFF;
+                font-weight: bold;
+}
+.person_sex {float: right;
+            margin-right: 25%;
+}
+.media-bottom {margin-top: 20px;}
+
+.media-bottom span {padding-left: 5px;}
+
+.person_jifen span{margin: 0 20px;
+                    color: #FFFFFF;
+                    font-size: 14px;
+}
+.person_list {margin-left: -30px;
+                margin-right: -30px;
+                margin-top:10px;
+}
+.person_list a {color: #333333;
+                font-size: 18px;
+                text-align: center;
+                line-height: 30px;
+}
+.person_list a:hover {background: #e60012;
+                        color: white;
+}
+ #personal_info form{text-align: left;
+                     margin-left:30%;
+                     color: #333333;
+                     font-size: 16px;
+                     line-height: 50px;
+ }
+#personal_product_name p{font-size: 18px;
+                        color: #333333;
+                        margin-left: 5%;
+}
+#personal_product_name span{margin:0 75%;
+                            font-size: 14px;
+                            color: #666666;
+}
+.nianhua {color: #666666;
+            font-size: 14px;
+}
+.jine {color: #666666;
+        font-size: 18px;
+}
+#btn_chakan a {width: 100px;
+                height: 40px;
+                background: #E60012;
+                color: white;
+                font-size: 16px;
+                border: none;
+}
+#personal_myorg ul li {list-style: none;
+                        font-size: 18px;
+                        color: #333333;
+}
+#personal_myorg hr {border: 1px dashed #E5E5E5;}
+#personal_myAM ul li {list-style: none;
+                        font-size: 18px;
+                        color: #333333;
+}
+#personal_myAM hr {border: 1px dashed #E5E5E5; }
+#personal_myAM span{float: right;
+                    font-size: 18px;
+                    color: #333333;
+}
+
+#personal_info , #personal_product , #personal_myorg , #personal_myAM{margin-top: 20px;}
+
+
+
+
+
+
+

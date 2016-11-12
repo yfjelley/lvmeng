@@ -1,0 +1,178 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+         <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">机构信息</li>
+            <li>机构基本信息</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>机构基本信息</h4>
+        </div>
+
+        <div class="btn-modify">
+            <a href="/erp/modify_business_base_info#show_business_base_info">点击修改</a>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% load detail_deal %}
+        <div class="">
+            <div class="col-lg-12 panel-body content-panel">
+
+                <div class="form-group icon-group" style="">
+                    <div class="control-label">{% get_verbose_field_name business "logo" %}:</div>
+                    <!--<div class="control-label">机构标志:</div>-->
+                    <div class="controls row">
+                        <div class="col  col-lg-4 img-left">
+                            <img src="{{ business.logo|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                        </div>
+                        <div class="col col-lg-8 img-right">
+                            <div class="logo-label col">{% get_verbose_field_name business "business_qrcode" %}:</div>
+                            <!--<div class="logo-label col">机构二维码:</div>-->
+                            <img src="{{ business.business_qrcode|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group icon-group" style="">
+                    <div class="control-label">{% get_verbose_field_name business "business_license_original" %}:</div>
+                    <!--<div class="control-label">营业执照（原件扫描):</div>-->
+                    <div class="controls row">
+                        <div class="col col-lg-4 img-left">
+                            <img src="{{ business.business_license_original|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                        </div>
+                        <div class="col col-lg-8 img-right">
+                            <div class="logo-label col">{% get_verbose_field_name business "idCard_positive" %}:</div>
+                            <!--<div class="logo-label col">法人身份证正面:</div>-->
+                            <img src="{{ business.idCard_positive|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group icon-group" style="">
+                    <div class="control-label">{% get_verbose_field_name business "business_license_copy" %}:</div>
+                    <!--<div class="control-label">营业执照（复印件盖章）:</div>-->
+                    <div class="controls row">
+                    <div class="col  col-lg-4 img-left">
+                        <img src="{{ business.business_license_copy|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                    </div>
+                    <div class="col  col-lg-8 img-right">
+                        <div class="logo-label col">{% get_verbose_field_name business "idCard_negative" %}:</div>
+                        <!--<div class="logo-label col">法人身份证反面:</div>-->
+                        <img src="{{ business.idCard_negative|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="">
+                    <div class="control-label">{% get_verbose_field_name business "name" %}:</div>
+                    <!--<div class="control-label">机构名称:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.name }}" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "business_num" %}:</div>
+                    <!--<div class="control-label">机构编号:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.business_num }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "phoneNum" %}:</div>
+                    <!--<div class="control-label">手机号码:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.phoneNum }}"
+                                                 readonly></div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "business_phone" %}:</div>
+                    <!--<div class="control-label">机构公众电话(展示在客户端首页):</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.business_phone }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "email" %}:</div>
+                    <!--<div class="control-label">管理员邮箱(登录用户名):</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.email }}" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "business_email" %}:</div>
+                    <!--<div class="control-label">机构对外邮箱(展示在客户端首页):</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.business_email }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "address" %}:</div>
+                    <!--<div class="control-label">机构地址:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.address }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "work_address" %}:</div>
+                    <!--<div class="control-label">机构办公地址(展示在客户端首页):</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.work_address }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "due_time" %}:</div>
+                    <!--<div class="control-label">账户到期时间:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.due_time|default:''|date_str }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "contact_name" %}:</div>
+                    <!--<div class="control-label">直接联系人姓名:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.contact_name }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "contact_position" %}:</div>
+                    <!--<div class="control-label">直接联系人职位:</div>-->
+                    <div class="controls"><input class="form-control" type="text"
+                                                 value="{{ business.contact_position }}" readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "register_date" %}:</div>
+                    <!--<div class="control-label">注册日期:</div>-->
+                    <div class="controls"><input class="form-control" type="text" value="{{ business.register_date|date_str }}"
+                                                 readonly></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">{% get_verbose_field_name business "brief_introduction" %}:</div>
+                    <!--<div class="control-label">公司简介(15个字以内,显示在APP首页)</div>-->
+                    <div class="controls">
+                        <input class="form-control" type="text" value="{{ business.brief_introduction }}" readonly>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="clear-flex"></div>
+        </div>
+        <div class="clear-flex"></div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}

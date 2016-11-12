@@ -1,0 +1,82 @@
+{% extends "api/base.html" %}
+{% block content %}
+      <div class="block-center mt-xl wd-xl">
+         <!-- START panel-->
+         <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center" style="font-size:16px; text-align: center">
+                <div style="display:inline; float:left;"><a href="#" onclick="window.location.href='http://' + window.location.host+'/api/url_agent/'+'?v='+Math.random()+ '&' + window.location.search.substr(1);" style="color:white;">&larr;</a></div>
+                <div style="display:inline; ">已有用户理财师添加</div>
+            </div>
+            <div class="panel-body">
+{#                <img width="150" src="/media/{{ agent.avatar }}" style="margin:auto;display:block; height:150px"/>#}
+{#                <div style="font-size:18px;margin-top:15px;;">#}
+{#                    <ul style="font-size:16px">#}
+{#                        <li>邀请码：{{ invitation_code }}</li>#}
+{#                        <li>机构：{{ agent.business.name }}</li>#}
+{#                        <li>姓名：{{ agent.name }}</li>#}
+{#                        <li>手机号：{{ agent.phoneNum }}</li>#}
+{#                    </ul>#}
+{#                </div>#}
+
+               <div class="col-lg-12 panel-body">
+                   <form id="register-form" action="#" method="post" role="form">
+                       {% csrf_token %}
+
+                       <div class="form-group">
+                           <p id="error" class="text-danger">{{ error }}</p>
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           <input id="phoneNum" type="text" placeholder="手机号" required class="form-control" name="phoneNum" value="{{ phoneNum }}">
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           <input id="password" type="password" placeholder="密码" required class="form-control" name="password" >
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           {{ form.captcha }}
+                       </div>
+
+                       <button id="register" type="submit" class="btn btn-block btn-primary mt-lg">确认添加</button>
+                   </form>
+               </div>
+            </div>
+         </div>
+         <!-- END panel-->
+{#         <div class="p-lg text-center">#}
+{#            <span>&copy;</span>#}
+{#            <span>2016</span>#}
+{#            <span>-</span>#}
+{#            <span>Lvmeng Information Technology</span>#}
+{#            <br>#}
+{#            <span>Corporation Management System</span>#}
+{#         </div>#}
+      </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    //点击验证码图片进行刷新
+    $(function() {
+        $('img.captcha').after(
+                $('<a href="#void" class="captcha-refresh">Refresh</a>')
+                );
+
+        // Click-handler for the refresh-link
+        $('img.captcha').click(function(){
+            var $form = $(this).parents('form');
+            var url = location.protocol + "//" + window.location.hostname + ":"
+                      + location.port + "/captcha/refresh/";
+
+            // Make the AJAX-call
+            $.getJSON(url, {}, function(json) {
+                $form.find('input[name="captcha_0"]').val(json.key);
+                $form.find('img.captcha').attr('src', json.image_url);
+            });
+
+            return false;
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   {% block meta %}{% endblock %}
+   <title>牛基队注册</title>
+   <!-- =============== VENDOR STYLES ===============-->
+    {% load staticfiles %}
+   <link type="text/css" rel="stylesheet" href="{% static "agle/vendor/fontawesome/css/font-awesome.min.css" %}" >
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="{% static "agle/vendor/simple-line-icons/css/simple-line-icons.css" %}">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/bootstrap.css" %}" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/app_complete.css" %}" id="maincss">
+   <link type="text/css" rel="stylesheet" href="{% static "agle/app/css/luzheng.css" %}" id="maincss">
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css">
+</head>
+<style>
+    #get_code1:hover{background-color:#1489cc}
+    #get_code:hover{background-color:#1489cc}
+    .alert-danger{display:none;}
+</style>
+
+<body>
+   <div class="">
+      {% block content %}{% endblock %}
+
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <!-- PARSLEY-->
+   <script src="{% static "agle/vendor/modernizr/modernizr.js" %}"></script>
+   <!-- JQUERY-->
+   <script src="{% static "agle/vendor/jquery/dist/jquery.js" %}"></script>
+   <!-- BOOTSTRAP-->
+   <script src="{% static "agle/vendor/bootstrap/dist/js/bootstrap.js" %}"></script>
+   <!-- STORAGE API-->
+   <script src="{% static "agle/vendor/jQuery-Storage-API/jquery.storageapi.js" %}"></script>
+   <!-- JQUERY EASING-->
+   <script src="{% static "agle/vendor/jquery.easing/js/jquery.easing.js" %}"></script>
+   <!-- ANIMO-->
+   <script src="{% static "agle/vendor/parsleyjs/dist/parsley.min.js" %}"></script>
+   <!-- CLASSY LOADER-->
+   <script src="{% static "agle/vendor/jquery-classyloader/js/jquery.classyloader.min.js" %}"></script>
+
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="{% static "agle/app/js/app.js" %}"></script>
+    <script src="{% static "js/index.js" %}"></script>
+    <script src="/static/new_vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/static/new_vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="/static/new_vendors/greensock/EasePack.min.js"></script>
+    <script src="/static/new_vendors/greensock/TweenMax.min.js"></script>
+    <script src="/static/new_js/index.js"></script>
+
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      <!--_paq.push(['deleteCustomDimension', 1]);-->
+      <!--_paq.push(['deleteCustomDimension', 2]);-->
+    {#  _paq.push(['setCustomDimension', 1, '{{ user.first_name }}']);#}
+      <!--_paq.push(['setCustomDimension', 2, '{{ user.username }}');-->
+      _paq.push(['setCustomVariable',
+        // Index, the number from 1 to 5 where this custom variable name is stored for the current page view
+        1,
+        // Name, the name of the variable, for example: Category, Sub-category, UserType
+        "User",
+        // Value, for example: "Sports", "News", "World", "Business", etc.
+          "{{ user.first_name }}",
+        // Scope of the custom variable, "page" means the custom variable applies to the current page view
+        "page"
+      ]);
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analysis.niujidui.com:49997/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//analysis.niujidui.com:49997/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+<!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">服务协议</h4>
+                </div>
+                <div class="modal-body">
+                    <p>本协议是使用律锰服务的用户（以下简称“用户”或“您”）与律锰公司就律锰软件管理平台的使用等相关事宜所签订的协议，请用户在点击“同意”按钮之前，详细阅读本协议，用户可以选择不接受该协议条款，但用户点击“同意”按钮并提交后，依据《中华人民共和国合同法》《中华人民共和国电信条例》《互联网信息服务管理办法》等相关法律法规的规定，本协议即构成双方合法有效、对双方具有约束力的法律文件。</p>
+    			<h4 class="title">一、协议的签署</h4>
+                <p>
+                    1、本平台提供的各项服务的所有权及运营权归律锰公司享有，您在注册完成后，即视为已经充分阅读并理解了本协议约定的条款，对标黑加粗的部分，再次提醒您重点阅读。
+                    2、在注册之前，请您确认同意该协议条款，如果您不同意本协议内容或对本协议内容有异议，请您立即停止注册。
+                    3、当您按照注册页面提示填写信息、阅读并同意本协议且完成全部注册程序后，即表示您已充分阅读、理解并接受本协议的全部内容，本协议即产生法律约束力。您承诺接受并遵守本协议的约定，届时您不应以未阅读本协议的内容或者未获得律锰对您问询的解答等理由，主张本协议无效，或要求撤销本协议。
+                </p>
+			<h4>二、用户注册</h4>
+			<p>1、用户保证提供的注册信息（包括但不限于个人信息、企业信息等）真实、及时、完整和准确。如果信息有变动，用户应及时通知本平台，若用户未及时通知或提供注册的信息不真实、不准确、不合法，由此产生的一切法律责任及后果（包括本平台的损失）均由用户自行承担。同时，本平台有权暂停或终止向用户提供全部或部分服务。
+				2、您了解并同意，律锰注册账号所有权归属于律锰，注册完成后，您仅获得账号使用权。律锰账号使用权仅归属于初始申请注册人，不得以任何方式转让或被提供予他人使用，否则，律锰有权立即不经通知收回该账号，由此带来的因您使用本服务产生的全部数据、信息等被清空、丢失等的损失，您应自行承担。
+				3、用户注册成功后，将产生用户名及密码等用户信息，用户有更改密码的权利。用户应当妥善、谨慎的保管和使用账户信息，不得利用该账户从事违法犯罪或侵犯他人合法权益的行为。若用户发现住户密码被盗，请立即通知本平台或向司法机关报案。
+				、未经本平台同意，用户不得将注册成功的账户提供给其他方使用，否则由此产生的法律责任，由注册用户与实际使用人承担连带责任。
+				5、若本平台有理由相信用户正在利用本平台从事违法活动，或依据司法行政机关的法律文书或命令，本平台有权依法进行相应的证据保全。
+				6、您了解并同意，如您注册律锰账号后连续超过24个月未登录，律锰为网站优化管理之目的有权回收该账号，相关问题及责任均由您自行承担。
+				7、律锰根据本协议收回或取消账号后，有权自行对账号相关内容及信息以包括但不限于删除等方式进行处理，且无需就此向用户承担任何责任。
+			</p>
+			<h4>三、用户责任</h4>
+			<p>1、根据《中华人民共和国电信条例》《互联网信息服务管理办法》《中华人民共和国计算机信息网络国际联网管理暂行规定》《中华人民共和国计算机信息系统安全保护条例》及本平台的相应规则，用户不得利用本平台制作、发布、传播含有下列内容的信息：
+				a、反对宪法所确定的基本原则的；
+				b、危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；
+				c、损害国家荣誉和利益的；
+				d、煽动民族仇恨、民族歧视，破坏民族团结的；
+				e、破坏国家宗教政策，宣扬邪教和封建迷信的；
+				f、散布谣言，扰乱社会秩序，破坏社会稳定的；
+				g、散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；
+				h、侮辱或者诽谤他人，侵害他人合法权益的；
+				i、含有法律、行政法规禁止的其他内容的；
+				2、用户不得从事干扰本平台的正常运转，非法侵入本平台及国家计算机信息系统的行为，不得利用本平台注册的账户进行非法牟利经营。
+				若用户违反本条规定，本平台将依据《中华人民共和国侵权责任法》等相关法律、法规的规定，立即独立采取有效措施停止提供服务、关闭注销用户，由此产生的一切后果由用户自行承担。
+				3、您了解并同意，在律锰服务提供过程中，律锰及其关联公司或其授权单位和个人有权以各种方式投放各种商业性广告或其他任何类型的推广信息，同时，您同意接受以电子邮件或其他方式向您发送的上述广告或推广信息。
+			</p>
+			<H4>四、本平台服务</H4>
+			<p>本平台服务商提供互联网办公服务及相关软件、硬件的服务，其提供的服务会随着公司的经营而不断调整和变化。
+				对于用户自行在本平台上传或发布的信息，本平台不负责实质性的审查。若在本平台上发布的信息有虚假、违法、侵权等情形的，均由发布者自行承担，本平台不承担任何的责任。但若出现上述情况，用户可及时通知本平台，经本平台查实后，本平台将依照相关法律、法规的规定采取屏蔽、注销、停止服务等措施。
+			</p>
+			<h4>五、知识产权条款</h4>
+			<p>1、本平台在服务过程中提供的各种软件、硬件等产品的著作权、商标专用权、专利权等知识产权归本平台享有。
+				2、用户因使用本平台提供的服务而产生或发布的各种信息、作品的知识产权归用户享有，但出于技术的需要，本平台可以无偿、永久的复制、存储、使用该信息。
+			</p>
+			<h4>六、责任限制条款</h4>
+			<p>1、对于用户自行发布的信息，用户应当保证该信息的真实、合法性，本平台作为服务软件管理平台，无法控制该信息，若出现违法信息而产生的一切法律责任均由发布者自行承担，与本平台无涉，给本平台造成损失的，本平台将依法追究其相应的法律责任。
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% block script %}{% endblock %}
+
+</html>

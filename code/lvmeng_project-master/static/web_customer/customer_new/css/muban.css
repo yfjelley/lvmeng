@@ -1,0 +1,91 @@
+body,html{font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;}
+img {max-width: 100%;
+    vertical-align: middle;
+}
+p {color: #333333;}
+
+#header {background: #F1F1F1;}
+.pull-right, .pull-left{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.pull-left img {max-width: 100%;
+                vertical-align: middle;
+
+
+}
+.image_logo img {width:100px;
+                height:100px;
+                border-radius:50%;
+}
+.pull-right p{color: #E60012;
+    font-size: 20px;
+}
+.pull-right form {float: right;}
+
+.pull-right select {width: 120px;
+    height: 30px;
+    border-radius: 5px;
+}
+.btn{background: white;
+    border: solid 1px #A9A9A9;
+    height: 30px;
+}
+#menu {background: #e60012;
+       height: 60px;
+}
+.navbar {border: none;  }
+
+#nav-menu ul {width: 100%;}
+
+#nav-menu ul li a {font-size: 18px;
+                   color: white;
+}
+#nav-menu ul li a:hover {color:#333333;}
+
+#nav-menu ul li {padding-left: 50px;}
+
+.navbar-nav > li > a {padding-top: 20px;line-height: 25px;}
+
+
+
+#footer {background-color:#171616;}
+
+#footer img {margin-bottom: 20px;}
+
+.contact {text-align: center;
+    padding-top: 30px;
+}
+.contact span {font-size:30px;
+    color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.contact p {text-align: center;
+    margin-top: 10px;
+    color: #ffffff;
+}
+.footer_word {font-size: 18px;
+    color: #ffffff;
+}
+.foot_info {margin-top:25px;}
+
+.foot_info p {font-size: 16px;
+    color: #ffffff;
+}
+#ewm img {margin-top: 70%;
+    max-width: 100%;
+}
+
+.right_ewm{position:fixed;
+    top:30%;
+    right:-200px;
+    opacity:1;
+}
+.right_ewm p {color:black;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    margin-right: 3px;
+}
+.ewm_word {color: white;font-size: 14px;text-align: center;}

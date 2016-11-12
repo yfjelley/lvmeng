@@ -1,0 +1,109 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">机构信息</li>
+            <li>{{message}}</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>{{message}}</h4>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <input style="display:none;" name="" id="picture" value="{{ business.logo|default:'' }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/erp/modify_business_base_info/?business_id={{business_id}}" method="post" role="form" enctype="multipart/form-data">
+{#                        <div>#}
+{#                            <label>当前图片</label>#}
+{#                            <div>#}
+{#                                <img style='height:200px;' id="show_picture" src="/media/{{ business.logo }}" onerror="this.src='/static/img/default_blue.png'" title="当前图片"/>#}
+{#                            </div>#}
+{#                        </div>#}
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+
+
+    $(function(){
+        if($("#picture").val() == ""){
+            $("#show_picture").css("display","none");
+        }
+    });
+
+    $(function(){
+        $("#id_logo").after("<input type='text' style='display:none;' name='base_1' id='base_1'/>");
+        $("#id_business_qrcode").after("<input type='text' style='display:none;' name='qrcode_1' id='qrcode_1'/>");
+    });
+
+    $(document).ready(function(e){
+      $('#id_logo').customFile({
+            type : 'image',
+            image : {
+                crop	: true,
+                cropSize: [200,200],
+                preview : {
+                    display: true,
+                    maxWidth: 5000,
+                    maxHeight: 5000,
+                }
+            },
+            filePicker : '<h5>点击上传图片</h5>',
+      });
+    });
+
+    $(document).ready(function(e){
+      $('#id_business_qrcode').customFile({
+            type : 'image',
+            image : {
+                crop	: true,
+                cropSize: [200,200],
+                preview : {
+                    display: true,
+                    maxWidth: 5000,
+                    maxHeight: 5000,
+                }
+            },
+            filePicker : '<h5>点击上传图片</h5>',
+      });
+    });
+
+     $(function(){
+        $("#submit-id-save").click(function(){
+            if($("input[name='logo-w[]']").val() > 0){
+                set_base_input();
+            }
+
+            if($("input[name='business_qrcode-w[]']").val() > 0){
+                if($("input[name='logo-w[]']").val() > 0){
+                    set_base_qrcode(3);
+                }else{
+                    set_base_qrcode(0);
+                }
+
+            }
+
+        });
+     });
+
+</script>
+{% endblock %}

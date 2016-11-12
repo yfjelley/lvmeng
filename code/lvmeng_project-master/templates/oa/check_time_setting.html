@@ -1,0 +1,90 @@
+{% extends "erp/base.html" %}
+{% block style %}
+<style>
+    .datetimepicker th.switch {
+        width: 250px;
+        height:0px;
+        color:white;
+    }
+</style>
+{% endblock %}
+{% block head %}
+    <link href="/static/css/datetimepicker.css" type="text/css" media="all" rel="stylesheet" />
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js"></script>
+{% endblock %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>考勤管理</li>
+            <li>考勤时间设定</li>
+
+        </ol>
+        <div id="error_time" style="text-align:center;margin-bottom:10px;font-size:20px;color:red;"></div>
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form onsubmit="return check_time_valid();" action="/oa/check_time_setting/?id={{ check_zero.id }}#check_time_setting" method="post" role="form">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        $("#id_check_in_time").click(function(){
+            $(".switch").html("");
+            $(".prev").remove();
+            $(".next").remove();
+        });
+        $("#id_check_out_time").click(function(){
+            $(".switch").html("");
+            $(".prev").remove();
+            $(".next").remove();
+        });
+        $("#id_check_in_remind").click(function(){
+            $(".switch").html("");
+            $(".prev").remove();
+            $(".next").remove();
+        });
+        $("#id_check_out_remind").click(function(){
+            $(".switch").html("");
+            $(".prev").remove();
+            $(".next").remove();
+        });
+    });
+
+    function check_time_valid(){
+        var id_check_in_time = $('input[id="id_check_in_time"]').val();
+        var id_check_out_time = $('input[id="id_check_out_time"]').val();
+        var id_check_in_remind = $('input[id="id_check_in_remind"]').val();
+        var id_check_out_remind = $('input[id="id_check_out_remind"]').val();
+
+        if(id_check_out_time < id_check_in_time){
+            $("#error_time").html("\u7b7e\u9000\u65f6\u95f4\u4e0d\u80fd\u5c0f\u4e8e\u7b7e\u5230\u65f6\u95f4\uff01");
+            $('input[id="id_check_out_time"]').val("");
+            return false;
+        }
+
+        if(id_check_out_remind < id_check_in_remind){
+            $("#error_time").html("\u7b7e\u9000\u65f6\u95f4\u4e0d\u80fd\u5c0f\u4e8e\u7b7e\u5230\u65f6\u95f4\uff01");
+            $('input[id="id_check_out_remind"]').val("");
+            return false;
+        }
+    }
+
+</script>
+
+{% endblock %}

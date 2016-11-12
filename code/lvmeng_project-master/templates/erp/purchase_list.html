@@ -1,0 +1,107 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+           <!-- START Language list-->
+            <h4 style="color:red;">购买列表</h4>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="excel table table-hover">
+                    <thead>
+                    <tr id="tr_head">
+                        <th>序号</th>
+                        <th>客户姓名</th>
+                        <th>产品名</th>
+                        <th>购买金额</th>
+                        <th>购买时间</th>
+                        <th>结束时间</th>
+                        <th>添加时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% load detail_deal %}
+                    {% for purchase in purchases %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a href="/erp/check/?id={{ customer.id }}&type=customer#agent_list" title="点击查看">{{ customer.name }}</a></td>
+                            <td><a href="/erp/check/?id={{ purchase.product.id }}&type=product#agent_list" title="点击查看">{{ purchase.product }}</a></td>
+                            <td>{{ purchase.amount }}</td>
+                            <td>{{ purchase.income_date|date_str }}</td>
+                            <td>{{ purchase.end_date|date_str }}</td>
+                            <td>{{ purchase.register_time|date_str }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if purchases.has_previous %}
+                                <a href="?page={{ purchases.previous_page_number }}#agent_list">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p purchases.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#agent_list" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if agents.has_next %}
+                                <a href="?page={{ purchases.next_page_number }}#agent_list">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+
+                        {% else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{purchases.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}

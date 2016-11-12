@@ -1,0 +1,83 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">员工对客户管理</li>
+            <li>查看客户列表</li>
+            {% if message %}
+                <li>{{ message }}</li>
+            {% else %}
+                <li>客户基本信息</li>
+            {% endif %}
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            {% if message %}
+                <h4>{{ message }}</h4>
+            {% else %}
+                <h4>客户基本信息</h4>
+            {% endif %}
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <input style="display:none;" name="" id="picture" value="{{ customer.portrait|default:'' }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                {% load detail_deal %}
+                <form action="/erp/customer_add/?customer_id={{ customer_id }}#customer_add" method="post" role="form" enctype="multipart/form-data">
+                    <img style='height:150px;' id="show_picture" src="{{ customer.portrait|check_picture }}" onerror="this.src='/static/img/default_blue.png'" title="当前图片"/>
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+
+
+    $(function(){
+        if($("#picture").val() == ""){
+            $("#show_picture").css("display","none");
+        }
+    });
+
+    $(function(){
+        $("#id_portrait").after("<input type='text' style='display:none;' name='base_1' id='base_1'/>");
+    });
+
+    $(document).ready(function(e){
+      $('#id_portrait').customFile({
+            type : 'image',
+            image : {
+                crop	: true,
+                cropSize: [100,100],
+                preview : {
+                    display: true,
+                    maxWidth: 5000,
+                    maxHeight: 5000,
+                }
+            },
+            filePicker : '<h5>点击上传图片</h5>',
+      });
+    });
+
+     $(function(){
+        $("#submit-id-save").click(function(){
+            set_base_input();
+        });
+     });
+</script>
+{% endblock %}

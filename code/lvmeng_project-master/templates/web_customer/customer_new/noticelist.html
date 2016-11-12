@@ -1,0 +1,314 @@
+{% extends "web_customer/customer_new/base.html" %}
+
+{% block head %}
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+{#    <link rel="icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />#}
+{#    <link rel="shortcut icon" href="/static/web_customer/customer_new/images/another/favicon.png" type="image/png" />#}
+{#    <title>牛基队</title>#}
+
+    <link href="/static/web_customer/customer_new/css/bootstrap.css" type="text/css" rel="stylesheet">
+
+    <link href="/static/web_customer/customer_new/css/muban.css" rel="stylesheet" type="text/css">
+    <link href="/static/web_customer/customer_new/css/noticelist.css" rel="stylesheet" type="text/css">
+
+
+    <script type="text/javascript" src="/static/web_customer/customer_new/js/html5shiv.js"></script>
+    <script type="text/javascript" src="/static/web_customer/customer_new/js/respond.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <div class="container">
+        <div class="pull-left">
+            <!--<img src="/static/web_customer/customer_new/images/another/niu.png">-->
+           <div class="image_logo">
+            <img src="/media/{{ business.logo }}" onerror="this.src='/static/img/default_blue.png'">
+            {% comment %}<img src="/static/web_customer/customer_new/images/another/niheta.png">{% endcomment %}
+            <span style="font-size:26px;line-height: 80px;color: #333333;"> {{ business }}</span>
+            </div>
+        </div>
+        <div class="pull-right">
+            <p>财富热线：{{ business.phoneNum }}</p>
+            <form class="bs-docs-example form-inline pull-right"  method="get" action="/web_customer/customer_business_search/"/>
+                <select name="bus_id" style="width: 180px;font-size: 14px;">
+                        <option value="{{ business.id }}">{{ business }}</option>
+                    {% for agent in agents %}
+                        {% if business != agent.business %}
+                            <option value="{{ agent.business.id }}">{{ agent.business }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            <button class="btn " type="submit">确定</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="menu">
+    <div class="container">
+        <nav class="navbar ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-menu">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/web_customer/redi_to_index/?business_id={{ business.id }}">首页</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#product">产品中心</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#topline">金融头条</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#topline">企业公告</a></li>
+                    <li><a href="/web_customer/redi_to_index/?business_id={{ business.id }}#footer">联系我们</a></li>
+                    <li><a href="/web_customer/personal_info/?bus_id={{ business.id }}">我的账户</a></li>
+                    <li style="float: right;"><a href="/logout/" >退出登录</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div>
+    <img src="/static/web_customer/customer_new/images/banner/bj.png">
+</div>
+
+<div id="noticelist">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12" style="background: white;">
+                <div class="noticelist_nav">
+                    <p>首页>企业公告</p>
+                </div>
+                <div class="col-md-2 col-sm-2" >
+                    <div class="noticelist_left">
+                        <p class="noticelist_mark"><img src="/static/web_customer/customer_new/images/notice/sanjiao.png"></p>
+                        <p class="noticelist_day">{{ announ_head.date|date:'d' }}</p>
+                        <p class="noticelist_month">{{ announ_head.date|date:'Y-m' }}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-10 col-sm-10">
+                    <div class="media" style="margin-top:-13px;">
+                        <a class="pull-left" href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announ_head.id }}">
+                            <img class="media-object" src="/media/{{ announ_head.picture }}" onerror="this.src='/static/img/default_blue.png'" style="width:200px;height:150px;">
+                        </a>
+                        <div class="media-body">
+                            <p class="noticelist_title"><a href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announ_head.id }}">{{ announ_head.title }}</a></p>
+                            <p class="noticelist_word">
+                                {{ announ_head.text|safe|truncatechars:200 }}
+                            </p>
+                            <div class="media-bottom">
+                                <img src="/static/web_customer/customer_new/images/notice/liulan.png">&nbsp;<span>{{ announ_head.read_num }}</span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announ_head.id }}">阅读全文>></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for announcement in announcements %}
+                <div class="col-md-12 col-sm-12" style="background: white;">
+                    <div class="col-md-2 col-sm-2" >
+                        <div class="noticelist_left">
+                            <p class="noticelist_day">{{ announcement.date|date:'d' }}</p>
+                            <p class="noticelist_month">{{ announcement.date|date:'Y-m' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10 col-sm-10" style="background: #FFFFFF;">
+                        <div class="media">
+                            <a class="pull-left" href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announcement.id }}">
+                                <img class="media-object" src="/media/{{ announcement.picture }}" onerror="this.src='/static/img/default_blue.png'" style="width:200px;height:150px;">
+                            </a>
+                            <div class="media-body">
+                                <p class="noticelist_title"><a href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announcement.id }}">{{ announcement.title }}</a></p>
+                                <p class="noticelist_word">
+                                    {{ announcement.text|safe|truncatechars:200 }}
+                                </p>
+                                <div class="media-bottom">
+                                    <img src="/static/web_customer/customer_new/images/notice/liulan.png">&nbsp;<span>{{ announcement.read_num }}</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/web_customer/notice/?business_id={{ business.id }}&announce_id={{ announcement.id }}">阅读全文>></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!--<div class="col-md-12 col-sm-12" style="background: white;">-->
+                <!--<div class="col-md-2 col-sm-2" >-->
+                    <!--<div class="noticelist_left">-->
+                        <!--<p class="noticelist_day">16</p>-->
+                        <!--<p class="noticelist_month">2016-05</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-10 col-sm-10" style="background: #FFFFFF;">-->
+                    <!--<div class="media">-->
+                        <!--<a class="pull-left" href="#">-->
+                            <!--<img class="media-object" src="/static/web_customer/customer_new/images/notice/gonggao.png">-->
+                        <!--</a>-->
+                        <!--<div class="media-body">-->
+                            <!--<p class="noticelist_title"><a href="notice.html">校园大学生CEO自主创业计划</a></p>-->
+                            <!--<p class="noticelist_word">-->
+                                <!--上海律锰信息技术有限公司是一家从事互联网平台、APP软件开发于一体的科技公司，-->
+                                <!--旗下首款创新型金融企业用户管理系统——“牛基队”致力于为金融类公司提供更便捷的员工管理，更简单的产品推广及更详尽的客户资源；-->
+                            <!--</p>-->
+                            <!--<div class="media-bottom">-->
+                                <!--<img src="images/notice/liulan.png">&nbsp;<span>125</span>-->
+                                <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                <!--<a href="notice.html">阅读全文>></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-12 col-sm-12" style="background: white;">-->
+                <!--<div class="col-md-2 col-sm-2" >-->
+                    <!--<div class="noticelist_left">-->
+                        <!--<p class="noticelist_day">16</p>-->
+                        <!--<p class="noticelist_month">2016-05</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-10 col-sm-10" style="background: #FFFFFF;">-->
+                    <!--<div class="media">-->
+                        <!--<a class="pull-left" href="#">-->
+                            <!--<img class="media-object" src="/static/web_customer/customer_new/images/notice/gonggao.png">-->
+                        <!--</a>-->
+                        <!--<div class="media-body">-->
+                            <!--<p class="noticelist_title"><a href="notice.html">校园大学生CEO自主创业计划</a></p>-->
+                            <!--<p class="noticelist_word">-->
+                                <!--上海律锰信息技术有限公司是一家从事互联网平台、APP软件开发于一体的科技公司，-->
+                                <!--旗下首款创新型金融企业用户管理系统——“牛基队”致力于为金融类公司提供更便捷的员工管理，更简单的产品推广及更详尽的客户资源；-->
+                            <!--</p>-->
+                            <!--<div class="media-bottom">-->
+                                <!--<img src="/static/web_customer/customer_new/images/notice/liulan.png">&nbsp;<span>125</span>-->
+                                <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                <!--<a href="notice.html">阅读全文>></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-12 col-sm-12" style="background: white;">-->
+                <!--<div class="col-md-2 col-sm-2" >-->
+                    <!--<div class="noticelist_left">-->
+                        <!--<p class="noticelist_day">16</p>-->
+                        <!--<p class="noticelist_month">2016-05</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-10 col-sm-10" style="background: #FFFFFF;">-->
+                    <!--<div class="media">-->
+                        <!--<a class="pull-left" href="#">-->
+                            <!--<img class="media-object" src="/static/web_customer/customer_new/images/notice/gonggao.png">-->
+                        <!--</a>-->
+                        <!--<div class="media-body">-->
+                            <!--<p class="noticelist_title"><a href="notice.html">校园大学生CEO自主创业计划</a></p>-->
+                            <!--<p class="noticelist_word">-->
+                                <!--上海律锰信息技术有限公司是一家从事互联网平台、APP软件开发于一体的科技公司，-->
+                                <!--旗下首款创新型金融企业用户管理系统——“牛基队”致力于为金融类公司提供更便捷的员工管理，更简单的产品推广及更详尽的客户资源；-->
+                            <!--</p>-->
+                            <!--<div class="media-bottom">-->
+                                <!--<img src="/static/web_customer/customer_new/images/notice/liulan.png">&nbsp;<span>125</span>-->
+                                <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                <!--<a href="notice.html">阅读全文>></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+    <!--两种分页样式 -->
+    <!--<div style="text-align: center;">
+        <ul class="pagination pagination-lg">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>-->
+
+    <!--<div style="margin-top: 20px;margin-bottom: 20px;" >
+        <ul style="list-style: none" >
+            <li  style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn" style="color: #666666;">&laquo;</a></li>&nbsp;
+            <li  style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn">1</a></li>
+            <li style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn">2</a></li>
+            <li style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn">3</a></li>
+            <li style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn">4</a></li>
+            <li style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn">5</a></li>
+            <li style="margin-left: 15px;float: left;"><a href="#" class="btn" type="btn">&raquo;</a></li>
+        </ul>
+    </div>-->
+
+</div>
+
+
+
+
+
+<footer id="footer">
+    <div class="contact">
+        <img src="/static/web_customer/customer_new/images/another/line_left.png">
+        <span>联系我们</span>
+        <img src="/static/web_customer/customer_new/images/another/line_right.png">
+        <p> Contact us</p>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <p class="footer_word">COOPERATIVE PARTNER  合作伙伴</p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/360.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/baidu.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/gongshang.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/guotai.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/texun.png"></div>
+                    <div class="col-md-4 col-sm-4"><img src="/static/web_customer/customer_new/images/partner/xinlang.png"></div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4" >
+                <p class="footer_word">CONTACT US  联系我们</p>
+                <div class="foot_info">
+                    <p>客服热线：{{ business.business_phone }}</p>
+                    <p>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ business.business_email }}</p>
+                    <br/>
+                    <p>地址：{{ business.work_address }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4" id="ewm">
+               <div class="col-md-4 col-sm-4">
+                    <!--<img src="/static/web_customer/customer_new/images/ewm/gongzhonghao.png">-->
+                    <img src="/media/{{ business.business_qrcode }}" onerror="this.src='/static/img/default_blue.png'" style="width:90px;height:90px;">
+                    <p class="ewm_word">企业公众号</p>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <img src="/static/web_customer/customer_new/images/ewm/guanwang.png">
+                    <p class="ewm_word">下载APP</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+{% endblock %}

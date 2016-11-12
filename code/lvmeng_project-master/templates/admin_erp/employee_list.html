@@ -1,0 +1,48 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+           <!-- START Language list-->
+            <h4 style="color:red;">员工列表</h4>
+        </div>
+        <div>
+            <form action="" method="post">
+                员工姓名：<input type="text" name="emp_name" value="{{emp_name|default:''}}">&nbsp;&nbsp;&nbsp;&nbsp;
+                电话：<input type="text" name="phoneNum" value="{{phoneNum|default:''}}">&nbsp;&nbsp;&nbsp;&nbsp;
+                身份证号：<input type="text" name="idNum" value="{{idNum|default:''}}">&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="搜索">
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <table frame=boxrules="all" align="center" border="1" cellspacing="0" cellpadding="0" width="100%;">
+                    <tr id="tr_head">
+                        <th>姓名</th>
+                        <th>电话</th>
+                        <th>性别</th>
+                        <th>地址</th>
+                        <th>身份证号</th>
+                        <th>所属机构</th>
+                        <th>角色</th>
+                        <th>注册日期</th>
+                    </tr>
+
+                    {% for emp in employees %}
+                        <tr>
+                            <th><a href="/erp/check/?id={{ emp.id }}&type=employee" title="点击查看">{{ emp.name }}</a></th>
+                            <th>{{ emp.phoneNum }}</th>
+                            <th>{{ emp.get_sex_display }}</th>
+                            <th>{{ emp.address }}</th>
+                            <th>{{ emp.idCard_num }}</th>
+                            <th>{{ emp.business }}</th>
+                            <th>{{ emp.role }}</th>
+                            <th>{{ emp.register_date }}</th>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

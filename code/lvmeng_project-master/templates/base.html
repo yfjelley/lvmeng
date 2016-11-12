@@ -1,0 +1,43 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="{% static "admin/css/base.css" %}" />
+    <link rel="stylesheet" href="{% static "admin/css/login.css" %}" />
+    <title>牛基队</title>
+</head>
+
+<body>
+{% block bodyclass %}about{% endblock %}
+{% block content %}
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{#    <div id="header">#}
+{#    {% block header %}#}
+{#    <a href="{% url 'index' %}">{% trans "Home" %}</a> | #}
+{##}
+{#    {% if user.is_authenticated %}#}
+{#        {% trans "Logged in" %}: {{ user.username }} #}
+{#        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | #}
+{#        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)#}
+{#    {% else %}#}
+{#       <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>#}
+{#    {% endif %}#}
+{#    <hr />#}
+{#    {% endblock %}#}
+{#    </div>#}
+{##}
+{#    <div id="content">#}
+{#    {% block content %}{% endblock %}#}
+{#    </div>#}
+{##}
+{#    <div id="footer">#}
+{#    {% block footer %}#}
+{#        <hr />#}
+{#    {% endblock %}#}
+{#    </div>#}
+</body>
+
+</html>

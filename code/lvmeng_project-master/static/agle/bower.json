@@ -1,0 +1,10 @@
+{
+  "name": "angular dependency",
+  "description": "for ig and sprint project",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular-resource": "1.4.x"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div class="">
+        <h4  style="color:blue;">{{message}}</h4>
+    </div>
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <form action="/oa/edit_travel_examine/?id={{ all_examine.id }}" method="post" role="form">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                {% crispy form %}
+        </form>
+</body>
+<script>
+    $(function(){
+
+        var check_remark = $("#check_remark").val();
+        if(check_remark){
+            $("#submit-id-save").css("display","none");
+            document.getElementById("id_leave_user").disabled = "true";
+            document.getElementById("div_id_examine_user").disabled = "true";
+        }
+    });
+
+</script>
+</html>

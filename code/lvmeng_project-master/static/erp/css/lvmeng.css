@@ -1,0 +1,857 @@
+/* ========================================================================
+   Component: base.html
+ ========================================================================== */
+
+body{
+    background: #F1F1F1;
+}
+
+.topnavbar {
+    background: #FFFFFF;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.brand-logo{
+    padding-left: 100px;
+    vertical-align: middle;
+    padding-top: 15px;
+    height: 90px;
+    padding-bottom: 15px;
+    width: 280px;
+    float: left;
+}
+
+.info > .nav-list{
+    height: 90px;
+    float: right;
+    text-align: right;
+    white-space: nowrap;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.info > ul > li{
+    /*padding: 0 10px;*/
+    margin: 0;
+    display: inline-block;
+    height: 90px;
+    line-height: 90px;
+    color: #333333;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.info ul li a{
+    color: #333333;
+}
+
+.info ul li a:hover{
+    color: #E60012;
+    text-decoration: none;
+}
+
+.info ul .item1 {
+    margin-right: 25px;
+}
+
+.info ul .item2 {
+    margin-right: 50px;
+}
+
+.info ul .item3 {
+    margin-right: 40px;
+}
+
+.info ul .item4 {
+    margin-right: 50px;
+}
+
+.info ul li .logout:hover, .info ul li .logout:focus {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: #1489cc;
+}
+
+.info > ul > li > .logout{
+    color: #FFFFFF;
+    background: #0092E6;
+    /* width: 76px; */
+    height: 33px;
+    padding: 7px 24px;
+    line-height: 13px;
+    /* display: inline-block; */
+    /* display: block; */
+    /* vertical-align: middle; */
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.wrapper .aside {
+    /*width: 13.5416%;*/
+    width:260px;
+    margin-top: 92px;
+}
+
+.wrapper > .aside .aside-inner {
+    width: 260px;
+    padding-top:0;
+}
+
+.sidebar > .nav > li {
+    border-bottom: 1px solid #CCCCCC;
+}
+.sidebar > .nav > li:last-child {
+    /*border-bottom: 1px solid #CCCCCC;*/
+}
+
+.sidebar > .nav > li > a {
+    background-image: url(../../img/droparrow-collapse.png);
+     background-repeat: no-repeat;
+    background-position: 210px 25px;
+}
+
+.sidebar > .nav > li.active > a {
+    background-image: url(../../img/droparrow.png);
+    background-repeat: no-repeat;
+    background-position: 210px 25px;
+}
+
+/*################################################*/
+
+.sidebar > .nav > li > a#lvmeng_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:21px;
+    height:20px;
+    background-image: url(../../img/nav-base/agent.png);
+}
+
+.sidebar > .nav > li.active > a#lvmeng_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:21px;
+    height:20px;
+    background-image: url(../../img/nav-base/agent_select.png);
+}
+
+.sidebar > .nav > li > a#business_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:22px;
+    height:24px;
+    background-image: url(../../img/nav-base/agent_info.png);
+}
+
+.sidebar > .nav > li.active > a#business_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:22px;
+    height:24px;
+    background-image: url(../../img/nav-base/agent_info_select.png);
+}
+
+.sidebar > .nav > li > a#employee_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:16px;
+    height:20px;
+    background-image: url(../../img/nav-base/staff_manage.png);
+}
+
+.sidebar > .nav > li.active > a#employee_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:16px;
+    height:20px;
+    background-image: url(../../img/nav-base/staff_manage_select.png);
+}
+
+.sidebar > .nav > li > a#notice_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:20px;
+    height:17px;
+    background-image: url(../../img/nav-base/agent_announcement.png);
+}
+
+.sidebar > .nav > li.active > a#notice_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:20px;
+    height:17px;
+    background-image: url(../../img/nav-base/agent_announcement_select.png);
+}
+
+.sidebar > .nav > li > a#agent_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:20px;
+    height:20px;
+    background-image: url(../../img/nav-base/staff2customer.png);
+}
+
+.sidebar > .nav > li.active > a#agent_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:20px;
+    height:20px;
+    background-image: url(../../img/nav-base/staff2customer_select.png);
+}
+
+.sidebar > .nav > li > a#product_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:21px;
+    height:15px;
+    background-image: url(../../img/nav-base/product_manage.png);
+}
+
+.sidebar > .nav > li.active > a#product_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:21px;
+    height:15px;
+    background-image: url(../../img/nav-base/product_manage_select.png);
+}
+
+.sidebar > .nav > li > a#check_work_click > .icon-img{
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:20px;
+    height:19px;
+    background-image: url(../../img/nav-base/oa.png);
+}
+
+.sidebar > .nav > li.active > a#check_work_click > .icon-img {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    width:20px;
+    height:19px;
+    background-image: url(../../img/nav-base/oa_select.png);
+}
+
+/*################################################*/
+/*二级菜单*/
+.metismenu .arrow {
+    padding-right: 20px;
+    font-size: 18px;
+    color: #999999;
+}
+
+/*三级菜单*/
+.sidebar-subnav > li > .menu3 > li.active > a {
+    color: #333333;
+}
+
+.sidebar > .nav > li > a.no-image {
+    background-image: none;
+}
+
+.sidebar > .nav > li > a, .sidebar > .nav > li > div{
+    font-size: 14px;
+    font-weight:bold;
+    height: 60px;
+    line-height:14px;
+    padding: 24px 20px 22px 64px;
+    /*background-color: #CC141C;*/
+    /*color: #FFFFFF;*/
+}
+
+.sidebar > .nav > li > a > .sub-title {
+    font-size:14px;
+}
+
+/*.sidebar > .nav > li > a.collapsed{
+    font-size: 16px;
+    font-weight:bold;
+    height: 60px;
+    line-height:16px;
+    padding: 19px 20px 19px 30px;
+    background-color: #CC141C;
+    color: #FFFFFF;
+}*/
+
+.sidebar > .nav > li > a:hover, .sidebar > .nav > li > .nav-item:hover {
+    background-color: #E5E5E5;
+    color: #999999;
+}
+
+.sidebar > .nav > li > a:focus, .sidebar > .nav > li > .nav-item:focus {
+    color: #333333;
+}
+
+.sidebar > .nav > li.active > a, .sidebar > .nav > li.open > a {
+    background-color: #E60012;
+    color: #FFFFFF;
+}
+
+.sidebar-subnav > li.active > a, .sidebar-subnav > li.active > .nav-item {
+    color: #E60012;
+}
+
+.sidebar > .nav > li > a > em{
+    /*font-size: 16px;*/
+    color: #E60012;
+}
+
+.sidebar > .nav > li > a > em{
+    width:34px;
+}
+
+.sidebar > .nav > li> a.li-active, .sidebar > .nav > li> a.li-active{
+    background-color: #CC141C;
+    color: #FFFFFF;
+}
+
+.sidebar > .nav > li> a.li-active, .sidebar > .nav > li> a.li-active > em{
+    color: #FFFFFF;
+}
+
+
+.nav > li > a > img {
+    /*width: 23px;
+    height: 25px;*/
+    position: absolute;
+    left: 30px;
+    top: 22px;
+}
+
+.sidebar-subnav > li > a, .sidebar-subnav > li > .nav-item {
+    padding: 13px 10px 13px 64px;
+    color: #999999;
+    font-size:14px;
+    height:40px;
+    line-height:15px;
+}
+
+.sidebar-subnav > li > .menu3 > li > a {
+    padding-left: 90px;
+    /*text-align: center;*/
+}
+
+.sidebar-subnav > li > a:hover, .sidebar-subnav > li > a:focus, .sidebar-subnav > li > a.hover{
+    color: #E60012;
+}
+
+
+
+@media only screen and (min-width: 768px){
+    .wrapper > .aside .aside-inner {
+        padding-top: 0;
+    }
+
+    .wrapper > section, .wrapper > footer {
+        margin-left: 260px;
+    }
+    .content-wrapper {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+  .csstransforms3d .wrapper > .aside,  .wrapper > .aside {
+    margin-left: -260px;
+  }
+  .aside-toggled .wrapper > section,
+  .aside-toggled .wrapper > footer {
+    margin-left: 260px;
+  }
+}
+
+
+/* ========================================================================
+   Component: business_list.html
+ ========================================================================== */
+
+.content-wrapper {
+    background-color:#F1F1F1;
+    padding-left:50px;
+    padding-right:20px;
+    padding-top:0;
+}
+
+.content-wrapper .breadcrumb{
+    font-size: 14px;
+    line-height:14px;
+    padding:21px 10px 17px 0;
+    background-color: #F1F1F1;
+    border-bottom:1px solid #CCCCCC;
+}
+
+.content-wrapper .breadcrumb span{
+    color: #666666;
+}
+
+.content-wrapper .breadcrumb li{
+    color: #999999;
+}
+
+.content-wrapper .breadcrumb li.active{
+    color: #CC141C;
+}
+
+.content-wrapper .breadcrumb > li + li:before {
+    color: #999999;
+    content: "> ";
+    padding: 0 5px;
+}
+.header-line {
+    height:30px;
+}
+
+.header-line h4{
+    margin:0;
+    height:30px;
+    line-height:20px;
+    padding-bottom:10px;
+    font-size:20px;
+    color: #333333;
+    float: left;
+    /*display: inline;*/
+}
+
+.btn-add, .btn-modify {
+    background-position: 20px 11px;
+    background-color: #E60012;
+    float: right;
+    width:170px;
+    height:40px;
+    border:1px solid #E60012;
+    /*text-align: center;*/
+    margin-top: -10px;
+}
+
+.btn-add {
+    background-image: url(../../img/icon-add.png);
+    background-repeat: no-repeat;
+
+}
+
+.btn-add > a, .btn-modify > a{
+    display: block;
+    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    padding-left:48px;
+    font-size: 18px;
+    line-height: 18px;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.content-table{
+    clear: both;
+}
+
+.form-inline .form-group{
+    height: 35px;
+    width: 260px;
+}
+.form-inline .form-group.div-wrap{
+    width: 250px;
+}
+
+.form-inline .form-group > .control-label{
+    padding:0;
+    padding-top:7px;
+    float: left;
+}
+
+.form-inline .form-group > .col-sm-9{
+    padding-left:5px;
+    width:176px;
+}
+
+.form-inline .form-group .form-control{
+    padding-left:10px;
+    border-radius: 0;
+}
+
+.form-inline .form-group > input[type='text']{
+    border:1px solid #999999;
+    /**/
+}
+
+.form-inline .form-group .btn-wrap {
+    padding:0;
+}
+
+.form-inline .form-group .btn-submit{
+
+    height: 31px;
+    margin-top: 3px;
+    width: 61px;
+    background-color: #E60012;
+    color: #fff;
+    border: 0;
+}
+.form-inline .form-group .btn-submit:hover{
+    background-color: #cc141c;
+}
+
+.form-inline .form-group .btn-export, .export .btn-export, .export-extra .btn-export {
+    height: 31px;
+    margin-top: 3px;
+    width: 151px;
+    background-color: #FFFFFF;
+    color: #E60012;
+    border: 1px solid #E60012;
+}
+
+.panel-body > table {
+    background-color: #FFFFFF;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #f9f9f9;
+}
+
+.panel-body > table tr th, .panel-body > table tr td {
+    color: #333333;
+}
+
+.panel-body > table tr th {
+    font-weight: bold;
+}
+
+.panel-body .table > tbody > tr > td  {
+    text-align: center;
+}
+
+.panel-body .table > tbody > tr > td > a  {
+    width: 16px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+/*.panel-body .table > tbody > tr > td.bus-name{
+    white-space: nowrap;
+    text-overflow: ellipsis;"
+    overflow: hidden;
+}*/
+.panel-body .table > tbody > tr > td.bus-address{
+    text-align: left;
+}
+
+.panel-body .nav-pagenation {
+    margin-top:30px;
+    /*height:30px;*/
+    text-align: center;
+}
+
+/*.panel-body .nav-pagenation .pagenation{
+    height: 30px;
+}*/
+
+.nav-pagenation .pagination > .active > a, .nav-pagenation .pagination > .active > span, .nav-pagenation .pagination > .active > a:hover, .nav-pagenation .pagination > .active > span:hover, .nav-pagenation .pagination > .active > a:focus, .nav-pagenation .pagination > .active > span:focus {
+    background-color: #E60012;
+    border-color: #E60012;
+    color: #FFFFFF;
+}
+
+.nav-pagenation .pagination > li > a, .nav-pagenation .pagination > li > span {
+    margin-left: 10px;
+    color: #333333;
+    height: 30px;
+    line-height:18px;
+    border-radius: 3px;
+}
+
+.nav-pagenation .pagination > li > a.disabled, .nav-pagenation .pagination > li > span.disabled {
+    background-color: #CCCCCC;
+    opacity: 1.0;
+    color: #666666;
+}
+
+.go-wrap{
+    float: left;
+    margin-left:10px;
+}
+
+.go-wrap .text-go, .go-wrap .btn-go{
+    height: 30px;
+}
+.go-wrap .text-go{
+    line-height:18px;
+    border:1px solid #CCCCCC;
+    width: 46px;
+    text-align: center;
+    margin-right:10px;
+}
+
+.go-wrap .btn-go{
+    width:56px;
+    color: #ffffff;
+    background: #E60012;
+    border:1px solid #E60012;
+    border-radius: 2px;
+}
+
+/* ========================================================================
+   Component: business_Add.html
+ ========================================================================== */
+
+.panel-body .form-group {
+    clear: both;
+    margin-bottom:10px;
+    height: 40px;
+    min-height: 40px;
+    /*height:auto!important;*/
+    /*display: table;*/
+}
+
+.panel-body .form-group #div_id_on_top, .panel-body .form-group #div_id_finished, .panel-body .form-group #div_id_ahead_end, .panel-body .form-group #div_id_structure, .panel-body .form-group #div_id_show_text {
+    margin-left:25.5%;
+}
+
+/*#div_id_show_text{
+     margin-top:-30px;
+}*/
+
+.panel-body .form-group > .control-label {
+    float: left;
+    height: 40px;
+    margin: 0;
+    line-height: 14px;
+    padding: 13px 0;
+    width: 25.5%;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.panel-body .form-group > .control-label > .asteriskField {
+    color: #E60012;
+}
+
+.panel-body .form-group > .controls {
+    float: left;
+    width: 50%;
+    /*padding: 0 20px;*/
+}
+
+.panel-body .form-group > .controls .form-control {
+    height: 40px;
+    line-height: 18px;
+    padding: 9px 20px;
+    clear: both;
+}
+
+.panel-body .form-group > .controls > .clearablefileinput {
+    height: 40px;
+    line-height: 14px;
+    padding: 13px 20px;
+}
+
+.panel-body .form-group > .controls > #div_id_note {
+    height: 420px;
+
+}
+
+.panel-body #submit-id-save {
+    clear: both;
+    margin-top:20px;
+    margin-left: 25.5%;
+}
+
+.panel-body #button-id-save {
+    clear: both;
+    margin-top:20px;
+    margin-left:2%;
+    color:red;
+}
+
+
+.panel-body #div_id_address {
+    height:75px;
+}
+
+/* ========================================================================
+   Component: business_password_change.html
+ ========================================================================== */
+.tips{
+    margin-top: 50px;
+}
+
+#pwd_form {
+    width:376px;
+    margin:10px auto;
+}
+.panel-body .form-sheet .form-control{
+    width:376px;
+    height: 50px;
+    padding:16px 20px;
+    margin-bottom: 20px;
+}
+
+.panel-body .form-sheet .form-control.btn-change-pwd{
+    background: #E60012;
+    color: #ffffff;
+    font-size:24px;
+    padding:0;
+}
+
+/* ========================================================================
+   Component: business_base_info.html
+ ========================================================================== */
+
+
+.content-panel{
+    padding:0;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin-top:20px;
+    /*background-color: #FFFFFF;*/
+}
+
+.content-panel .col-lg-6 {
+    padding: 23px 20px;
+}
+
+.content-panel .row {
+    margin:0;
+
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.content-panel .col-lg-6 .logo-label {
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.content-panel .col-lg-6 > div > img {
+    height: 100px;
+}
+
+.content-panel .form-group {
+    margin: 0;
+    padding: 5px;
+    height: 50px;
+    /*border-bottom: 1px solid #E5E5E5;*/
+}
+
+.content-wrapper .clear-flex {
+    clear: both;
+}
+
+.content-panel .form-control[disabled], .content-panel .form-control[readonly], .content-panel fieldset[disabled] .form-control {
+    background-color: #e5e5e5;
+}
+
+#show_customer .controls {
+    padding-top:13px;
+}
+
+#show_avatar {
+    padding-left: 25.5%;
+}
+
+#show_picture {
+    padding-left: 25.5%;
+    margin-bottom: 20px;
+}
+
+/* ========================================================================
+   Component: daily_todo_list.html
+ ========================================================================== */
+
+.export {
+    text-align: right;
+    margin-right: 180px;
+}
+
+.export-extra {
+    text-align: right;
+}
+
+.export .btn-export .export-extra .btn-export {
+    margin-top: 0;
+}
+
+.date-label {
+    padding-right: 15px;
+    height: 30px;
+}
+
+.separator-label{
+    padding: 0 10px;
+}
+
+#dataStart, #dataEnd, .search-txt {
+    height:30px;
+}
+
+#dataEnd, #end {
+    margin-right:50px;
+}
+
+.search-txt {
+    margin-right:20px;
+}
+
+#start {
+    margin-right:0;
+}
+
+.check-table .table-responsive > .table > thead > tr > th, .check-table .table-responsive > .table > tbody > tr > th, .check-table .table-responsive > .table > tfoot > tr > th, .check-table .table-responsive > .table > thead > tr > td, .check-table .table-responsive > .table > tbody > tr > td, .check-table .table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+}
+
+/* ========================================================================
+   Component: business_base_info.html
+ ========================================================================== */
+
+.form-group .img-left {
+    padding-left: 0;
+}
+
+.form-group .img-right {
+    text-align: right;
+    padding-right: 0;
+}
+
+.form-group .row .col img {
+    width:100px;
+}
+
+.form-group .row .col .logo-label {
+    display: inline;
+    padding-right: 20px;
+}
+
+.form-group.icon-group {
+    height:110px;
+    padding:5px 0;
+    /*border-bottom: 1px solid #E5E5E5; */
+}
+
+.icon-group .controls{
+    border:0;
+}
+
+.panel-body .form-group > .controls > .form-control.selectmultiple {
+    height:80px;
+    margin-bottom: 20px;
+}
+
+.sidebar > .nav > li.active {
+  border-left-color: #ffffff;
+}

@@ -1,0 +1,170 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>财务管理</li>
+            <li>收款查询</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>客户购买总汇</h4>
+        </div>
+
+         <div class="content-table">
+            <form action="" method="post" class="form-inline">
+                <div style="float:left;" class="search-factors">
+                    <span class="date-label">客户名:</span>
+                    <input type="text" name="customer_num" value="{{customer_num|default:''}}" class="search-txt" style="width:100px;">
+                    <span class="date-label">产品名:</span>
+                    <input type="text" name="product_name" value="{{product_name|default:''}}" class="search-txt" style="width:100px;">
+                    <span class="date-label">收款时间段:</span>
+                    <input type="text" name="start" id="start" value="{{start|default:''}}" class="search-txt" style="width:100px;">
+                    <span class="separator-label">-</span>
+                    <input type="text" name="end" id="end" value="{{end|default:''}}" class="search-txt" style="width:100px;">
+                    <span class="date-label">产品结束时间段:</span>
+                    <input type="text" name="product_start" id="product_start" value="{{product_start|default:''}}" class="search-txt" style="width:100px;">
+                    <span class="separator-label">-</span>
+                    <input type="text" name="product_end" id="product_end" value="{{product_end|default:''}}" class="search-txt" style="width:100px;">
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>购买客户姓名</th>
+                            <th>产品名</th>
+                            <th>实收金额</th>
+                            <th>收款日期</th>
+                            <th>付款方式</th>
+                            <th>产品结束日期</th>
+                            <th>添加时间</th>
+                            <th>录入人</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for real_purchase in real_purchases %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a class="customer_check" href="/erp/check/?id={{ real_purchase.id }}&type=income_real_purchase#income_real_purchase" title="点击查看">{{ real_purchase.customer }}</a></td>
+                                <td>{{ real_purchase.product }}</td>
+                                <td style="color:green;">{{ real_purchase.amount }}</td>
+                                <td>{{ real_purchase.income_date|date_str }}</td>
+                                <td>{{ real_purchase.get_pay_type_display }}</td>
+                                <td>{{ real_purchase.end_date|date_str }}</td>
+                                <td>{{ real_purchase.register_time|date_str }}</td>
+                                <td>{{ real_purchase.real_agent }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div style="text-align: right;">
+                    购买总金额：
+                    <input id="input_sum" style="color:green;" type="text" value="{{per_sum|default:''}}"><br/>
+                    <span style="color:#029AE5;font-size:20px;" id="span_sum"></span>
+                </div>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if real_purchases.has_previous %}
+                                <a href="?page={{ real_purchases.previous_page_number }}#income_inquiry">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p real_purchases.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#income_inquiry" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if real_purchases.has_next %}
+                                <a href="?page={{ real_purchases.next_page_number }}#income_inquiry">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{real_purchases.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    laydate({
+                elem: '#start'
+             });
+     laydate({
+        elem: '#end'
+     });
+
+     laydate({
+                elem: '#product_start'
+             });
+     laydate({
+        elem: '#product_end'
+     });
+
+    $(function(){
+        var str = $("#input_sum").val();
+        if(str){
+            $("#span_sum").html(intToChinese(str));
+        }
+    });
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "api/base.html" %}
+{% block content %}
+      <div class="block-center mt-xl wd-xl">
+         <!-- START panel-->
+         <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center" style="font-size:16px; text-align: center">
+                <div style="display:inline; float:left;"><a href="#" onclick="window.location.href='http://' + window.location.host+'/api/url_agent/'+'?v='+Math.random()+ '&' + window.location.search.substr(1);" style="color:white;">&larr;</a></div>
+{#                <div style="display:inline; float:left; background-color: transparent;"><input type="button" onClick="window.history.back()" value="&larr;" style="background-color:transparent; color:white; "></div>#}
+                <div style="display:inline; ">牛基队新用户注册</div>
+            </div>
+            <div class="panel-body">
+
+               <div class="col-lg-12 panel-body">
+                   <form id="register-form" action="#" method="post" role="form">
+                       {% csrf_token %}
+
+                       <div class="form-group">
+                           <p id="error" class="text-danger">{{ error }}</p>
+                       </div>
+
+                       <div class="form-group has-feedback">
+{#                       <input type="text" placeholder="用户名" required class="form-control" name="name" value="{{ invitation_code }}" >#}
+                           <input type="text" placeholder="姓名" required class="form-control" name="name" value="{{ data.name }}">
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           <div class="input-group has-feedback">
+                               <input id="phoneNum" type="text" placeholder="手机号" required class="form-control" name="phoneNum" value="{{ data.phoneNum }}">
+                               <div class="input-group-btn" >
+                                   <button id="get_code" type="button" class="btn btn-block btn-green " onclick="get_verification_code()">获取验证码</button>
+                               </div>
+                           </div>
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           <input type="text" placeholder="验证码" required class="form-control" name="verification_code" value="{{ data.verification_code }}">
+                       </div>
+
+{#                       <div class="form-group has-feedback">#}
+{#                           <input type="text" placeholder="身份证号码" required class="form-control" name="idCard_num" value="{{ data.idCard_num }}">#}
+{#                       </div>#}
+
+                       <div class="form-group has-feedback">
+                           <input id="password1" type="password" placeholder="密码" required class="form-control" name="password1" >
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           <input id="password2" type="password" placeholder="请再次输入密码" required class="form-control" name="password2" >
+                       </div>
+
+                       <div class="form-group has-feedback">
+                           {{ form.captcha }}
+                       </div>
+
+                       <button id="register" type="submit" class="btn btn-block btn-primary mt-lg">免费注册</button>
+                   </form>
+               </div>
+            </div>
+         </div>
+         <!-- END panel-->
+{#         <div class="p-lg text-center">#}
+{#            <span>&copy;</span>#}
+{#            <span>2016</span>#}
+{#            <span>-</span>#}
+{#            <span>Lvmeng Information Technology</span>#}
+{#            <br>#}
+{#            <span>Corporation Management System</span>#}
+{#         </div>#}
+      </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var api_host = window.location.host
+
+    var InterValObj; //timer变量，控制时间
+    var count = 120; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    /**
+	 * 获取验证码
+	 */
+	function get_verification_code(){
+        //向后台发送处理数据
+        var phoneNum = $('#phoneNum').val();
+		var url = 'http://' + api_host + '/api/verification/?purpose=register&phone_number=' + phoneNum;
+        $.ajax({
+            url: url,
+            success: function(data) {
+                var status = data["status"];
+                var message = data["message"];
+                if (status) {
+                    curCount = count;
+　　                //设置button效果，开始计时
+                    $("#get_code").attr("disabled", "true");
+                    $("#get_code").html("重新获取" + curCount);
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                } else {
+                    $('#error').html("*" + message);
+                }
+            },
+            error: function(){
+                $('#error').html("*网络错误，请重试！");
+            }
+        });
+	}
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {18701789653
+            window.clearInterval(InterValObj);//停止计时器
+            $("#get_code").removeAttr("disabled");//启用按钮
+            $("#get_code").html("重新发送");
+        }
+        else {
+            curCount--;
+            $("#get_code").html("重新获取" + curCount);
+        }
+    }
+
+    //点击验证码图片进行刷新
+    $(function() {
+        $('img.captcha').after(
+                $('<a href="#void" class="captcha-refresh">Refresh</a>')
+                );
+
+        // Click-handler for the refresh-link
+        $('img.captcha').click(function(){
+            var $form = $(this).parents('form');
+            var url = location.protocol + "//" + window.location.hostname + ":"
+                      + location.port + "/captcha/refresh/";
+
+            // Make the AJAX-call
+            $.getJSON(url, {}, function(json) {
+                $form.find('input[name="captcha_0"]').val(json.key);
+                $form.find('img.captcha').attr('src', json.image_url);
+            });
+
+            return false;
+        });
+    });
+</script>
+{% endblock %}

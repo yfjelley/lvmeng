@@ -1,0 +1,21 @@
+th{text-align:center;height:40px;font-weight:normal;}
+.nav-heading span{color:red;}
+
+
+#div_id_agents .controls {width:800px;}
+/*.checkbox{float:left;width:300px;}
+.checkbox{margin-top:-5px;margin-left:50px;margin-right:30px;}*/
+#div_id_business,#div_id_name,#div_id_apply_topic,#div_id_leave_type,#div_id_travel_reason,#div_id_strategy,#div_id_avatar,#div_id_compensation,#show_avatar,#div_id_topic,#div_id_return_expected{clear:both;}
+
+/*#div_id_show_text{width:500px;}*/
+
+/*#paginator {height:30px;!*background:#B4B397;*!margin-top:50px;!*position:relative;*!}*/
+#table_alert {height:40px;position:relative;margin-top:-1px;font-size:20px;color:black;}
+.page {float:left;font-size:20px;margin-left:30px;margin-top:4px;}
+.current {background:#E60012; width:26px; height:26px; display:block; text-align:center; border-radius:2px;
+    color: #FFFFFF;}
+.pagehead {margin-left:20%;}
+.page input {border-radius:5px;}
+.page .jumpPage {width:30px;height:30px;text-align:center;}
+.page input .jump {width:60px;height:30px;text-align:center;}
+.page a:hover {color:#F11634;}

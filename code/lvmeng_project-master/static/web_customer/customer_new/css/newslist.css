@@ -1,0 +1,47 @@
+body,html{font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;}
+#newslist {background: #F1F1F1;}
+.newslist_nav {background: #E5E5E5;
+                margin-left: -15px;
+                margin-right: -15px;
+}
+.newslist_nav p{color: #e60012;
+                font-size: 18px;
+                line-height: 80px;
+                padding-left: 100px;
+                margin-top: -80px;
+}
+.newslist_left {background:#666666;
+                margin-left: -30px;
+                margin-right: -10px;
+                height: 160px;
+                border-bottom: solid 1px white;
+}
+.newslist_mark {text-align: center;margin-top: -10px;}
+.newslist_mark img {max-width: 100%;}
+.newslist_day {font-size: 50px;
+                color:#CCCCCC;
+                text-align: center;
+}
+.newslist_month{font-size: 20px;
+                color: #999999;
+                text-align: center;
+}
+.newslist_title a {font-size: 20px;
+                    color: #666666;
+                    text-decoration: none;
+                    font-weight: bold;
+}
+.newslist_title a:hover {color: #E60012;}
+
+.newslist_word {font-size: 14px;
+                color: #666666;
+                line-height:25px;
+                max-height: 55px;
+                overflow: hidden;
+}
+.media-bottom a{color:#e60012;
+                text-decoration: none;
+                font-size: 14px;
+}
+.media-bottom a:hover {color: #000000;}
+

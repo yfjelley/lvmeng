@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <title>鲁证资管</title>
+
+        <link href="{% static "light_blue/css/application.css" %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static "agle/app/img/luzheng_logo_single.png" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+{#    defaul webkit#}
+    <link type="text/css" rel="stylesheet" href="{% static "light_blue/custom_css/luzheng.css" %}" id="maincss">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <script>
+    //alert before everythin if broswer is not correct
+    function isIE () {
+      var myNav = navigator.userAgent.toLowerCase();
+      return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+    }
+
+    if (isIE () && isIE () < 9) {
+        alert('IE版本过低，本应用只支持IE9以上或者其他类型的浏览器')
+     // is IE version less than 9
+    } else {
+     // is IE 9 and later or not IE
+    }
+    </script>
+
+</head>
+<body class="background-dark">
+        <div class="single-widget-container">
+            <section class="widget login-widget">
+                <header class="text-align-center">
+                    <h3>鲁证期货 资产管理</h3>
+                </header>
+                <div class="body">
+                    <form role="form" data-parsley-validate="" novalidate="" class="mb-lg" action="{{ app_path }}"
+                          method="post" id="login-form">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="email" >用户名</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                <input id="username" type="username" class="form-control input-lg input-transparent"
+                                       placeholder="用户名" name="username" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" >密码</label>
+
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                <input id="password" type="password" class="form-control input-lg input-transparent"
+                                       placeholder="密码" name="password">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-block btn-lg btn-inverse">
+                                <span class="small-circle"><i class="fa fa-caret-right"></i></span>
+                                <small>登陆</small>
+                            </button>
+                            <br/>
+{#                            <a class="forgot" href="#">Forgot Username or Password?</a>#}
+                        </div>
+                    </form>
+                </div>
+                <footer>
+{#                    <div class="facebook-login">#}
+{#                        <a href="index.html"><span><i class="fa fa-facebook-square fa-lg"></i> LogIn with Facebook</span></a>#}
+{#                    </div>#}
+                </footer>
+            </section>
+        </div>
+<!-- common libraries. required for every page-->
+<script src="{% static "light_blue/lib/jquery/dist/jquery.min.js" %}"></script>
+<script src="{% static "light_blue/lib/jquery-pjax/jquery.pjax.js" %}"></script>
+<script src="{% static "light_blue/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js" %}"></script>
+<script src="{% static "light_blue/lib/widgster/widgster.js" %}"></script>
+<script src="{% static "light_blue/lib/underscore/underscore.js" %}"></script>
+
+<!-- common application js -->
+<script src="{% static "light_blue/js/app.js" %}"></script>
+<script src="{% static "light_blue/js/settings.js" %}"></script>
+
+    <!-- page specific scripts -->
+<script>
+
+</script>
+
+</body>
+</html>

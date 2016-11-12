@@ -1,0 +1,129 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">金融头条列表</li>
+            <li>金融头条列表</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>金融头条列表</h4>
+        </div>
+
+        <div class="btn-add">
+            <a href="/erp/headline_add_modify#financial_headlines">新增金融头条</a>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>简图</th>
+                            <th>内容</th>
+                            <th>添加时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for headline in headlines %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a  class="headline_check" href="/erp/check/?id={{ headline.id }}&type=headline#financial_headlines" title="点击查看">{{ headline.title }}</a></td>
+                            <td><img style="width:50px;height:50px;" src="{{ headline.picture|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/></td>
+                            <td class="fin_con">{{ headline.context|safe|truncatechars:100|lv_announce_cut }}</td>
+                            <td>{{ headline.register_date|date_str }}</td>
+
+                            <td>
+                                <a class="headline_modify" href="/erp/headline_add_modify/?headline_id={{headline.id}}#financial_headlines" title="点击修改金融头条"><img src="/static/img/icon-edit.png"></a>
+                                <a class="headline_delete" style="color:red" href="/erp/financial_headlines/?headline_id={{headline.id}}" onclick="if(confirm('确定删除该金融头条吗？')==false)return false;"><img src="/static/img/icon-delete.png"></a>
+                                <!--<a class="headline_delete" style="color:red" href="/erp/financial_headlines/?headline_id={{headline.id}}"><img src="/static/img/icon-delete.png"></a>-->
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if headlines.has_previous %}
+                                <a href="?page={{ headlines.previous_page_number }}#financial_headlines">&lt; 上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p headlines.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#financial_headlines" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if headlines.has_next %}
+                                <a href="?page={{ headlines.next_page_number }}#financial_headlines">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+
+                        {% else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{headlines.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}

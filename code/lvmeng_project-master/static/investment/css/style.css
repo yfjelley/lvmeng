@@ -1,0 +1,868 @@
+/** 
+* Project : trjproject 
+* Author : engine9012 
+* Updated : Tue Aug 16 2016 17:55:49 
+*/ 
+
+@charset "UTF-8";
+/* 精简后的Reset样式:适用于桌面项目 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+  margin: 0;
+  padding: 0; }
+
+body, button, input, select, textarea {
+  font-size: 12px;
+  font-family: "microsoft yahei";
+  font-weight: normal;
+  color: #999; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%; }
+
+html {
+  _background-image: url(about:blank);
+  _background-attachment: fixed; }
+
+em, i {
+  font-style: normal; }
+
+ul, ol {
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  color: #333;
+  outline: 0;
+  _blr: expression(this.onFocus=this.blur()); }
+
+a:hover {
+  color: #E60012;
+  text-decoration: none; }
+
+fieldset, img {
+  border: 0; }
+
+button, input, select, textarea {
+  font-size: 100%; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+.center{text-align: center}
+.fl{float: left;}
+.fr{float: right;}
+  .blue{color: #0092E6;}
+  .gray{color: #666666}
+  .re{color: #E60012}
+ .tr{text-align: right;}
+ .tl{text-align: left;}
+/* 此处可以自定义设置Sass的变量 */
+/* Sass基础样式 */
+/*===========================================================
+           INDEX.HTML
+=============================================================*/
+/*body {
+  background: #eeeeee;
+}*/
+  .contain {
+    width:1190px;
+    margin: auto auto;
+  }
+
+  .toolsbar {
+    width: 100%;
+    background-color: #F1F1F1;
+    height: 30px; }
+  .toolsbar #toolsbar {
+    width:1190px;
+    margin: auto auto;
+    font-size: 14px; 
+  }
+  .toolsbar #toolsbar .tb-left {
+      display: inline-block; }
+  .toolsbar #toolsbar .tb-left span {
+      line-height: 30px;
+      vertical-align: middle; 
+  }
+  .toolsbar #toolsbar .tb-left span:first-child {
+      font-size: 14px;
+      color: #333333; 
+  }
+  .toolsbar #toolsbar .tb-left span:last-child {
+        font-size: 18px;
+        color: #E60012;
+        opacity: 0.8;
+        margin-left: 9px; }
+  .toolsbar #toolsbar .tb-right {
+        float: right; }
+  .toolsbar #toolsbar .tb-right .btn-invest-recruit {
+        display: block;
+        height: 20px;
+        background-color: #E60012;
+        width: 100px;
+        text-align: center;
+        margin: 5px;
+        margin-left: 20px;
+        color: #FFF;
+        line-height: 20px;
+        font-size: 13px;
+        border-radius: 3px; }
+  .toolsbar #toolsbar .tb-right .btn-invest-recruit:hover, .toolsbar #toolsbar .tb-right .btn-invest-recruit:focus {
+        background-color: #cc141c;
+        text-decoration: none; }
+  .toolsbar #toolsbar .tb-right .my-account {
+        color: #333333;
+        text-decoration: none;
+        display: block;
+        margin: 5px; }
+  .toolsbar #toolsbar .tb-right .my-account:hover, .toolsbar #toolsbar .tb-right .my-account:focus {
+        color: #E60012; }
+
+.navbar {
+  height: 60px;
+  width: 100%;
+  background: #FFFFFF; }
+  .navbar .contain {
+    width: 1190px;
+    margin: 0 auto;
+    font-size: 16px; }
+    .navbar .contain .navbar-logo {
+      float: left;
+      margin: 10px 0 0;
+      padding-right: 15px;
+      border-right: 1px solid #A0A0A0; }
+    .navbar .contain .trj-title {
+      float: left;
+      height: 40px;
+      margin: 10px 0 0; }
+      .navbar .contain .trj-title span {
+        margin-left: 10px;
+        font-size: 13px; }
+    .navbar .contain ul {
+      float: right; }
+      .navbar .contain ul li {
+        float: left;
+        height: 60px;
+        margin-left: 35px;
+        line-height: 60px; }
+
+main .ads-content {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1; }
+main .carousel-inner > .item > img, main .carousel-inner > .item > a > img {
+  height: 400px; }
+main .login-wrap {
+  position: relative;
+  z-index: 10;
+  width:1920px;
+  min-width:1920px;
+  margin-left: auto;
+  margin-right: auto; }
+  main .login-wrap .login {
+    position: absolute;
+    right:365px;
+    top: 50px;
+    width: 280px;
+    height: 260px;
+    background: #FFFFFF;
+    opacity: 0.4; 
+    z-index: 200;
+  }
+    main .login-wrap .login .login-header {
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      color: #333333; }
+    main .login-wrap .login .login-form {
+      padding: 10px 30px 0; }
+      main .login-wrap .login .login-form .form-group > .form-control, main .login-wrap .login .login-form .login-forget > a, main .login-wrap .login .login-form .checkbox-inline > label > .remember-me {
+        color: #999; }
+      main .login-wrap .login .login-form .login-forget {
+        float: right; }
+        main .login-wrap .login .login-form .login-forget a:hover {
+          color: #E60012; }
+      main .login-wrap .login .login-form .btn-login {
+        width: 100%;
+        margin-top: 10px;
+        background-color: #E60012;
+        color: #FFFFFF; }
+      main .login-wrap .login .login-form .btn-register {
+        float: right;
+        margin-top: 10px;
+        color: #999; }
+.find-tab {
+  width: 821px;
+  height: 336px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  /*border: 1px solid #DDDDDD;*/
+  background-color: #FFFFFF; }
+ .find-tab .tabbar {
+    height: 50px;
+    width: 100%;
+    background: #F5F5F5;
+    display: -webkit-flex;
+    display: flex;
+  }
+.find-tab .tabbar .find-group a  {
+    padding: 0;
+    border:0;
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+  }
+.find-tab .input-group input{
+    width: 720px;
+    height: 41px;
+    border:1px solid #E60012;
+    border-radius: 0;
+    font-size: 14px;
+}
+.find-tab .input-group span{
+    width:101px;
+    height: 41px;
+    border-radius: 0;
+    background-color: #E60012;
+    font-size: 14px;
+    color: #fff;
+} 
+.find-tab .big-tab{
+    border:1px solid #DDDDDD;
+    height:276px;
+    margin-top:18px; 
+}
+.find-tab .tabbar .find-group {
+      flex: 1;
+      text-align: center;
+      border: 1px solid #DDDDDD;
+      font-size: 18px;
+      padding: 0 0;
+      line-height: 20px;
+      color: #333333; }
+ .find-tab .tabbar .active {
+      background: #FFFFFF;
+      border: none;
+      border-top: 1px solid #E60012; }
+.tab-content table{
+  width: 800px;
+  height: 176px;
+  text-align: center;
+  margin-right:20px;
+}
+.tab-content table .tab-1{
+  width: 100%;
+  height: 70px;
+  font-weight:bold;
+  color: #333;
+  font-size: 14px; 
+}
+.tab-content table tr td {
+  width:120px;     
+}
+.tab-content table tr td a{
+  font-size:14px;
+  color: #666;
+}
+.tab-content table tr .td1 {
+  width:200px;
+}
+.tab-content .tab-p{
+  width:821px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+.tab-content .tab-p .tab-span a{
+  display: inline-block;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  background-color:#0092E6;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+
+
+
+
+.case-succ {
+  width: 351px;
+  height: 336px;
+  float: right;
+  border: 1px solid #DDDDDD;
+  background-color: #FFFFFF; }
+.case-succ .items{
+   height: 75px;
+   line-height: 75px; 
+   text-align: center;
+}
+.case-succ .items .items-time{
+   font-size: 14px;
+   color: #666;
+}
+.case-succ .items .items-time span{
+   border:1px solid   #ddd;
+   display:inline-block;
+   width:25px;
+   height:37px;
+   line-height: 37px;
+   margin-left: 3px;
+   font-weight: bold;
+   font-size: 30px;
+   color: #E60012;
+}
+.case-succ .report{
+   width: 56px;
+   height: 14px;
+   line-height: 14px;
+   margin-left: 31px;
+   margin-top: 10px;
+   font-size: 14px;
+} 
+ .case-succ .case-succ-img{
+   width:309px;
+   height: 159px;
+   margin-left: 21px;
+   margin-top: 27px;
+}
+ .case-succ .case-succ-img img{
+   width: 100%;
+   height: 100%;
+}
+.case-succ .case-succ-wen{
+   height: 33px;
+   line-height: 33px;
+   font-size: 12px;
+   color: #666;
+   text-align: center;
+   border: 1px solid transparent;
+   border-top-color:#e5e5e5; 
+   margin-top: 17px;
+}
+main .case-succ .case-succ-img #myCarousel a{
+  height: 159px;
+  line-height: 159px;
+} 
+
+.content{
+  width: 1190px;
+  height: auto;
+  margin:auto auto;
+  padding: 0;
+}
+/*精选资金*/
+.content .Selected-funds{
+  width: 100%;
+  height: 390px;
+  border: 1px solid #ddd;
+}
+ .content .Selected-funds-wen{
+   height:19px;
+   line-height: 19px;
+   margin-top: 41px;
+   margin-bottom: 19px;
+   font-size: 18px;
+   font-weight: bold;
+ }
+ .content .Selected-funds-wen img{
+  height: 19px;
+  width: 19px;
+  vertical-align: middle;
+ }
+ .content .Selected-funds .stock{
+   width: 351px;
+   height: auto;
+   margin-top: 21px;
+   margin-left: 25px;
+   margin-right:46px;
+   /*float:left;*/
+ }
+ .content .Selected-funds .rights{
+  width: 350px;
+  height: auto;
+  margin-top: 20px;
+  margin-right: 45px;
+ }
+  .content .Selected-funds .lease{
+    width: 370px;
+    height: auto;
+  }
+  .content .Selected-funds .rights tbody > tr > td{
+    border-top: none;
+  }
+ .content .Selected-funds .stock .stock-title{
+   margin-top: 20px;
+ } 
+  .content .Selected-funds .stock .stock-title .fl-color{
+    border-bottom:2px solid #E60012;
+    width:80px;  
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
+  .content .Selected-funds .stock .table tbody > tr > td{
+    border-top: none;
+  }
+  .content .Selected-funds .stock .table{ 
+    height: 140px;
+    width: 355px;
+  }
+  .content .Selected-funds .rights .rights-title{
+   margin-top: 20px;
+ } 
+  .content .Selected-funds .rights .rights-title .fl-color{
+    border-bottom:2px solid #E60012;
+    width:80px;  
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
+  .content .Selected-funds .rights .table{
+    height: 140px;
+    width: 355px;
+    border-top: none;
+  }
+
+ .content .Selected-funds .lease{
+  padding:0;
+  width: 370px;
+  height: 390px;
+  background-image:url(../img/other.png); 
+  background-repeat:no-repeat;
+  position: relative;left:3px;top:0;
+  z-index:100;
+ } 
+  .content .Selected-funds .lease .other-tou{
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 70px;
+    margin-left: 124px;
+    overflow: hidden;
+  }
+  .content .Selected-funds .lease .other-tou p{
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    color: #fff;
+
+  }
+  .content .Selected-funds .lease .other-line{
+    width:300px;
+    height:2px;
+    background-color:#E60012;
+    margin-left:40px;
+    margin-top:18px;
+  }
+  .content .Selected-funds .lease .other-many{
+     width: 80px;
+     height:30px;
+     line-height: 30px;
+     background-color: #fff;
+     margin-left: 145px;
+     border-radius: 2px;
+     margin-top: 30px;
+
+  }
+  .content .Selected-funds .lease .other-meng{
+    width:369px;
+    height: 50px;
+    line-height:50px;
+    background-color:rgba(0,0,0,0.4);
+    position: absolute;bottom:1px;left:0px;
+  }
+  .content .Selected-funds .lease .other-meng p{
+    font-size: 14px;
+    color: #fff;
+  }
+
+
+  .content .project{
+    width: 1190px;
+    height: 765px;
+    margin-top: 20px;
+    border:1px solid #e5e5e5;
+  }
+
+  .content .project .pro-big{
+    width: 100%;
+    height: auto; 
+  } 
+  .content .project .pro-big .pro-two{
+    width: 350px;
+    height:365px;
+    margin-top: 20px;
+    margin-left: 25px;
+  }
+   .content .project .pro-big .pro-two img{
+    width: 350px;
+    height: 140px;
+  }
+  .content .project .pro-big .pro-two .information {
+    width: 350px;
+    height:auto;
+  }
+  .content .project .pro-big .pro-two .information .stock-title{
+    width:290px;
+    margin: auto auto;
+    height:auto; 
+    margin-top: 30px;
+  } 
+  .content .project .pro-big .pro-two .information .stock-title .fl-color{
+    border-bottom:2px solid #E60012;
+    width:85px;  
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .content .project .pro-big .pro-two .information .table{
+    height:130px;
+    width:290px;
+    font-size: 14px;
+    margin:auto auto;
+    margin-top: 20px;
+  }
+  .content .project .pro-big .pro-two .pro-meng{
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  .content .project .pro-big .pro-two .pro-meng .meng{
+    width: 350px;
+    height: 40px;
+    line-height:40px;
+    font-size: 14px;
+    color: #fff;  
+    background-color:rgba(0,0,0,0.4);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  .content .project .pro-big .pro-two .information .table > tbody > tr > td{
+    border-top: none;
+    padding: 0;
+    height: 26px;
+    line-height: 26px;
+  }
+  .content .project .pro-big .two-1{
+    margin-left: 45px;
+  }
+  .content .choose{
+    width:1190px;
+    height: auto;
+    margin-top: 20px;
+  }
+  .content .choose .choose-big {
+    height: 270px;
+    width: 590px;
+  }
+  .content .choose .choose-big-two{
+    margin-left:10px;
+  }
+  .content .choose .choose-big .choose-1{
+    width: 200px;
+    height: 270px;
+    background-image:url(../img/plate.png);
+    background-repeat: no-repeat;
+    margin-top: 1px;
+  }
+  .content .choose .choose-big .coin{
+    width: 200px;
+    height: 270px;
+    background-image:url(../img/coin.png);
+    background-repeat: no-repeat;
+    margin-top: 1px;
+  }
+  .content .choose .choose-big .front{
+    width: 200px;
+    height: 270px;
+    background-image:url(../img/front.png);
+    background-repeat: no-repeat;
+    margin-top: 1px;
+  }
+  .content .choose .choose-big .else{
+    width: 200px;
+    height: 270px;
+    background-image:url(../img/else.png);
+    background-repeat: no-repeat;
+    margin-top: 1px;
+  }
+  .content .choose .choose-big .choose-1 p{
+    width: 200px;
+    height: 30px;
+    line-height:30px;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 60px;
+    font-size:30px;
+  }
+  .content .choose .choose-big .choose-1 .many{
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 90px;
+    margin-left: 60px;
+  }
+   .content .choose .choose-big .choose-1 .many a{
+     display: block;
+     height: 100%;
+     width: 100%;
+     background-color: #fff;
+     color: #333;
+     font-size: 14px;
+   }
+  .content .choose .choose-big .choose-2{
+    width: 390px;
+    height: 270px;
+    border:1px solid #e5e5e5;
+    border-left-color: transparent;
+  }
+  .content .choose .choose-big .choose-2 .ch-one{
+    width:350px;
+    height:89px;
+    margin: auto auto;
+    border:1px dashed transparent;
+    border-bottom-color:#999;   
+  }
+  .content .choose .choose-big .choose-2 .ch-one .wall{
+    height: 16px;
+    line-height: 16px;
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    margin-top: 12px;
+  }
+  .content .choose .choose-big .choose-2 .ch-two .wall-1,.content .choose .choose-big .choose-2 .ch-three .wall-1{
+    height: 16px;
+    line-height: 16px;
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    margin-top: 12px;
+  }
+  .content .choose .choose-big .choose-2 .row .col-md-4 .percent{
+    width: 100%;
+    height: 31px;
+    line-height: 31px;
+    font-size: 20px;
+    color:#333;
+  }
+  .content .choose .choose-big .choose-2 .row .col-md-4 .reed{
+    color:#E60012; 
+  }
+  .content .choose .choose-big .choose-2 .row .col-md-4 .yield{
+    width: 100%;
+    height:30px;
+    font-size:14px; 
+  }
+   .content .choose .choose-big .choose-2 .ch-two{
+    width: 350px;
+    height:89px;
+    margin: auto auto;
+    border:1px dashed transparent;
+    border-bottom-color:#999; 
+  }
+   .content .choose .choose-big .choose-2 .ch-three{
+    width: 350px;
+    height:90px;
+    margin: auto auto;
+  }
+
+ .link {
+  background: #F5F5F5; }
+  .link .contain {
+    width: 1190px;
+    height: 115px;
+    margin: 0 auto; }
+    .link .contain .link-title {
+      padding: 10px 0;
+      font-size: 14px;
+      color: #333; }
+    .link .contain .link-info {
+      padding: 0 20px; }
+      .link .contain .link-info a {
+        margin-right: 10px;
+        white-space: nowrap;
+        color: #666;
+        display: inline-block;
+        padding: 5px 0; }
+
+         /*脚部*/
+.footer-bar {
+  background: #333333;
+  height: 270px; }
+  .footer-bar .contain {
+    display: -webkit-flex;
+    display: flex; }
+  .footer-bar .help-group {
+    flex: 1;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    text-align: center; }
+    .footer-bar .help-group h2 {
+      color: #CCCCCC;
+      font-weight: 500; }
+    .footer-bar .help-group p {
+      padding-top: 20px; }
+      .footer-bar .help-group p a {
+        color: #999999; }
+      .footer-bar .help-group p .service-call {
+        font-size: 16px;
+        font-weight: 500; }
+    .footer-bar .help-group img {
+      padding-top: 20px; }
+  .footer-bar .help-group:first-child {
+    text-align: left; }
+  .footer-bar .help-group:last-child {
+    text-align: right; }
+  .footer-bar .copyright {
+    border-top: 1px solid #FFFFFF; }
+    .footer-bar .copyright p {
+      text-align: center;
+      margin-top: 20px; }
+
+/* 针对不同分辨率的适配可以根据需求自定义 */
+@media only screen and (min-width: 481px) {
+  /* 适配480分辨率 */ }
+
+/*# sourceMappingURL=style.css.map */
+
+/*找资金*/
+.content .all{
+  width:100%;
+  height: auto;
+  border:1px solid #ddd;
+  background-color: #fff;
+}
+.content .all table{
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  
+}
+.content .all table tbody tr td a{
+  color: #666;
+}
+.content .all table caption{
+  padding: 10px 0;
+  background-color: #f1f1f1; 
+}
+.content .all table > tbody > tr > td{
+  border-top: none;
+  padding: 10px 0;
+}
+.content .all table caption{
+  color: #333;
+}
+.content .all table caption .input-group{
+  width: 25%;
+  padding: 0
+}
+.content .all table caption .input-group .form-control{
+  height: 30px;
+  padding: 0;
+  font-size: 14px;
+  padding: 5px;
+}
+.content .all table caption .input-group .btn-primary{
+  background-color: #333;
+  color: #fff
+}
+.content .old {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: 20px;
+}
+.content .old .col-8{
+  height:auto;
+  padding: 0
+}
+.content .old .col-4{
+  height:auto;
+  padding: 0;
+}
+.content .old .col-8 .find-tab{
+  margin-top: 0;
+  margin-left:0;
+  width: 100%;
+}
+.content .old .col-8 .find-tab .big-tab{
+  margin-top: 0;
+  margin-left:0;
+}
+.content .old .col-8 .find-tab .big-tab .tab-content #home .col-l caption{
+  padding:10px 0;
+  width: 100%;
+  height: auto;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+}
+.content .old .col-8 .find-tab .big-tab .tab-content #home .col-l .re{
+  font-size: 18px;
+}
+.content .old .col-8 .find-tab .big-tab .tab-content #home .col-l table{
+  width: 100%;
+  height:100%;
+}
+.content .old .col-8 .find-tab .big-tab .tab-content #home .col-l table tr td{
+  padding: 10px 0;
+}
+.content .old .col-8 .find-tab .big-tab .tab-content #home .col-r{
+  height: 100%;
+  border:1px solid #333;
+}
+.content .old .col-8 .find-tab .big-tab .tab-content #home .col-r .xiansheng .xian p:first-child{
+    color: #333;
+    font-size: 14px;
+}
+.content .old .col-4 .Selected-funds-wen{
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  margin:0;
+  color: #333;
+}
+.content .old .col-4 p span{
+  width: 95%;
+  margin-left: 5%;
+}
+.content .old .col-4 .colr{
+  width: 95%;
+  margin-left:5%;
+  border:1px solid #ddd;
+}
+.content .old .col-4 .colr .colr-1 .col-big{
+  width:100%;
+  height: auto;
+  border-bottom: 1px dashed #ddd;
+}
+.content .old .col-4 .colr-1 div:first-child img{
+  width:90%;
+  margin:5%;
+}
+.content .old .col-4 .colr-1 div:last-child{
+  width: 90%;
+  position: relative;
+}
+.content .old .col-4 .colr-1 div:last-child p{
+  width: 90%;
+  margin-left:10%;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.content .old .col-4 .colr-1 div:last-child .col-4-te{
+  color: #333;
+}
+
+
+
+
+

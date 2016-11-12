@@ -1,0 +1,143 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">机构公告(面向客户)</li>
+            <li>查看机构公告信息</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>机构公告列表(会展示在APP首页)</h4>
+        </div>
+        {% load detail_deal %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="row content-table">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                        <th>机构名称</th>
+                        <th>图片</th>
+                        <th>标题</th>
+                        <th>展示顺序</th>
+                        <th>添加时间</th>
+                        <th>状态</th>
+                        {% if 'auth.business_announcement_out' in permissions and not request.user.is_superuser%}
+                            <!--{% comment %}<th style="color:#04A1DC;">修改</th>-->
+                            <!--<th style="color:red;">删除</th>{% endcomment %}-->
+                            <th>操作</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for announcement in announcements %}
+                        <tr>
+                            <td>{{ announcement.announce_business }}</td>
+                            <td>
+                                    <img style="width:100px;height:50px;" src="{{ announcement.picture|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                            </td>
+
+                            <td><a class="announcement_check" href="/erp/check/?id={{ announcement.id }}&type=announcement#business_announcement_list" title="点击查看">{{ announcement.title }}</a></td>
+
+                            <td>{{ announcement.order }}</td>
+                            <td>{{ announcement.date|date_str }}</td>
+                            {% if announcement.id in read %}
+
+                                <td style="">已读</td>
+                            {% else %}
+                                <td style="color:#04A1DC;">未读</td>
+                            {% endif %}
+                            {% if 'auth.business_announcement_out' in permissions and not request.user.is_superuser%}
+                                <td>
+                                     <a class="announcement_modify" href="/erp/picture_logos/?announce_id={{announcement.id}}#business_announcement_list" title="点击修改机构图片信息">
+                                         <img src="/static/img/icon-edit.png">
+                                     </a>
+                                    <a href="/erp/business_announcement_list/?announce_id={{announcement.id}}#business_announcement_list" title="点击删除机构图片信息" onclick="if(confirm('确定删除该机构图片信息吗？')==false)return false;">
+                                        <img src="/static/img/icon-delete.png">
+                                    </a>
+                                    <!--<a class="announcement_delete" href="/erp/business_announcement_list/?announce_id={{announcement.id}}#business_announcement_list" title="点击删除机构图片信息">-->
+                                        <!--<img src="/static/img/icon-delete.png">-->
+                                    <!--</a>-->
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if announcements.has_previous %}
+                                <a href="?page={{ announcements.previous_page_number }}#business_announcement_list">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p announcements.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#business_announcement_list" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if announcements.has_next %}
+                                <a href="?page={{ announcements.next_page_number }}#business_announcement_list">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{announcements.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}

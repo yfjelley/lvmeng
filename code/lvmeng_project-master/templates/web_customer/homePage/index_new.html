@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>牛基队</title>
+    <link rel="stylesheet" href="/static/new_vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/new_css/main.css">
+    <link href="/static/web_customer/homePage/lvmeng/images/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://niujidui.com">
+                    <img src="/static/new_img/logo.png" />
+                </a>
+            </div>
+            <div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right">
+                        <li><a href="/invest/invest_index">融资企业</a></li>
+                        <li><a href="/login">企业登录</a></li>
+                        <li><span>客服电话&nbsp;<strong>4006-720-315</strong></span></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="wrapper">
+        <div class="vertigo-bg js-vertigo">
+            <div class="generic-bg"></div>
+        </div>
+
+        <div class="container">
+            <div>
+                <img src="/static/new_img/bj2.png" class="title-img" alt="">
+            </div>
+
+            <form action="/erp/business_redister/" onsubmit="return checkPhone();" method="get">
+                <div class="form-data clearfix">
+                    <input type="tel" class="phonenum" id="phoneNum" name="phoneNum" placeholder="请输入电话号码" required>
+                    <button class="btn-phone" data-toggle="popover" type="submit" data-placement="right">创建账号</button>
+                </div>
+            </form>
+
+            <!--<div class="popover-content hide" style="background: transparent">-->
+                <!--<a href="/login" class="btn" style="padding:10px;color: #333; font-size:16px;">企业登录</a><br><br>-->
+                <!--<a href="/customer_login" class="btn" style="padding:10px;color: #333; font-size:16px;">个人登录</a></div>-->
+
+            <div class="grid row">
+                <div class="grid-item col-sm-4" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="扫描二维码下载试用">
+                    <div class="border-img">
+                        <img src="/static/new_img/IOS.png" class="ios">
+                        <!--<img src="img/ios_c.png" class="ios_cover">-->
+                    </div>
+                    <p>ios</p>
+                </div>
+                <div class="grid-item col-sm-4" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="扫描二维码下载试用">
+                    <div class="border-img">
+                        <img src="/static/new_img/android.png" class="android">
+                        <!--<img src="img/android_c.png"  class="android_cover">-->
+                    </div>
+
+                    <p>android</p>
+                </div>
+                <div class="grid-item3 col-sm-4" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="扫描二维码关注公众号">
+                    <div class="border-img">
+                        <img src="/static/new_img/weixin.png" class="weixin">
+                        <!--<img src="img/weixi_c.png" class="weixin_cover">-->
+                    </div>
+
+                    <p>公众号</p>
+                </div>
+            </div>
+
+            <!--<div id="popover-head" class="hide">
+                扫描二维码下载试用
+            </div>-->
+            <div id="popover-content" class="hide" style="width:270px;">
+                <div class="col" style="float: left; margin:0 10px;">
+                    <img src="/static/new_img/qr_customer.png" alt="">
+                    <p>用户版</p>
+                </div>
+                <div class="col" style="float: left; margin:0 10px;">
+                    <img src="/static/new_img/qr_business.png" alt="">
+                    <p>企业版</p>
+                </div>
+            </div>
+            <div id="popover-content3" class="hide" style="float: left; margin:0;">
+                <img src="/static/new_img/qr_general.png" alt="">
+                <p>公众号</p>
+            </div>
+        </div>
+
+    </section>
+    <footer>
+        <div class="copy">
+            <p>©2016上海律锰信息技术有限公司 版权 沪ICP备16013923号-1</p>
+        </div>
+    </footer>
+</body>
+</html>
+<script src="/static/new_vendors/jquery/dist/jquery.min.js"></script>
+<script src="/static/new_vendors/bootstrap/js/bootstrap.js"></script>
+<script src="/static/new_vendors/greensock/EasePack.min.js"></script>
+<script src="/static/new_vendors/greensock/TweenMax.min.js"></script>
+<script src="/static/new_js/index.js"></script>
+<script>
+function checkPhone(){
+    var phone = document.getElementById('phoneNum').value;
+    if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+            alert("手机号码有误，请重填");
+            return false;
+         }
+      }
+</script>

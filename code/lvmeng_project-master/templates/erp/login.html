@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!--<link rel="shortcut icon" href="/static/agle/app/img/small_logo.png">-->
+    <link href="/static/web_customer/homePage/lvmeng/images/favicon.png" rel="shortcut icon" />
+    <title>律锰信息技术</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <meta name="renderer" content="webkit" />
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/agle/vendor/bootstrap/dist/js/bootstrap.js"></script>
+
+    <link href="/static/css/lvmeng.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="wrap">
+
+        <div class="header clearfix">
+			<div class="wrap">
+				<div class="logo">
+                    <a href="http://niujidui.com">
+                        <img src="/static/img/logo.png" alt="牛基队">
+                    </a>
+                </div>
+			</div>
+		</div>
+
+        <div class="contain">
+            <div class="banner"></div>
+            <div class="login-wrap">
+                <div class="login-panel">
+                    <h1>企业登录</h1>
+
+                    <form class="bs-example bs-example-form" role="form" action="" method="post">
+                    {% csrf_token %}
+                        {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon"><img src="/static/agle/app/img/mine.png"></span>
+                            <input type="text" name="username" id="username" class="form-control" value="{{ username|default:'' }}" placeholder="请输入用户名">
+                        </div>
+
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon"><img src="/static/agle/app/img/psd.png" ></span>
+                            <input type="password" class="form-control" name="password"  id="password"  value="{{ password|default:'' }}" placeholder="请输入密码">
+                        </div>
+
+
+                        <div class="checkbox input-check" style="height:10px;">
+                            <label>
+                                <input type="checkbox" checked> 下次自动登录
+                            </label>
+                        </div>
+
+                        <div class="login_btn">
+                            <button type="submit" id="submit" class="btn btn-lg btn-sub">登录</button>
+                        </div>
+
+                        <!--<div class="">-->
+                            <!--<a href="/erp/business_redister/"><button type="button" class="btn btn-lg sing-sub" style="margin-top:5px;margin-button:20px;background: #ffffff;color: #e60012;width: 100%;height: 51px;border-color:#e5e5e5;">注册</button></a>-->
+                        <!--</div>-->
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <footer class="foot-bar">
+            <div class="foot-wrap">
+                <address class="com-info">
+                  <p>客服热线：4006-720-315</p>
+                  <p>邮&nbsp;&nbsp;箱： niujidui@niujidui.com</p>
+                  <p>©2016&nbsp;上海律锰信息技术有限公司&nbsp;版权&nbsp;沪ICP备16013923号-1</p>
+                </address>
+                <div class="attention-to-me">
+                    <div class="u-qr-code">
+                        <p>扫一扫</p>
+                        <p>关注我们</p>
+                    </div>
+                    <div class="u-g-appwx">
+                        <p>扫一扫</p>
+                        <p>企业版APP</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

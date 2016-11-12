@@ -1,0 +1,196 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">员工管理</li>
+            <li>查看员工</li>
+            {% if message %}
+                <li>{{ message }}</li>
+            {% else %}
+                <li>员工基本信息</li>
+            {% endif %}
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            {% if message %}
+                <h4>{{ message }}</h4>
+            {% else %}
+                <h4>员工基本信息</h4>
+            {% endif %}
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <!--<input style="display:none;" name="check_remark" id="remark" value="{{ remark }}">-->
+        <input style="display:none;" name="" id="picture" value="{{ agent.avatar|default:'' }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <form action="/erp/agent_process/?agent_id={{ agent_id }}#agent_process" method="post" role="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                        <!--<input type="submit" onclick="if(confirm('确定要保存以上信息吗？')==false)return false;" value="保存">-->
+                </form>
+
+            <div id="show_customer" class="form-group">
+                <label for="id_graduated_school" class="control-label ">拥有客户：</label>
+                <div class="controls ">
+                    <span>{{ count }}</span>
+                    <ul>
+                        {% for customer in customers %}
+                            {% if request.user.is_superuser %}
+                                <li><a class="customer_check" href="/erp/check/?id={{ customer.id }}&type=customer#admin_agent_list">{{ customer.name }}</a></li>
+                            {% else %}
+                                <li><a class="customer_check" href="/erp/check/?id={{ customer.id }}&type=customer">{{ customer.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+
+
+    $(function(){
+        $("#id_address").before("<form name='shareip' action='' method='' id='city_form'><select class='select form-control' name='province' id='s1' style='width:180px;display: inline-block;'><option></option></select>&nbsp;&nbsp;&nbsp;<select class='select form-control' name='city' id='s2' style='width:180px;display: inline-block;'><option></option></select>&nbsp;&nbsp;&nbsp;<select class='select form-control' name='town' id='s3' style='width:180px;display: inline-block;'><option></option></select></form>");
+        $("#id_address").css("margin-top","10px");
+        $("#id_address").css("margin-bottom","10px");
+    });
+
+    $(function(){
+        var mark = $("#check_remark").val();
+        if(mark){
+            $("#city_form").css("display","none");
+        }
+        $("#s3").change(function(){
+            var province = $("#s1").find("option:selected").val();
+            var city = $("#s2").find("option:selected").val();
+            var town = $("#s3").find("option:selected").val();
+            if(province == city){
+                $("#id_address").val(province+town)
+            }else{
+                $("#id_address").val(province+city+town)
+            }
+        });
+    });
+
+    $(function(){
+        var mark = $("#id_phoneNum").val();
+        var remark = $("#remark").val();
+        if(mark==""){
+            $("#div_id_phoneNum").after("<div class='form-group'><label class='control-label'>初始密码<span style='color:red;'>*</span></label><div class='controls'><input name='password' id='password' placeholder='输入初始密码' autocomplete='off' class='form-control' value='' style='width:180px;'/></div></div>");
+        }
+        if(remark=="true"){
+            $("#id_phoneNum").attr({"readonly":true});
+        }
+
+        <!--$("#id_phoneNum").after("<span id='span_phoneNum' style='font-size:18px;color:red;display:none;'>该号码已存在,请重新输入</span>");-->
+        <!--$("#id_email").after("<span id='span_email' style='font-size:18px;color:red;display:none;'>该邮箱已存在,请重新输入</span>");-->
+
+        $('#id_position option').each(function(){
+            if($(this).val() == ''){
+                $(this).html('请选择');
+            }
+        });
+
+    });
+
+    <!--$(function(){-->
+        <!--$("#id_phoneNum").change(function(){-->
+            <!--var str = $("#id_phoneNum").val()-->
+            <!--$.ajax({-->
+            <!--type:"get",-->
+            <!--url:"/erp/valid_phone/",-->
+            <!--data:{'str':str},-->
+            <!--success:function(data){-->
+                    <!--if(data.result == "false"){-->
+                        <!--$("#span_phoneNum").css("display","");-->
+                    <!--}else{-->
+                        <!--$("#span_phoneNum").css("display","none");-->
+                    <!--}-->
+                <!--}-->
+            <!--});-->
+        <!--});-->
+    <!--});-->
+
+    <!--$(function(){-->
+        <!--$("#id_email").change(function(){-->
+            <!--var str = $("#id_email").val()-->
+            <!--$.ajax({-->
+            <!--type:"get",-->
+            <!--url:"/erp/valid_email/",-->
+            <!--data:{'str':str},-->
+            <!--success:function(data){-->
+                    <!--if(data.result == "false"){-->
+                        <!--$("#span_email").css("display","");-->
+                    <!--}else{-->
+                        <!--$("#span_email").css("display","none");-->
+                    <!--}-->
+                <!--}-->
+        <!--});-->
+        <!--});-->
+    <!--});-->
+
+    $(function(){
+        $("#id_position").change(function(){
+            var position_id = $('#id_position option:selected').val();
+            $.ajax({
+            type:"get",
+            url:"/erp/get_position_permission/",
+            data:{'position_id':position_id},
+            success:function(html){
+                   $("#div_id_permissions").html(html);
+                }
+            });
+        });
+    });
+
+    $(function(){
+        $("#id_avatar").after("<input type='text' style='display:none;' name='base_1' id='base_1'/>");
+    });
+
+    $(document).ready(function(e){
+      $('#id_avatar').customFile({
+            type : 'image',
+            image : {
+                crop	: true,
+                cropSize: [100,100],
+                preview : {
+                    display: true,
+                    maxWidth: 5000,
+                    maxHeight: 5000,
+                }
+            },
+            filePicker : '<h5>点击上传图片</h5>',
+      });
+    });
+
+     $(function(){
+        $("#submit-id-save").click(function(){
+            set_base_input();
+        });
+     });
+
+     $(function(){
+        if($("#picture").val()){
+            var src = "/media/"+$("#picture").val()
+            $("#div_id_avatar").before("<div id='show_avatar'><img style='height:140px;' title='当前图片' src="+src+" /></div>");
+        }
+     });
+
+</script>
+{% endblock %}

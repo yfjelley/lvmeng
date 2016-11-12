@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>在线聊天</title>
+    <link type="text/css" rel="stylesheet" href="/static/erp/css/chat.css">
+    <script src="/static/agle/vendor/jquery/dist/jquery.js"></script>
+    <!--<script src="/static/erp/js/iepng.js"></script>-->
+    <link type="text/css" rel="stylesheet" href="/static/css/image/jquery-webox.css">
+    <script src="/static/erp/js/chat.js"></script>
+    <script src="/static/js/jquery-webox.js"></script>
+</head>
+<body>
+{% load detail_deal %}
+<div class="kePublic">
+    <div class="content">
+        <div class="chatBox">
+            <div class="chatLeft">
+                <div class="chat01">
+                      <div class="chat01_title">
+                        <ul class="talkTo">
+                          <li style="text-align:center">
+                            <a href="javascript:;" id="get_user_name">{{ talk_user }}</a></li>
+                            <!--{{ talk_user }}</li>-->
+                        </ul>
+                        <input style="display:none;" value="{{ talk_user.id }}" id="talk_user"/>
+                        <!--<a class="close_btn" href="javascript:;"></a>-->
+                      </div>
+                                {% include "erp/online_chat_detail.html" %}
+                    </div>
+
+                <div class="chat02">
+                    <div class="chat02_title">
+                        <div class="wl_faces_box">
+                            <div class="wl_faces_content">
+                                <div class="wl_faces_main">
+                                    <ul>
+                                        <li><a href="javascript:;">
+                                            <img src="/static/erp/img/emo_01.gif"></a></li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img src="/static/erp/img/emo_02.gif">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                    <img src="/static/erp/img/emo_03.gif">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="wlf_icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat02_content" style="">
+                        <textarea id="textarea" ></textarea>
+                    </div>
+                    <div class="chat02_bar">
+                        <ul>
+                            <li style="right: 5px; top: 5px;"><a href="javascript:;">
+                                <img id="send_btn" src="/static/img/send_btn.jpg"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="chatRight">
+                <div class="chat03">
+                    <div class="chat03_title">
+                        <label class="chat03_title_t">
+                            成员列表</label>
+                    </div>
+                    <div class="chat03_content">
+                        <ul>
+                            {% for agent in agents %}
+                                <li>
+                                    <label class="">
+                                    </label>
+                                    {% if agent.sex == '2' %}
+                                            <img src="{{ agent.avatar|check_picture }}" onerror="this.src='/static/img/default.png'"/>
+                                            <a href="javascript:;" class="chat03_name" id="{{ agent.id }}">{{ agent }}</a>
+                                    {% else %}
+                                            <img src="{{ agent.avatar|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                                            <a href="javascript:;" class="chat03_name" id="{{ agent.id }}">{{ agent }}</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both;">
+            </div>
+        </div>
+    </div>
+</div>
+</body>

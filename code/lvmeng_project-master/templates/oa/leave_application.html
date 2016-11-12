@@ -1,0 +1,191 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">办公自动化</li>
+            <li>协同办公</li>
+            <li>请假申请</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>请假申请列表</h4>
+        </div>
+        {% if not request.user.business and not request.user.is_superuser%}
+             <div class="btn-add">
+                <a href="/oa/leave_add_modify/#leave_management">新增请假申请</a>
+            </div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            <form action="" method="post" class="form-inline">
+                <span class="date-label">姓名：</span>
+                <input id="name" name="name" type="text" value="{{ name|default:'' }}" placeholder="姓名">
+                <span class="date-label">日期选择：</span>
+                <input id="data" name="data" type="text" value="{{ data|default:'' }}"  placeholder="申请时间">
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                        <th>序号</th>
+                        <th>申请人</th>
+                        <th>请假类型</th>
+                        <th>请假原因</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>申请时间</th>
+                        <th>审核结果</th>
+                        {% if not request.user.business and not request.user.is_superuser%}
+                            <th>操作</th>
+                        {% endif %}
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for leave in leaves %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td title="点击查看"><a class="leave_check" href="/erp/check/?type=check_leave&id={{leave.id}}#leave_management">{{ leave.user }}</a></td>
+                                <td>{{ leave.topic }}</td>
+                                <td>{{ leave.content|truncatechars:20 }}</td>
+                                <td>{{ leave.start|date_str }}</td>
+                                <td>{{ leave.end|date_str }}</td>
+                                <td>{{ leave.time|date_str }}</td>
+                                <td title="点击查看审核"><a class="leave_examine" href="/oa/leave_examine/?leave_id={{ leave.id }}#leave_management">查看</a></td>
+                                <!--<th style="cursor:pointer" title="点击修改"><a href="/oa/leave_add_modify/?leave_id={{leave.id}}"><img src="/static/img/edit.gif/"></a></th>-->
+                                {% if not request.user.business and not request.user.is_superuser%}
+                                    <td><a href="/oa/leave_management/?leave_id={{leave.id}}" onclick="if(confirm('确定删除该请假申请吗？')==false)return false;" title="点击删除"><img src="/static/img/icon-delete.png"></a></td>
+                                    <!--<td><a class="leave_delete" href="/oa/leave_management/?leave_id={{leave.id}}"><img src="/static/img/icon-delete.png"></a></td>-->
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if leaves.has_previous %}
+                                <a href="?page={{ leaves.previous_page_number }}#leave_management">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p leaves.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#leave_management" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if leaves.has_next %}
+                                <a href="?page={{ leaves.next_page_number }}#leave_management">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{leaves.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+
+    function modify_leave(id){
+        $.ajax({
+        type:"get",
+        url:"/oa/leave_add_modify/",
+        data:{"leave_id":id},
+        success:function(html){
+               $.webox({
+                   height:500,
+                   width:700,
+                   bgvisibel:true,
+                   title:'修改请假申请',
+                   html:html,
+                });
+            }
+        });
+    }
+
+    function check_leave(id){
+        $.ajax({
+        type:"get",
+        url:"/erp/check/?type=check_leave",
+        data:{"id":id},
+        success:function(html){
+               $.webox({
+                   height:500,
+                   width:700,
+                   bgvisibel:true,
+                   title:'查看请假申请',
+                   html:html,
+                });
+            }
+        });
+    }
+
+    laydate({
+            elem: '#data'
+         });
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+
+{% endblock %}

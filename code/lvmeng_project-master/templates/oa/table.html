@@ -1,0 +1,130 @@
+{% extends "erp/base.html" %}
+{% block content %}
+<div class="">
+    <ol class="breadcrumb">
+        <span>当前位置：</span>
+        <li class="active">办公自动化</li>
+        <li>考勤管理</li>
+        <li>考勤记录表</li>
+    </ol>
+    <div class="header-line">
+       <!-- START Language list-->
+        <h4>考勤记录表</h4>
+    </div>
+    <div class="content-table">
+        <form action="" method="post" class="form-inline">
+            <span class="date-label">日期选择：</span>
+            <input id="dataStart" name="start" type="text" value="{{ start|default:'' }}" required placeholder="开始时间">
+            <span class="separator-label">-</span>
+            <input id="dataEnd" name="end" type="text" value="{{ end|default:'' }}" required placeholder="结束时间">
+            <span class="date-label">邀请码选择：</span>
+            <input id="qr_code" name="qr_code" type="text" value="{{ qr_code|default:'' }}" placeholder="邀请码">
+            <div class="form-group">
+              <div class="col-sm-3 btn-wrap">
+                    <input type="submit" value="搜索" class="btn-submit">
+                </div>
+                <div class="col-sm-9">
+                    <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                </div>
+           </div>
+        </form>
+        </div>
+        <div class="row check-table">
+            <div class="col-lg-12 panel-body table-responsive" style="overflow:auto;">
+                <table id="example" class="table table-hover table-bordered excel stripe row-border order-column ">
+
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>日期</th>
+                            {% for date_list in date_lists %}
+                                {% if '周六' in date_list or '周日' in date_list %}
+                                    <th style="color:red;" align="center">{{ date_list }}</th>
+                                {% else %}
+                                    <th align="center">{{ date_list }}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if qr_code %}
+                            {% for agent in qr_agents %}
+                                <tr>
+                                    <td rowspan="2"> {{ agent }}<br>{{ agent.code }} </td>
+                                    <td>签到</td>
+                                    {% for che_in in agent.checkIn %}
+                                        <td>{{ che_in|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>签退</td>
+                                    {% for che_out in agent.checkOut %}
+                                        <td>{{ che_out|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for agent in agents %}
+                                <tr>
+                                    <td rowspan="2"> {{ agent }}<br>{{ agent.code }} </td>
+                                    <td>签到</td>
+                                    {% for che_in in agent.checkIn %}
+                                        <td>{{ che_in|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>签退</td>
+                                    {% for che_out in agent.checkOut %}
+                                        <td>{{ che_out|default:'' }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block style %}
+<style>
+
+    th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+    }
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+        laydate({
+                elem: '#dataStart'
+             });
+         laydate({
+                elem: '#dataEnd'
+             });
+
+        <!--$(document).ready(function() {-->
+            <!--$('#example').DataTable();-->
+        <!--} );-->
+
+        $(document).ready(function() {
+            var table = $('#example').DataTable( {
+                scrollY:        "300px",
+                scrollX:        true,
+                scrollCollapse: true,
+                paging:         false,
+                fixedColumns:   {
+                    leftColumns: 2
+                }
+            } );
+        } );
+
+
+
+</script>
+{% endblock %}

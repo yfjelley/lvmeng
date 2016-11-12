@@ -1,0 +1,161 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">律锰管理</li>
+            <li>客户机构列表</li>
+            <li>查看产品列表</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>产品列表</h4>
+        </div>
+        <div class="content-table">
+            <form action="" method="post" class="form-inline">
+                <div class="form-group">
+                    <label class="control-label">产品名称：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="product_name" value="{{product_name|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="control-label">产品类型：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="product_type" value="{{product_type|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="control-label">开始时间：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="start_time" id="start_time" value="{{start_time|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="control-label">结束时间：</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="end_time" id="end_time" value="{{end_time|default:''}}">
+                  </div>
+               </div>
+                <div class="form-group">
+                  <div class="col-sm-3 btn-wrap">
+                        <input type="submit" value="搜索" class="btn-submit">
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="button" value="数据导出到Excel表格" onclick="download();" title="点击导出数据" class="btn-export">
+                    </div>
+               </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                <table  id="example" class="table table-hover excel" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>产品名</th>
+                            <th>托管机构</th>
+                            <th>产品类型</th>
+                            <th>产品管理人</th>
+                            <th>所在省份</th>
+                            <th>开始日期</th>
+                            <th>结束日期</th>
+                            <th>预期收益</th>
+                            <th>所属机构</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="/erp/check/?id={{ product.id }}&type=product#business_list" title="点击查看">{{ product.name }}</a></td>
+
+                                <td>{{ product.custodian }}</td>
+                                <td>{{ product.product_type|default:'' }}</td>
+                                <td>{{ product.manager }}</td>
+                                <td>{{ product.province|default:'' }}</td>
+                                <td>{{ product.begin_date|date_str }}</td>
+                                <td>{{ product.end_date|date_str }}</td>
+                                <td>{{ product.return_expected|move_zero }}<span>%</span></td>
+                                <td>{{ product.business }}</td>
+
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if products.has_previous %}
+                                <a href="?page={{ products.previous_page_number }}#product_list">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p products.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}#product_list" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if products.has_next %}
+                                <a href="?page={{ products.next_page_number }}#product_list">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{products.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+        laydate({
+                elem: '#start_time'
+             });
+             laydate({
+                elem: '#end_time'
+             });
+
+             $(document).ready(function() {
+                $('#example').DataTable();
+            } );
+
+            $(function(){
+                $("th").attr("title","点击排序");
+            });
+
+            $(function(){
+                $('#example_filter').css('style','display:none');
+                $('#example_info').attr('style','display:none');
+                $('#example_length').attr('style','display:none');
+                $('#example_paginate').attr('style','display:none');
+            });
+</script>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <div class="">
+            <h4  style="color:blue;">{{message}}</h4>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#E53E4D;"><img style="width:20px;height:20px;" src="/static/img/cancel.gif">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+        <input style="display:none;" name="check_remark" id="remark" value="{{ remark }}">
+        <input style="display:none;" name="" id="picture" value="{{ lv.lv_picture|default:'' }}">
+        <div class="row">
+            <div class="col-lg-12 panel-body">
+                {% load detail_deal %}
+                <form action="/web_customer/lv_announcement_process/?lv_id={{ lv_id }}" method="post" role="form" enctype="multipart/form-data">
+                        <img style='height:200px;' id="show_picture" src="{{ lv.lv_picture|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+
+
+
+$(function(){
+    if($("#picture").val() == ""){
+        $("#show_picture").css("display","none");
+    }
+});
+
+$(function(){
+        $("#id_lv_picture").after("<input type='text' style='display:none;' name='base_1' id='base_1'/>");
+    });
+$(document).ready(function(e){
+      $('#id_lv_picture').customFile({
+            type : 'image',
+            image : {
+                crop	: true,
+                cropSize: [100,100],
+                preview : {
+                    display: true,
+                    maxWidth: 5000,
+                    maxHeight: 5000,
+                }
+            },
+            filePicker : '<h5>点击上传图片</h5>',
+      });
+    });
+
+     $(function(){
+        $("#submit-id-save").click(function(){
+            set_base_input();
+        });
+     });
+
+
+
+</script>
+{% endblock %}

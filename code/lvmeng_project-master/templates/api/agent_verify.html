@@ -1,0 +1,55 @@
+{% extends "api/base.html" %}
+{% block content %}
+      <div class="block-center mt-xl wd-xl">
+         <!-- START panel-->
+         <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center" style="font-size:16px">客户经理信息确认
+{#               <a href="#">#}
+{#                  <img src="img/logo.png" alt="Image" class="block-center img-rounded">#}
+{#               </a>#}
+            </div>
+            <div class="panel-body">
+               <!--<h3 class="text-center pv">客户经理信息确认</h3>-->
+                {% if agent %}
+                   <img width="150" src="/media/{{ agent.avatar }}" style="margin:auto;display:block; height:150px"/>                  
+                   <div style="font-size:18px;margin-top:15px;;">
+                   <ul style="font-size:16px">
+                      <li>邀请码：{{ invitation_code }}</li>
+                      <li>机构：{{ agent.business.name }}</li>
+                      <li>姓名：{{ agent.name }}</li>
+                      <li>手机号：{{ agent.phoneNum }}</li>
+                   </ul>
+                   </div>
+                   <form method="post">{% csrf_token %}
+                       <div class="form-group has-feedback">
+                           <div class="input-group has-feedback">
+                               <div class="input-group-btn">
+                                   <button name="register" type="submit" class="btn btn-block btn-primary mt-lg">新注册用户</button>
+                               </div>
+                               <p></p>
+                               <div class="input-group-btn">
+                                   <button name="exist" type="submit" class="btn btn-block btn-primary mt-lg">已注册用户</button>
+                               </div>
+                           </div>
+                       </div>
+                   </form>
+                {% else %}
+                   <div style="font-size:18px">
+                   <ul>
+                      <li>该客户经理不存在!</li>
+                   </ul>
+                   </div>
+                {% endif %}
+            </div>
+         </div>
+         <!-- END panel-->
+{#         <div class="p-lg text-center">#}
+{#            <span>&copy;</span>#}
+{#            <span>2016</span>#}
+{#            <span>-</span>#}
+{#            <span>Niujidui</span>#}
+{#            <br>#}
+{#            <span>Corporation Management System</span>#}
+{#         </div>#}
+      </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "erp/base.html" %}
+{% block content %}
+
+    <div class="">
+            <h4 style="color:red;">申请内容</h4>
+        </div>
+    <div class="row">
+        <div class="col-lg-12 panel-body">
+        {% load detail_deal %}
+        <table class="table table-hover excel">
+            <thead>
+            <tr id="tr_head1">
+                <th>申请人</th>
+                <th>主题</th>
+                <th>内容</th>
+                <th>金额</th>
+                <th>申请类型</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>申请时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                        <td>{{ all_examine.examine.user }}</td>
+                        <td>{{ all_examine.examine.topic }}</td>
+                        <td>{{ all_examine.examine.content }}</td>
+                        <td>{{ all_examine.examine.cost|default:'-----' }}</td>
+                        <td>{{ chinese_type }}{% if daily %}[{{ daily.get_work_type_display }}]{%endif%}</td>
+                        <td>{{ all_examine.examine.start|default:'-----'|date_str }}</td>
+                        <td>{{ all_examine.examine.end|default:'-----'|date_str }}</td>
+                        <td>{{ all_examine.examine.time|date_str }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+    <div align="center">
+        <h4  style="color:blue">{{message}}</h4>
+    </div>
+        <input style="display:none;" name="check_remark" id="check_remark" value="{{ check_remark }}">
+
+            <form action="/oa/edit_examine/?id={{ all_examine.id }}" method="post" role="form">
+                    {% csrf_token %}
+                    {% load crispy_forms_tags %}
+                    {% crispy form %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(function(){
+
+        var check_remark = $("#check_remark").val();
+        if(check_remark){
+            $("#submit-id-save").css("display","none");
+            document.getElementById("id_cost_user").disabled = "true";
+            document.getElementById("div_id_examine_user").disabled = "true";
+        }
+
+    });
+
+</script>
+{% endblock %}

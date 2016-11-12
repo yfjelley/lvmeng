@@ -1,0 +1,131 @@
+{% extends "erp/base.html" %}
+{% block content %}
+    <div class="">
+        <ol class="breadcrumb">
+            <span>当前位置：</span>
+            <li class="active">机构信息</li>
+            <li>机构轮播图</li>
+        </ol>
+        <div class="header-line">
+           <!-- START Language list-->
+            <h4>机构轮播图列表</h4>
+        </div>
+        {% if not request.user.is_superuser%}
+            <div class="btn-add">
+                <a href="/erp/business_carousel_add#business_carousel_list_delete">机构轮播图</a>
+            </div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if forloop.last %}
+                    <div class="message" style="text-align:center;margin-bottom:10px;font-size:20px;color:#40A6DF;"><img style="width:20px;height:20px;" src="/static/img/yes.gif"/>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-12 panel-body table-responsive">
+                <table id="example" class="table table-hover" style="overflow-x:scroll;white-space:nowrap;">
+                    <thead>
+                        <tr id="tr_head">
+                            <th>序号</th>
+                            <th>简图</th>
+                            <th>录入人</th>
+                            <th>所属机构</th>
+                            <th>添加时间</th>
+                            {% if not request.user.is_superuser%}
+                                {% comment %}<th  style="color:red;">删除</th>{% endcomment %}
+                                <th>操作</th>
+
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% load detail_deal %}
+                        {% for carousel in carousels %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <!--<td><img style="width:50px;height:50px;" src="/media/{{ carousel.carousel }}"/></td>-->
+                                <td>
+                                    <img style="width:50px;height:50px;" src="{{ carousel.carousel|check_picture }}" onerror="this.src='/static/img/default_blue.png'"/>
+                                </td>
+                                <td>{{ carousel.add_user }}</td>
+                                <td>{{ carousel.business }}</td>
+                                <td>{{ carousel.add_time|date_str }}</td>
+                                {% if not request.user.is_superuser%}
+                                    <td>
+                                        <a href="/erp/business_carousel_list_delete/?carousel_id={{carousel.id}}" onclick="if(confirm('确定删除该机构轮播图吗？')==false)return false;">
+                                            <img src="/static/img/icon-delete.png">
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+                <div class="nav-pagenation">
+                    <ul class="pagination">
+                        <li>
+                            {% if carousels.has_previous %}
+                                <a href="?page={{ carousels.previous_page_number }}">上一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">上一页</a>
+                            {% endif %}
+                        </li>
+
+                        {% for p in page_range %}
+                            {% ifequal p carousels.number %}
+                                <li class="active"><a href="#">{{p}}</a></li>
+                            {% else %}
+                                <li><a href="?page={{p}}" title="第{{p}}页">{{p}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <li>
+                            {% if carousels.has_next %}
+                                <a href="?page={{ carousels.next_page_number }}">下一页</a>
+                            {% else %}
+                                <a href="#" class="disabled">下一页</a>
+                            {% endif %}
+                        </li>
+
+                        <li>
+                            <a href="#">共{{ paginator.count }}条</a>
+                        </li>
+
+                        {% ifequal paginator.num_pages 1 %}
+                        {%  else %}
+                            <div class="go-wrap">
+                                <form action="">
+                                    <input type="text" class="text-go" name="page" value="{{carousels.number}}"/>
+                                    <input type="submit" class="btn-go" value="跳转"/>
+                                </form>
+                            </div>
+                        {% endifequal %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+
+    $(function(){
+        $("th").attr("title","点击排序");
+    });
+
+    $(function(){
+        $('#example_filter').css('style','display:none');
+        $('#example_info').attr('style','display:none');
+        $('#example_length').attr('style','display:none');
+        $('#example_paginate').attr('style','display:none');
+    });
+
+</script>
+{% endblock %}

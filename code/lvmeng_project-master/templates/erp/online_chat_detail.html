@@ -1,0 +1,16 @@
+{% load detail_deal %}
+      <div class="chat01_content">
+        {% for message in all_messages %}
+        <div class="message_box mes3" style="display: block;">
+          <div class="message clearfix">
+            <div class="user-logo">
+            <img style="width:50px;height:50px;" src="{{ message.sender.agent.avatar|check_picture }}" onerror="this.src='/static/img/default.png'"></div>
+            <div class="wrap-text">
+              <h6 class="clearfix" style="color:#0E6EB8">{{ message.sender }}&nbsp;&nbsp;&nbsp;{{ message.send_time|date_str }}</h6>
+              <div>{{ message.content }}</div></div>
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
